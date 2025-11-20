@@ -1,0 +1,57 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build
+bin/
+obj/
+out/
+
+# Rider
+.idea/
+
+# ASP.NET / ASP.NET Core
+wwwroot/lib/
+wwwroot/dist/
+appsettings.*.json
+*.db
+
+# NuGet
+*.nupkg
+packages/
+*.snupkg
+
+# Node / NPM / Frontend
+node_modules/
+npm-debug.log*
+yarn-error.log*
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# JetBrains
+.idea/
+*.iml
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+
+# Others
+*.bak
+*.backup
+*.swp

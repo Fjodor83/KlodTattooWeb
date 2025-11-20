@@ -1,0 +1,61 @@
+@model KlodTattooWeb.Models.BookingRequest
+
+@{
+    ViewData["Title"] = "Prenota un Appuntamento";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card bg-dark text-white border-secondary shadow-lg">
+                <div class="card-header bg-black border-secondary text-center py-4">
+                    <h2 class="text-uppercase" style="color: #d4af37;">Prenota la tua seduta</h2>
+                </div>
+                <div class="card-body p-5">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        
+                        <div class="mb-4">
+                            <label asp-for="ClientName" class="form-label text-muted">Nome Completo</label>
+                            <input asp-for="ClientName" class="form-control bg-dark text-white border-secondary" />
+                            <span asp-validation-for="ClientName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Email" class="form-label text-muted">Email</label>
+                            <input asp-for="Email" class="form-control bg-dark text-white border-secondary" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="BodyPart" class="form-label text-muted">Parte del Corpo</label>
+                                <input asp-for="BodyPart" class="form-control bg-dark text-white border-secondary" placeholder="Es. Avambraccio" />
+                                <span asp-validation-for="BodyPart" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="PreferredDate" class="form-label text-muted">Data Preferita</label>
+                                <input asp-for="PreferredDate" class="form-control bg-dark text-white border-secondary" type="date" />
+                                <span asp-validation-for="PreferredDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="IdeaDescription" class="form-label text-muted">Descrivi la tua idea</label>
+                            <textarea asp-for="IdeaDescription" class="form-control bg-dark text-white border-secondary" rows="5" placeholder="Descrivi lo stile, il soggetto e le dimensioni approssimative..."></textarea>
+                            <span asp-validation-for="IdeaDescription" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Invia Richiesta</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    // Scommenta la riga sotto se NON vuoi usare il _Layout.cshtml per questa pagina specifica
+    // Layout = null;
+}
+
+<div class="hero-section position-relative text-center text-white mb-5" style="background-image: url('/images/hero.png'); background-size: cover; background-position: center; height: 80vh; display: flex; align-items: center; justify-content: center;">
+    <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6);"></div>
+    <div class="content position-relative" style="z-index: 1;">
+        <h1 class="display-1 fw-bold text-uppercase" style="letter-spacing: 5px; color: #d4af37;">Klod Tattoo</h1>
+        <p class="lead mb-4 fs-3">L'arte sulla tua pelle</p>
+        <a asp-controller="Booking" asp-action="Create" class="btn btn-primary btn-lg px-5 py-3 rounded-0">Prenota Ora</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mb-5 align-items-center">
+        <div class="col-md-6">
+            <h2 class="text-uppercase mb-4" style="border-left: 4px solid #d4af37; padding-left: 15px;">Chi Siamo</h2>
+            <p class="lead text-muted">
+                Benvenuti da Klod Tattoo, dove la passione per l'arte incontra la professionalità.
+                Ogni tatuaggio è un pezzo unico, progettato su misura per raccontare la tua storia.
+            </p>
+            <p class="text-muted">
+                Specializzati in diversi stili, dal realistico al traditional, offriamo un ambiente sicuro,
+                igienico e accogliente. Utilizziamo solo attrezzature di ultima generazione e inchiostri certificati
+                per garantire il massimo risultato e la tua sicurezza.
+            </p>
+        </div>
+        <div class="col-md-6 text-center">
+            <div class="p-5 border border-secondary" style="background-color: #1e1e1e;">
+                <i class="fas fa-paint-brush fa-3x mb-3" style="color: #d4af37;"></i>
+                <h3 class="h4">Design Personalizzati</h3>
+                <p class="text-muted small">Trasformiamo le tue idee in realtà.</p>
+
+                <i class="fas fa-shield-alt fa-3x mb-3 mt-4" style="color: #d4af37;"></i>
+                <h3 class="h4">Igiene Garantita</h3>
+                <p class="text-muted small">Standard di sicurezza elevatissimi.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row text-center mb-5">
+        <div class="col-12 mb-4">
+            <h2 class="text-uppercase" style="color: #d4af37;">I Nostri Stili</h2>
+            <div style="width: 60px; height: 3px; background-color: #d4af37; margin: 0 auto;"></div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 p-4">
+                <h3 class="h4" style="color: #d4af37;">Realistico</h3>
+                <p class="small text-muted">Ritratti e dettagli fotografici.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 p-4">
+                <h3 class="h4" style="color: #d4af37;">Traditional</h3>
+                <p class="small text-muted">Linee solide e colori vibranti.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 p-4">
+                <h3 class="h4" style="color: #d4af37;">Blackwork</h3>
+                <p class="small text-muted">Contrasti forti e geometrie.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mb-5">
+        <div class="col-12 text-center mb-4">
+            <h2 class="text-uppercase">Dicono di Noi</h2>
+            <div style="width: 60px; height: 3px; background-color: #d4af37; margin: 0 auto;"></div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card bg-dark border-secondary p-4 h-100">
+                <div class="mb-3 text-warning">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-muted fst-italic">"Klod è un artista incredibile. Ha capito subito cosa volevo e il risultato è andato oltre le aspettative. Studio pulitissimo."</p>
+                <footer class="blockquote-footer mt-3">Marco R.</footer>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card bg-dark border-secondary p-4 h-100">
+                <div class="mb-3 text-warning">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-muted fst-italic">"Professionalità al top. Mi sono sentita subito a mio agio. Il tatuaggio è guarito perfettamente seguendo i suoi consigli."</p>
+                <footer class="blockquote-footer mt-3">Giulia B.</footer>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card bg-dark border-secondary p-4 h-100">
+                <div class="mb-3 text-warning">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-muted fst-italic">"Mano leggerissima e precisione chirurgica. Tornerò sicuramente per il prossimo pezzo!"</p>
+                <footer class="blockquote-footer mt-3">Luca S.</footer>
+            </div>
+        </div>
+    </div>
+</div>

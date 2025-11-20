@@ -1,0 +1,37 @@
+﻿@model IEnumerable<KlodTattooWeb.Models.PortfolioItem>
+
+@{
+    ViewData["Title"] = "Portfolio";
+}
+
+<div class="text-center mb-5">
+    <h1 class="display-4 text-uppercase" style="color: #d4af37;">Klodback Works</h1>
+    <p class="lead text-muted">Inchiostro indelebile, arte eterna.</p>
+    <div style="width: 60px; height: 3px; background-color: #d4af37; margin: 20px auto;"></div>
+</div>
+
+<div class="row g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-lg-3">
+            <div class="portfolio-item position-relative overflow-hidden rounded shadow-sm" style="height: 300px; cursor: pointer;">
+                <img src="@item.ImageUrl" class="w-100 h-100" alt="@item.Title" style="object-fit: cover; transition: transform 0.5s ease;">
+                <div class="portfolio-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center p-3" 
+                     style="background: rgba(0,0,0,0.8); opacity: 0; transition: opacity 0.3s ease;">
+                    <h5 class="text-uppercase mb-2" style="color: #d4af37;">@item.Title</h5>
+                    <p class="text-white small mb-3">@item.Style</p>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-light btn-sm rounded-0 px-4">Vedi</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .portfolio-item:hover img {
+        transform: scale(1.1);
+    }
+    .portfolio-item:hover .portfolio-overlay {
+        opacity: 1 !important;
+    }
+</style>

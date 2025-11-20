@@ -1,0 +1,71 @@
+@{
+    ViewData["Title"] = "Info & Aftercare";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 text-uppercase" style="color: #d4af37;">Aftercare & FAQ</h1>
+        <p class="lead text-muted">Tutto quello che devi sapere per curare il tuo tatuaggio.</p>
+        <div style="width: 60px; height: 3px; background-color: #d4af37; margin: 20px auto;"></div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="card bg-dark text-white border-secondary mb-5">
+                <div class="card-header bg-black border-secondary">
+                    <h3 class="h5 mb-0 text-uppercase" style="color: #d4af37;">Cura del Tatuaggio</h3>
+                </div>
+                <div class="card-body p-4">
+                    <ol class="list-group list-group-numbered list-group-flush">
+                        <li class="list-group-item bg-dark text-white border-secondary">Lascia la pellicola protettiva per almeno 2-4 ore.</li>
+                        <li class="list-group-item bg-dark text-white border-secondary">Lava delicatamente il tatuaggio con acqua tiepida e sapone neutro.</li>
+                        <li class="list-group-item bg-dark text-white border-secondary">Asciuga tamponando con carta assorbente pulita (non strofinare).</li>
+                        <li class="list-group-item bg-dark text-white border-secondary">Applica uno strato sottile di crema specifica (es. Bepanthenol) 3-4 volte al giorno.</li>
+                        <li class="list-group-item bg-dark text-white border-secondary">Evita sole diretto, piscina, mare e sauna per almeno 2 settimane.</li>
+                        <li class="list-group-item bg-dark text-white border-secondary">Non grattare le crosticine che si formeranno.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <h3 class="text-uppercase mb-4 text-center">Domande Frequenti</h3>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item bg-dark border-secondary">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button bg-dark text-white collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            Fa male farsi un tatuaggio?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted">
+                            Il dolore è soggettivo e dipende dalla zona del corpo. In generale, è una sensazione di fastidio sopportabile.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item bg-dark border-secondary">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button bg-dark text-white collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Quanto costa un tatuaggio?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted">
+                            Il prezzo varia in base alla dimensione, al dettaglio e al tempo necessario. Il prezzo minimo di partenza è solitamente €80.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item bg-dark border-secondary">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button bg-dark text-white collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Posso portare un accompagnatore?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted">
+                            Per motivi di igiene e concentrazione, preferiamo che il cliente venga da solo, salvo casi particolari concordati in anticipo.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+@{
+    ViewData["Title"] = "Servizi e Prezzi";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 text-uppercase" style="color: #d4af37;">Servizi e Prezzi</h1>
+        <p class="lead text-muted">Trasparenza e professionalità per il tuo prossimo tatuaggio.</p>
+        <div style="width: 60px; height: 3px; background-color: #d4af37; margin: 20px auto;"></div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-4 mb-4">
+            <div class="card bg-dark text-white border-secondary h-100 p-4 text-center">
+                <i class="fas fa-bolt fa-3x mb-3" style="color: #d4af37;"></i>
+                <h3 class="h4">Small Tattoos</h3>
+                <p class="text-muted small mb-4">Ideale per scritte, simboli o piccoli disegni minimal.</p>
+                <h4 class="h2" style="color: #d4af37;">€80 - €150</h4>
+                <p class="text-muted small">Prezzo indicativo</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card bg-dark text-white border-secondary h-100 p-4 text-center">
+                <i class="fas fa-hand-holding-heart fa-3x mb-3" style="color: #d4af37;"></i>
+                <h3 class="h4">Medium Pieces</h3>
+                <p class="text-muted small mb-4">Disegni su avambraccio, polpaccio o spalla. Dettagli curati.</p>
+                <h4 class="h2" style="color: #d4af37;">€200 - €400</h4>
+                <p class="text-muted small">Prezzo indicativo</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card bg-dark text-white border-secondary h-100 p-4 text-center">
+                <i class="fas fa-dragon fa-3x mb-3" style="color: #d4af37;"></i>
+                <h3 class="h4">Full Sessions</h3>
+                <p class="text-muted small mb-4">Grandi progetti: schiena, manica intera o gamba.</p>
+                <h4 class="h2" style="color: #d4af37;">€500+</h4>
+                <p class="text-muted small">A seduta (giornaliera)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row align-items-center mb-5">
+        <div class="col-md-6">
+            <h2 class="text-uppercase mb-4" style="border-left: 4px solid #d4af37; padding-left: 15px;">Come Funziona</h2>
+            <ul class="list-unstyled text-muted">
+                <li class="mb-3">
+                    <strong class="text-white">1. Consulenza:</strong> Discutiamo la tua idea, lo stile e la posizione.
+                </li>
+                <li class="mb-3">
+                    <strong class="text-white">2. Design:</strong> Creo una bozza personalizzata per te.
+                </li>
+                <li class="mb-3">
+                    <strong class="text-white">3. Appuntamento:</strong> Fissiamo la data e versiamo un acconto.
+                </li>
+                <li class="mb-3">
+                    <strong class="text-white">4. Tatuaggio:</strong> Realizziamo l'opera d'arte sulla tua pelle.
+                </li>
+            </ul>
+            <a asp-controller="Booking" asp-action="Create" class="btn btn-primary mt-3">Prenota una Consulenza</a>
+        </div>
+        <div class="col-md-6">
+            <div class="p-5 border border-secondary rounded" style="background-color: #1e1e1e;">
+                <h3 class="h5 mb-3 text-white">Politica Depositi</h3>
+                <p class="text-muted small">
+                    Per confermare l'appuntamento è richiesto un deposito non rimborsabile di €50. 
+                    Il deposito verrà scalato dal prezzo finale del tatuaggio.
+                    È possibile spostare l'appuntamento con almeno 48 ore di preavviso senza perdere il deposito.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
