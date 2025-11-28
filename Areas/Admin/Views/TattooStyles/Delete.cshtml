@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Elimina Stile";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Elimina Stile</h1>
@@ -20,7 +19,8 @@
         </dd>
     </dl>
 
-    <form asp-area="Admin" asp-controller="TattooStyles" asp-action="Delete">
+    <form asp-area="Admin" asp-controller="TattooStyles" asp-action="Delete" method="post">
+        @Html.AntiForgeryToken()
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Elimina" class="btn btn-danger" />
         <a asp-area="Admin" asp-controller="TattooStyles" asp-action="Index" class="btn btn-secondary">Annulla</a>

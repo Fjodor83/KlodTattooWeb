@@ -2,70 +2,431 @@
     ViewData["Title"] = "Info & Aftercare";
 }
 
-<div class="container mt-5">
-    <div class="text-center mb-5">
-        <h1 class="display-4 text-uppercase" style="color: #d4af37;">Aftercare & FAQ</h1>
-        <p class="lead text-muted">Tutto quello che devi sapere per curare il tuo tatuaggio.</p>
-        <div style="width: 60px; height: 3px; background-color: #d4af37; margin: 20px auto;"></div>
+<div class="container py-5">
+    <!-- Header Section -->
+    <div class="text-center mb-5" data-aos="fade-down">
+        <h1 class="display-3 fw-bold text-uppercase mb-3" style="color: #d4af37; letter-spacing: 3px;">
+            Aftercare & FAQ
+        </h1>
+        <p class="lead text-muted fs-4">Tutto quello che devi sapere per prenderti cura del tuo tatuaggio</p>
+        <div class="golden-underline mx-auto mt-3" style="width: 100px; height: 4px; background: linear-gradient(90deg, transparent, #d4af37, transparent);"></div>
     </div>
 
-    <div class="row mb-5">
-        <div class="col-lg-8 mx-auto">
-            <div class="card bg-dark text-white border-secondary mb-5">
-                <div class="card-header bg-black border-secondary">
-                    <h3 class="h5 mb-0 text-uppercase" style="color: #d4af37;">Cura del Tatuaggio</h3>
+    <!-- Main Content -->
+    <div class="row g-4 mb-5">
+        <!-- Aftercare Card -->
+        <div class="col-lg-6" data-aos="fade-right">
+            <div class="card h-100 shadow-lg border-0 overflow-hidden" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
+                <div class="card-header border-0 text-center py-4" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
+                    <i class="fas fa-hand-holding-medical fa-3x text-dark mb-3"></i>
+                    <h3 class="h4 mb-0 text-uppercase fw-bold text-dark">Cura del Tatuaggio</h3>
                 </div>
                 <div class="card-body p-4">
-                    <ol class="list-group list-group-numbered list-group-flush">
-                        <li class="list-group-item bg-dark text-white border-secondary">Lascia la pellicola protettiva per almeno 2-4 ore.</li>
-                        <li class="list-group-item bg-dark text-white border-secondary">Lava delicatamente il tatuaggio con acqua tiepida e sapone neutro.</li>
-                        <li class="list-group-item bg-dark text-white border-secondary">Asciuga tamponando con carta assorbente pulita (non strofinare).</li>
-                        <li class="list-group-item bg-dark text-white border-secondary">Applica uno strato sottile di crema specifica (es. Bepanthenol) 3-4 volte al giorno.</li>
-                        <li class="list-group-item bg-dark text-white border-secondary">Evita sole diretto, piscina, mare e sauna per almeno 2 settimane.</li>
-                        <li class="list-group-item bg-dark text-white border-secondary">Non grattare le crosticine che si formeranno.</li>
-                    </ol>
+                    <p class="text-light mb-4 lead">
+                        Segui attentamente queste istruzioni per garantire una guarigione perfetta:
+                    </p>
+
+                    <div class="aftercare-steps">
+                        <!-- Step 1 -->
+                        <div class="step-item d-flex mb-4 p-3 rounded" style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37;">
+                            <div class="step-number me-3">
+                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center"
+                                     style="width: 40px; height: 40px; min-width: 40px;">
+                                    <span class="fw-bold text-dark">1</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <h5 class="text-light mb-2">
+                                    <i class="fas fa-clock text-warning me-2"></i>Prime Ore
+                                </h5>
+                                <p class="text-muted mb-0">Lascia la pellicola protettiva per almeno 2-4 ore.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="step-item d-flex mb-4 p-3 rounded" style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37;">
+                            <div class="step-number me-3">
+                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center"
+                                     style="width: 40px; height: 40px; min-width: 40px;">
+                                    <span class="fw-bold text-dark">2</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <h5 class="text-light mb-2">
+                                    <i class="fas fa-hand-sparkles text-warning me-2"></i>Pulizia
+                                </h5>
+                                <p class="text-muted mb-0">Lava delicatamente con acqua tiepida e sapone neutro.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="step-item d-flex mb-4 p-3 rounded" style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37;">
+                            <div class="step-number me-3">
+                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center"
+                                     style="width: 40px; height: 40px; min-width: 40px;">
+                                    <span class="fw-bold text-dark">3</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <h5 class="text-light mb-2">
+                                    <i class="fas fa-wind text-warning me-2"></i>Asciugatura
+                                </h5>
+                                <p class="text-muted mb-0">Asciuga tamponando con carta assorbente pulita (non strofinare).</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="step-item d-flex mb-4 p-3 rounded" style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37;">
+                            <div class="step-number me-3">
+                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center"
+                                     style="width: 40px; height: 40px; min-width: 40px;">
+                                    <span class="fw-bold text-dark">4</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <h5 class="text-light mb-2">
+                                    <i class="fas fa-pump-medical text-warning me-2"></i>Idratazione
+                                </h5>
+                                <p class="text-muted mb-0">Applica uno strato sottile di crema specifica (es. Bepanthenol) 3-4 volte al giorno.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="step-item d-flex mb-4 p-3 rounded" style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37;">
+                            <div class="step-number me-3">
+                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center"
+                                     style="width: 40px; height: 40px; min-width: 40px;">
+                                    <span class="fw-bold text-dark">5</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <h5 class="text-light mb-2">
+                                    <i class="fas fa-ban text-warning me-2"></i>Evitare
+                                </h5>
+                                <p class="text-muted mb-0">Sole diretto, piscina, mare e sauna per almeno 2 settimane.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 6 -->
+                        <div class="step-item d-flex p-3 rounded" style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37;">
+                            <div class="step-number me-3">
+                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center"
+                                     style="width: 40px; height: 40px; min-width: 40px;">
+                                    <span class="fw-bold text-dark">6</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <h5 class="text-light mb-2">
+                                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>Attenzione
+                                </h5>
+                                <p class="text-muted mb-0">Non grattare le crosticine che si formeranno.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <h3 class="text-uppercase mb-4 text-center">Domande Frequenti</h3>
-            <div class="accordion" id="faqAccordion">
-                <div class="accordion-item bg-dark border-secondary">
+        <!-- Important Tips Card -->
+        <div class="col-lg-6" data-aos="fade-left">
+            <div class="card h-100 shadow-lg border-0 overflow-hidden" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
+                <div class="card-header border-0 text-center py-4" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
+                    <i class="fas fa-lightbulb fa-3x text-dark mb-3"></i>
+                    <h3 class="h4 mb-0 text-uppercase fw-bold text-dark">Consigli Importanti</h3>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Do's Section -->
+                    <div class="mb-4">
+                        <h5 class="text-success mb-3">
+                            <i class="fas fa-check-circle me-2"></i>Da Fare
+                        </h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-3 d-flex align-items-start">
+                                <i class="fas fa-check text-success me-3 mt-1"></i>
+                                <span class="text-light">Mantieni il tatuaggio sempre pulito e idratato</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start">
+                                <i class="fas fa-check text-success me-3 mt-1"></i>
+                                <span class="text-light">Indossa abiti morbidi e traspiranti</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start">
+                                <i class="fas fa-check text-success me-3 mt-1"></i>
+                                <span class="text-light">Usa crema solare ad alta protezione dopo la guarigione</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start">
+                                <i class="fas fa-check text-success me-3 mt-1"></i>
+                                <span class="text-light">Bevi molta acqua per favorire la guarigione</span>
+                            </li>
+                            <li class="d-flex align-items-start">
+                                <i class="fas fa-check text-success me-3 mt-1"></i>
+                                <span class="text-light">Contattami per qualsiasi dubbio o problema</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Don'ts Section -->
+                    <div>
+                        <h5 class="text-danger mb-3">
+                            <i class="fas fa-times-circle me-2"></i>Da Non Fare
+                        </h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-3 d-flex align-items-start">
+                                <i class="fas fa-times text-danger me-3 mt-1"></i>
+                                <span class="text-light">Non esporre il tatuaggio al sole diretto</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start">
+                                <i class="fas fa-times text-danger me-3 mt-1"></i>
+                                <span class="text-light">Non fare bagni prolungati (vasca, piscina, mare)</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start">
+                                <i class="fas fa-times text-danger me-3 mt-1"></i>
+                                <span class="text-light">Non grattare o staccare le crosticine</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start">
+                                <i class="fas fa-times text-danger me-3 mt-1"></i>
+                                <span class="text-light">Non applicare troppa crema (crea uno strato troppo spesso)</span>
+                            </li>
+                            <li class="d-flex align-items-start">
+                                <i class="fas fa-times text-danger me-3 mt-1"></i>
+                                <span class="text-light">Non praticare sport intensi nelle prime 48 ore</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Emergency Alert -->
+                    <div class="alert alert-warning mt-4 mb-0" role="alert">
+                        <h6 class="alert-heading fw-bold">
+                            <i class="fas fa-exclamation-triangle me-2"></i>Quando Contattarmi
+                        </h6>
+                        <p class="mb-0 small">
+                            Se noti rossore eccessivo, gonfiore, pus o febbre, contattami immediatamente o consulta un medico.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="row mt-5">
+        <div class="col-lg-10 mx-auto" data-aos="fade-up">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold text-uppercase mb-3">Domande Frequenti</h2>
+                <p class="text-muted lead">Le risposte alle domande più comuni</p>
+                <div class="golden-underline mx-auto" style="width: 80px; height: 4px; background-color: #d4af37;"></div>
+            </div>
+
+            <div class="accordion accordion-flush" id="faqAccordion">
+                <!-- Question 1 -->
+                <div class="accordion-item mb-3 border-0 rounded overflow-hidden shadow" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
                     <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button bg-dark text-white collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        <button class="accordion-button collapsed fw-bold text-light py-4"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne"
+                                aria-expanded="false"
+                                aria-controls="collapseOne"
+                                style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-left: 4px solid #d4af37;">
+                            <i class="fas fa-question-circle text-warning me-3"></i>
                             Fa male farsi un tatuaggio?
                         </button>
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body text-muted">
-                            Il dolore è soggettivo e dipende dalla zona del corpo. In generale, è una sensazione di fastidio sopportabile.
+                        <div class="accordion-body text-muted p-4" style="background: #1a1a1a;">
+                            <p class="mb-3">
+                                Il dolore è <strong>soggettivo</strong> e dipende dalla zona del corpo, dalla tua soglia del dolore personale e dalla durata della sessione.
+                            </p>
+                            <p class="mb-0">
+                                In generale, è una sensazione di <strong>fastidio sopportabile</strong>, simile a un graffio continuo.
+                                Le zone più sensibili includono costole, piedi, mani e zone vicine alle ossa.
+                                La maggior parte dei clienti trova l'esperienza molto più gestibile di quanto immaginassero!
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item bg-dark border-secondary">
+
+                <!-- Question 2 -->
+                <div class="accordion-item mb-3 border-0 rounded overflow-hidden shadow" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
                     <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button bg-dark text-white collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button class="accordion-button collapsed fw-bold text-light py-4"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo"
+                                aria-expanded="false"
+                                aria-controls="collapseTwo"
+                                style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-left: 4px solid #d4af37;">
+                            <i class="fas fa-euro-sign text-warning me-3"></i>
                             Quanto costa un tatuaggio?
                         </button>
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body text-muted">
-                            Il prezzo varia in base alla dimensione, al dettaglio e al tempo necessario. Il prezzo minimo di partenza è solitamente €80.
+                        <div class="accordion-body text-muted p-4" style="background: #1a1a1a;">
+                            <p class="mb-3">
+                                Il prezzo varia in base a diversi fattori:
+                            </p>
+                            <ul class="mb-3">
+                                <li><strong>Dimensione:</strong> più grande = più tempo e materiale</li>
+                                <li><strong>Dettaglio:</strong> lavori realistici e complessi richiedono più tempo</li>
+                                <li><strong>Colore vs. Black & Grey:</strong> i colori aumentano il tempo di lavoro</li>
+                                <li><strong>Posizionamento:</strong> alcune zone sono più difficili da tatuare</li>
+                            </ul>
+                            <div class="alert alert-info mb-0">
+                                <strong>Prezzo minimo:</strong> €80 per piccoli tatuaggi.<br>
+                                Per un preventivo preciso, <a asp-controller="Booking" asp-action="Create" class="alert-link fw-bold">prenota una consulenza gratuita</a>.
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item bg-dark border-secondary">
+
+                <!-- Question 3 -->
+                <div class="accordion-item mb-3 border-0 rounded overflow-hidden shadow" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
                     <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button bg-dark text-white collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <button class="accordion-button collapsed fw-bold text-light py-4"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree"
+                                aria-expanded="false"
+                                aria-controls="collapseThree"
+                                style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-left: 4px solid #d4af37;">
+                            <i class="fas fa-users text-warning me-3"></i>
                             Posso portare un accompagnatore?
                         </button>
                     </h2>
                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body text-muted">
-                            Per motivi di igiene e concentrazione, preferiamo che il cliente venga da solo, salvo casi particolari concordati in anticipo.
+                        <div class="accordion-body text-muted p-4" style="background: #1a1a1a;">
+                            <p class="mb-3">
+                                Per motivi di <strong>igiene</strong>, <strong>concentrazione</strong> e <strong>comfort</strong>,
+                                preferiamo che il cliente venga da solo durante la sessione.
+                            </p>
+                            <p class="mb-0">
+                                In casi particolari (es. prima volta, ansia, minori accompagnati),
+                                è possibile concordare la presenza di un accompagnatore.
+                                <strong>Contattami in anticipo</strong> per discutere la situazione.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="accordion-item mb-3 border-0 rounded overflow-hidden shadow" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed fw-bold text-light py-4"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour"
+                                aria-expanded="false"
+                                aria-controls="collapseFour"
+                                style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-left: 4px solid #d4af37;">
+                            <i class="fas fa-calendar-alt text-warning me-3"></i>
+                            Quanto tempo ci vuole per guarire?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted p-4" style="background: #1a1a1a;">
+                            <p class="mb-3">
+                                La guarigione completa richiede tipicamente:
+                            </p>
+                            <ul class="mb-0">
+                                <li><strong>2-3 settimane:</strong> guarigione superficiale (crosticine cadono, pelle si rigenera)</li>
+                                <li><strong>3-6 mesi:</strong> guarigione profonda completa (gli strati sottocutanei si rigenerano)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="accordion-item mb-3 border-0 rounded overflow-hidden shadow" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
+                    <h2 class="accordion-header" id="headingFive">
+                        <button class="accordion-button collapsed fw-bold text-light py-4"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseFive"
+                                aria-expanded="false"
+                                aria-controls="collapseFive"
+                                style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-left: 4px solid #d4af37;">
+                            <i class="fas fa-pencil-ruler text-warning me-3"></i>
+                            Posso portare il mio disegno?
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted p-4" style="background: #1a1a1a;">
+                            <p class="mb-3">
+                                Assolutamente sì! Puoi portare <strong>riferimenti, idee, foto</strong> o disegni che ti ispirano.
+                            </p>
+                            <p class="mb-0">
+                                Lavorerò con te per creare un <strong>design personalizzato</strong> che rispetta la tua visione
+                                ma è anche ottimizzato per la tecnica del tatuaggio e per la zona del corpo scelta.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- CTA Section -->
+    <div class="row mt-5 pt-5">
+        <div class="col-lg-8 mx-auto" data-aos="zoom-in">
+            <div class="text-center p-5 rounded shadow-lg" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
+                <i class="fas fa-comments fa-3x text-dark mb-4"></i>
+                <h3 class="display-6 fw-bold text-dark mb-3">Hai Altre Domande?</h3>
+                <p class="lead text-dark mb-4">Non esitare a contattarmi per qualsiasi dubbio o chiarimento</p>
+                <a asp-controller="Home" asp-action="Contact" class="btn btn-dark btn-lg px-5 py-3 rounded-pill shadow me-2">
+                    <i class="fas fa-envelope me-2"></i> Contattami
+                </a>
+                <a asp-controller="Booking" asp-action="Create" class="btn btn-outline-dark btn-lg px-5 py-3 rounded-pill shadow">
+                    <i class="fas fa-calendar-check me-2"></i> Prenota
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Custom Styles -->
+<style>
+    .accordion-button:not(.collapsed) {
+        background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%) !important;
+        color: #d4af37 !important;
+        border-left: 4px solid #d4af37 !important;
+    }
+
+    .accordion-button::after {
+        filter: brightness(0) invert(1);
+    }
+
+    .accordion-button:focus {
+        box-shadow: none;
+        border-color: #d4af37;
+    }
+
+    .step-item {
+        transition: all 0.3s ease;
+    }
+
+        .step-item:hover {
+            transform: translateX(10px);
+            background: rgba(212, 175, 55, 0.2) !important;
+        }
+
+    .card:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease;
+    }
+
+    @@media (max-width: 768px) {
+        .display-3 {
+            font-size: 2.5rem !important;
+        }
+    }
+</style>
+
+<!-- AOS Animation -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({
+        once: true,
+        duration: 800,
+        easing: 'ease-out-cubic'
+    });
+</script>

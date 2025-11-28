@@ -1,41 +1,95 @@
 @model IEnumerable<KlodTattooWeb.Models.TattooStyle>
-
 @{
     ViewData["Title"] = "Gestione Stili Tatuaggio";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "_Layout";
 }
 
-<h1>Gestione Stili Tatuaggio</h1>
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 mb-0">Gestione Stili Tatuaggio</h1>
+        <a asp-area="" asp-controller="Admin" asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Torna alla Dashboard
+        </a>
+    </div>
 
-<div class="mb-3">
-    <a asp-area="" asp-controller="Admin" asp-action="Index" class="btn btn-secondary">Torna alla Dashboard Admin</a>
+    @if (Model?.Any() == false)
+    {
+        <div class="alert alert-info" role="alert">
+            <i class="bi bi-info-circle"></i> Non ci sono stili di tatuaggio al momento.
+            <a asp-area="Admin" asp-controller="TattooStyles" asp-action="Create" class="alert-link">Creane uno ora</a>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Elenco Stili (@Model.Count())</h5>
+                <a asp-area="Admin" asp-controller="TattooStyles" asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Crea Nuovo Stile
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th class="text-end pe-4" style="width: 250px;">Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="ps-4 align-middle">
+                                        <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
+                                    </td>
+                                    <td class="text-end pe-4">
+                                        <div class="btn-group" role="group">
+                                            <a class="btn btn-sm btn-outline-primary"
+                                               asp-area="Admin"
+                                               asp-controller="TattooStyles"
+                                               asp-action="Edit"
+                                               asp-route-id="@item.Id"
+                                               title="Modifica">
+                                                <i class="bi bi-pencil"></i> Modifica
+                                            </a>
+                                            <a class="btn btn-sm btn-outline-info"
+                                               asp-area="Admin"
+                                               asp-controller="TattooStyles"
+                                               asp-action="Details"
+                                               asp-route-id="@item.Id"
+                                               title="Dettagli">
+                                                <i class="bi bi-eye"></i> Dettagli
+                                            </a>
+                                            <a class="btn btn-sm btn-outline-danger"
+                                               asp-area="Admin"
+                                               asp-controller="TattooStyles"
+                                               asp-action="Delete"
+                                               asp-route-id="@item.Id"
+                                               title="Elimina">
+                                                <i class="bi bi-trash"></i> Elimina
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
-<p>
-    <a asp-area="Admin" asp-controller="TattooStyles" asp-action="Create" class="btn btn-primary">Crea Nuovo Stile</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    <a asp-area="Admin" asp-controller="TattooStyles" asp-action="Edit" asp-route-id="@item.Id">Modifica</a> |
-                    <a asp-area="Admin" asp-controller="TattooStyles" asp-action="Details" asp-route-id="@item.Id">Dettagli</a> |
-                    <a asp-area="Admin" asp-controller="TattooStyles" asp-action="Delete" asp-route-id="@item.Id">Elimina</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@section Scripts {
+    <script>
+        // Tooltip Bootstrap (opzionale)
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[title]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+}

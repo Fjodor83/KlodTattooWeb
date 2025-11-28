@@ -1,59 +1,246 @@
 @model IEnumerable<KlodTattooWeb.Models.PortfolioItem>
-
 @{
     ViewData["Title"] = "Gestione Portfolio";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Gestione Portfolio</h1>
+<div class="container-fluid py-4">
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 mb-0">Gestione Portfolio</h1>
+        <div class="btn-group" role="group">
+            <a asp-action="Bookings" class="btn btn-outline-secondary">
+                <i class="bi bi-calendar-check"></i> Prenotazioni
+            </a>
+            <a asp-area="Admin" asp-controller="TattooStyles" asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-palette"></i> Stili Tatuaggio
+            </a>
+        </div>
+    </div>
 
-<div class="mb-3">
-    <a asp-action="Bookings" class="btn btn-secondary">Vai a Gestione Prenotazioni</a>
-    <a asp-area="Admin" asp-controller="TattooStyles" asp-action="Index" class="btn btn-secondary">Gestione Stili Tatuaggio</a>
+    <!-- Empty State -->
+    @if (Model?.Any() == false)
+    {
+        <div class="text-center py-5">
+            <div class="mb-4">
+                <i class="bi bi-images" style="font-size: 4rem; color: #6c757d;"></i>
+            </div>
+            <h3 class="text-muted">Nessun elemento nel portfolio</h3>
+            <p class="text-muted mb-4">Inizia aggiungendo il tuo primo lavoro al portfolio</p>
+            <a asp-action="Create" class="btn btn-primary btn-lg">
+                <i class="bi bi-plus-circle"></i> Crea Primo Elemento
+            </a>
+        </div>
+    }
+    else
+    {
+        <!-- Main Card -->
+        <div class="card shadow-sm">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                <h5 class="mb-0">
+                    <i class="bi bi-collection"></i> Elementi Portfolio
+                    <span class="badge bg-primary rounded-pill">@Model.Count()</span>
+                </h5>
+                <a asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Aggiungi Elemento
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4" style="width: 80px;">Anteprima</th>
+                                <th>@Html.DisplayNameFor(model => model.Title)</th>
+                                <th style="width: 150px;">Stile</th>
+                                <th style="width: 150px;">
+                                    <i class="bi bi-calendar3"></i> @Html.DisplayNameFor(model => model.CreatedAt)
+                                </th>
+                                <th class="text-end pe-4" style="width: 320px;">Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="ps-4">
+                                        <div class="position-relative" style="width: 60px; height: 60px;">
+                                            <img src="@item.ImageUrl"
+                                                 alt="@item.Title"
+                                                 class="rounded shadow-sm object-fit-cover w-100 h-100"
+                                                 style="cursor: pointer;"
+                                                 data-bs-toggle="modal"
+                                                 data-bs-target="#imageModal@(item.Id)" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <strong class="d-block">@Html.DisplayFor(modelItem => item.Title)</strong>
+                                        @if (!string.IsNullOrEmpty(item.Description))
+                                        {
+                                            <small class="text-muted">
+                                                @(item.Description.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description)
+                                            </small>
+                                        }
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-secondary">
+                                            @Html.DisplayFor(modelItem => item.TattooStyle.Name)
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <small class="text-muted">
+                                            @item.CreatedAt.ToString("dd/MM/yyyy")
+                                        </small>
+                                    </td>
+                                    <td class="text-end pe-4">
+                                        <div class="btn-group" role="group">
+                                            <a class="btn btn-outline-primary"
+                                               asp-action="Edit"
+                                               asp-route-id="@item.Id"
+                                               title="Modifica">
+                                                <i class="bi bi-pencil"></i> Modifica
+                                            </a>
+                                            <a class="btn btn-outline-info"
+                                               asp-action="Details"
+                                               asp-route-id="@item.Id"
+                                               title="Dettagli">
+                                                <i class="bi bi-eye"></i> Dettagli
+                                            </a>
+                                            <a class="btn btn-outline-danger"
+                                               asp-action="Delete"
+                                               asp-route-id="@item.Id"
+                                               title="Elimina">
+                                                <i class="bi bi-trash"></i> Elimina
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Modal per visualizzare l'immagine ingrandita -->
+                                <div class="modal fade" id="imageModal@(item.Id)" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">@item.Title</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                <img src="@item.ImageUrl"
+                                                     alt="@item.Title"
+                                                     class="img-fluid rounded shadow"
+                                                     style="max-height: 70vh;" />
+                                            </div>
+                                            <div class="modal-footer">
+                                                <span class="badge bg-secondary me-auto">@item.TattooStyle.Name</span>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Card (opzionale) -->
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card border-0 bg-light">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-collection text-primary" style="font-size: 2rem;"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="text-muted mb-0">Totale Elementi</h6>
+                                <h3 class="mb-0">@Model.Count()</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 bg-light">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-palette text-success" style="font-size: 2rem;"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="text-muted mb-0">Stili Diversi</h6>
+                                <h3 class="mb-0">@Model.Select(x => x.TattooStyle?.Name).Distinct().Count()</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 bg-light">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-calendar-plus text-info" style="font-size: 2rem;"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="text-muted mb-0">Ultimo Aggiunto</h6>
+                                <h3 class="mb-0">
+                                    @if (Model.Any())
+                                    {
+                                        @Model.OrderByDescending(x => x.CreatedAt).First().CreatedAt.ToString("dd/MM/yyyy")
+                                    }
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
-<p>
-    <a asp-action="Create">Crea Nuovo Elemento Portfolio</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                Stile
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TattooStyle.Name)
-                </td>
-                <td>
-                    <img src="@item.ImageUrl" alt="@item.Title" style="max-width: 100px; max-height: 100px;" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedAt)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Modifica</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Elimina</a>
-                </td>
-            </tr>
+@section Scripts {
+    <script>
+        // Inizializza tooltip
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[title]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+
+        // Animazione per le immagini al caricamento (opzionale)
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('tbody img');
+            images.forEach((img, index) => {
+                img.style.opacity = '0';
+                img.style.transform = 'scale(0.8)';
+                img.style.transition = 'all 0.3s ease';
+
+                setTimeout(() => {
+                    img.style.opacity = '1';
+                    img.style.transform = 'scale(1)';
+                }, index * 50);
+            });
+        });
+    </script>
+}
+
+<style>
+    .object-fit-cover {
+        object-fit: cover;
+    }
+
+    tbody tr {
+        transition: all 0.2s ease;
+    }
+
+        tbody tr:hover {
+            background-color: rgba(0, 123, 255, 0.05);
+            transform: translateX(2px);
         }
-    </tbody>
-</table>
+
+    tbody img:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+</style>
