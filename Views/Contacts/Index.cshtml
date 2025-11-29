@@ -2,67 +2,352 @@
     ViewData["Title"] = "Kontakt";
 }
 
-<div class="container mt-5">
-    <div class="text-center mb-5">
-        <h1 class="display-4 text-uppercase" style="color: #d4af37;">Kontakt</h1>
-        <p class="lead text-muted">Besuche uns im Studio oder schreibe uns für weitere Informationen.</p>
-        <div style="width: 60px; height: 3px; background-color: #d4af37; margin: 20px auto;"></div>
+<div class="container py-5">
+    <!-- Header Section -->
+    <div class="text-center mb-5" data-aos="fade-down">
+        <h1 class="display-3 fw-bold text-uppercase mb-3" style="color: #d4af37; letter-spacing: 3px;">
+            Kontakt
+        </h1>
+        <p class="lead text-muted fs-4">Besuche uns im Studio oder schreibe uns für weitere Informationen</p>
+        <div class="golden-underline mx-auto mt-3" style="width: 100px; height: 4px; background: linear-gradient(90deg, transparent, #d4af37, transparent);"></div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6 mb-5">
-            <div class="card bg-dark text-white border-secondary h-100 p-4">
-                <h3 class="h4 mb-4" style="color: #d4af37;">Klod Tattoo Studio</h3>
+    <div class="row g-4 mb-5">
+        <!-- Contact Info Card -->
+        <div class="col-lg-5" data-aos="fade-right">
+            <div class="card h-100 shadow-lg border-0" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
+                <div class="card-header border-0 text-center py-4" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
+                    <i class="fas fa-store fa-3x text-dark mb-3"></i>
+                    <h3 class="h4 mb-0 text-uppercase fw-bold text-dark">Klod Tattoo Studio</h3>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Address -->
+                    <div class="contact-item d-flex align-items-start mb-4 p-3 rounded" 
+                         style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37; transition: all 0.3s ease;">
+                        <div class="icon-wrapper me-3">
+                            <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                 style="width: 50px; height: 50px; min-width: 50px;">
+                                <i class="fas fa-map-marker-alt fa-lg text-dark"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="h6 mb-2 text-warning">Adresse</h5>
+                            <p class="text-light mb-1 fw-semibold">Lindenstraße 26</p>
+                            <p class="text-muted mb-0">63785 Obernburg am Main</p>
+                            <p class="text-muted mb-0">Deutschland</p>
+                        </div>
+                    </div>
 
-                <div class="d-flex align-items-start mb-3">
-                    <i class="fas fa-map-marker-alt fa-lg mt-1 me-3" style="color: #d4af37;"></i>
-                    <div>
-                        <h5 class="h6 mb-1">Adresse</h5>
-                        <p class="text-muted mb-0">Lindenstraße 26, 63785 Obernburg am Main, Deutschland</p>
+                    <!-- Phone -->
+                    <div class="contact-item d-flex align-items-start mb-4 p-3 rounded" 
+                         style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37; transition: all 0.3s ease;">
+                        <div class="icon-wrapper me-3">
+                            <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                 style="width: 50px; height: 50px; min-width: 50px;">
+                                <i class="fas fa-phone fa-lg text-dark"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="h6 mb-2 text-warning">Telefon</h5>
+                            <a href="tel:+491722487670" class="text-light text-decoration-none fw-semibold d-block hover-gold">
+                                +49 172 2487670
+                            </a>
+                            <small class="text-muted">Klick zum Anrufen</small>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="contact-item d-flex align-items-start mb-4 p-3 rounded" 
+                         style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37; transition: all 0.3s ease;">
+                        <div class="icon-wrapper me-3">
+                            <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                 style="width: 50px; height: 50px; min-width: 50px;">
+                                <i class="fas fa-envelope fa-lg text-dark"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="h6 mb-2 text-warning">E-Mail</h5>
+                            <a href="mailto:info@klodtattoo.de" class="text-light text-decoration-none fw-semibold d-block hover-gold">
+                                info@klodtattoo.de
+                            </a>
+                            <small class="text-muted">Schreib uns eine Nachricht</small>
+                        </div>
+                    </div>
+
+                    <!-- Instagram -->
+                    <div class="contact-item d-flex align-items-start mb-4 p-3 rounded" 
+                         style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37; transition: all 0.3s ease;">
+                        <div class="icon-wrapper me-3">
+                            <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                 style="width: 50px; height: 50px; min-width: 50px;">
+                                <i class="fab fa-instagram fa-lg text-dark"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="h6 mb-2 text-warning">Instagram</h5>
+                            <a href="https://instagram.com/klodback" target="_blank" class="text-light text-decoration-none fw-semibold d-block hover-gold">
+                                @@klodback
+                            </a>
+                            <small class="text-muted">Folge uns für Updates</small>
+                        </div>
+                    </div>
+
+                    <hr class="border-secondary my-4">
+
+                    <!-- Opening Hours -->
+                    <div class="opening-hours">
+                        <h4 class="h5 mb-4 text-center text-warning">
+                            <i class="fas fa-clock me-2"></i>Öffnungszeiten
+                        </h4>
+                        <div class="schedule">
+                            <div class="schedule-item d-flex justify-content-between align-items-center mb-3 p-3 rounded" 
+                                 style="background: rgba(212, 175, 55, 0.05);">
+                                <span class="text-light fw-semibold">
+                                    <i class="fas fa-calendar-day text-warning me-2"></i>Mo - Fr
+                                </span>
+                                <span class="text-warning fw-bold">10:00 - 19:00</span>
+                            </div>
+                            <div class="schedule-item d-flex justify-content-between align-items-center mb-3 p-3 rounded" 
+                                 style="background: rgba(212, 175, 55, 0.05);">
+                                <span class="text-light fw-semibold">
+                                    <i class="fas fa-calendar-day text-warning me-2"></i>Samstag
+                                </span>
+                                <span class="text-warning fw-bold">10:00 - 14:00</span>
+                            </div>
+                            <div class="schedule-item d-flex justify-content-between align-items-center p-3 rounded" 
+                                 style="background: rgba(212, 175, 55, 0.05);">
+                                <span class="text-light fw-semibold">
+                                    <i class="fas fa-calendar-day text-warning me-2"></i>Sonntag
+                                </span>
+                                <span class="text-danger fw-bold">Geschlossen</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="mt-4 text-center">
+                        <a asp-controller="Booking" asp-action="Create" class="btn btn-gold w-100 py-3 rounded-pill shadow-lg">
+                            <i class="fas fa-calendar-check me-2"></i>Jetzt Termin Buchen
+                        </a>
                     </div>
                 </div>
-
-                <div class="d-flex align-items-start mb-3">
-                    <i class="fas fa-phone fa-lg mt-1 me-3" style="color: #d4af37;"></i>
-                    <div>
-                        <h5 class="h6 mb-1">Telefon</h5>
-                        <p class="text-muted mb-0">+49 172 2487670</p>
-                    </div>
-                </div>
-
-                <div class="d-flex align-items-start mb-3">
-                    <i class="fas fa-envelope fa-lg mt-1 me-3" style="color: #d4af37;"></i>
-                    <div>
-                        <h5 class="h6 mb-1">E-Mail</h5>
-                        <p class="text-muted mb-0">info@klodtattoo.de</p>
-                    </div>
-                </div>
-
-                <div class="d-flex align-items-start mb-3">
-                    <i class="fab fa-instagram fa-lg mt-1 me-3" style="color: #d4af37;"></i>
-                    <div>
-                        <h5 class="h6 mb-1">Social</h5>
-                        <a href="https://instagram.com/klodback" target="_blank" class="text-muted text-decoration-none">@@klodback</a>
-                    </div>
-                </div>
-
-                <hr class="border-secondary my-4">
-
-                <h4 class="h5 mb-3">Öffnungszeiten</h4>
-                <ul class="list-unstyled text-muted">
-                    <li class="d-flex justify-content-between"><span>Mo - Fr:</span> <span>10:00 - 19:00</span></li>
-                    <li class="d-flex justify-content-between"><span>Samstag:</span> <span>10:00 - 14:00</span></li>
-                    <li class="d-flex justify-content-between"><span>Sonntag:</span> <span>Geschlossen</span></li>
-                </ul>
             </div>
         </div>
 
-        <div class="col-md-6 mb-5">
-            <!-- Google Maps -->
-            <div class="ratio ratio-1x1 border border-secondary rounded overflow-hidden">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2512.1234567890!2d9.11456!3d49.84712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1234567890abcdef!2sLindenstraße%2026%2C%2063785%20Obernburg%20am%20Main!5e0!3m2!1sde!2sde!4v0000000000000!5m2!1sde!2sde"
-                        style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <!-- Map and Quick Info -->
+        <div class="col-lg-7" data-aos="fade-left">
+            <div class="h-100 d-flex flex-column">
+                <!-- Map -->
+                <div class="card shadow-lg border-0 mb-4 flex-grow-1" style="min-height: 450px;">
+                    <div class="card-header border-0 py-3 text-center" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
+                        <h5 class="mb-0 text-light">
+                            <i class="fas fa-map-marked-alt text-warning me-2"></i>Finde Uns
+                        </h5>
+                    </div>
+                    <div class="card-body p-0 position-relative" style="height: 100%;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2512.1234567890!2d9.11456!3d49.84712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1234567890abcdef!2sLindenstraße%2026%2C%2063785%20Obernburg%20am%20Main!5e0!3m2!1sde!2sde!4v0000000000000!5m2!1sde!2sde"
+                                width="100%" 
+                                height="100%" 
+                                style="border:0; filter: grayscale(0.3) contrast(1.1);" 
+                                allowfullscreen="" 
+                                loading="lazy"
+                                class="rounded-bottom"></iframe>
+                        
+                        <!-- Floating Address Badge -->
+                        <div class="position-absolute top-0 start-0 m-3" style="z-index: 1000;">
+                            <a href="https://maps.google.com/?q=Lindenstraße+26,+63785+Obernburg+am+Main" 
+                               target="_blank"
+                               class="btn btn-light shadow-lg rounded-pill px-4 py-2">
+                                <i class="fas fa-directions text-warning me-2"></i>
+                                <strong>Route Planen</strong>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Info Cards -->
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="info-card text-center p-4 rounded shadow h-100" 
+                             style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
+                            <i class="fas fa-parking fa-2x text-dark mb-3"></i>
+                            <h5 class="h6 text-dark fw-bold mb-2">Parkplätze</h5>
+                            <p class="small text-dark mb-0">Kostenlose Parkplätze in der Nähe verfügbar</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-card text-center p-4 rounded shadow h-100" 
+                             style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border: 2px solid #d4af37;">
+                            <i class="fas fa-wheelchair fa-2x text-warning mb-3"></i>
+                            <h5 class="h6 text-light fw-bold mb-2">Barrierefrei</h5>
+                            <p class="small text-muted mb-0">Studio im Erdgeschoss zugänglich</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Media Section -->
+    <div class="row mt-5">
+        <div class="col-12" data-aos="fade-up">
+            <div class="card shadow-lg border-0 overflow-hidden" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
+                <div class="card-body p-5 text-center">
+                    <h3 class="display-6 fw-bold text-uppercase mb-3" style="color: #d4af37;">
+                        Folge Uns
+                    </h3>
+                    <p class="lead text-muted mb-4">Bleib auf dem Laufenden mit unseren neuesten Arbeiten</p>
+                    
+                    <div class="social-buttons d-flex justify-content-center gap-3 flex-wrap">
+                        <a href="https://instagram.com/klodback" 
+                           target="_blank" 
+                           class="btn btn-social btn-instagram btn-lg rounded-circle shadow-lg"
+                           style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fab fa-instagram fa-2x"></i>
+                        </a>
+                        <a href="https://facebook.com/klod.backa" 
+                           target="_blank" 
+                           class="btn btn-social btn-facebook btn-lg rounded-circle shadow-lg"
+                           style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fab fa-facebook-f fa-2x"></i>
+                        </a>
+                        <a href="https://wa.me/491722487670" 
+                           target="_blank" 
+                           class="btn btn-social btn-whatsapp btn-lg rounded-circle shadow-lg"
+                           style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fab fa-whatsapp fa-2x"></i>
+                        </a>
+                    </div>
+
+                    <div class="mt-4">
+                        <p class="text-muted mb-0">
+                            <i class="fas fa-heart text-danger me-2"></i>
+                            Über <strong class="text-warning">5.000+</strong> zufriedene Follower
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Contact -->
+    <div class="row mt-4">
+        <div class="col-12" data-aos="fade-up">
+            <div class="alert alert-info border-0 shadow" style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-info-circle fa-2x text-white me-3"></i>
+                    <div>
+                        <h6 class="alert-heading text-white fw-bold mb-1">Termine nur nach Vereinbarung</h6>
+                        <p class="mb-0 text-white">
+                            Bitte buche deinen Termin online oder kontaktiere uns telefonisch. Walk-ins nach Verfügbarkeit.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Custom Styles -->
+<style>
+    .btn-gold {
+        background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);
+        border: none;
+        color: #000;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+    .btn-gold:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        color: #000;
+    }
+
+    .contact-item:hover {
+        transform: translateX(10px);
+        background: rgba(212, 175, 55, 0.2) !important;
+    }
+
+    .hover-gold:hover {
+        color: #d4af37 !important;
+    }
+
+    .schedule-item:hover {
+        background: rgba(212, 175, 55, 0.15) !important;
+        transform: scale(1.02);
+    }
+
+    .info-card {
+        transition: all 0.3s ease;
+    }
+
+    .info-card:hover {
+        transform: translateY(-5px);
+    }
+
+    /* Social Buttons */
+    .btn-social {
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .btn-instagram {
+        background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        color: white;
+    }
+
+    .btn-instagram:hover {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 10px 30px rgba(225, 48, 108, 0.5);
+    }
+
+    .btn-facebook {
+        background: #1877f2;
+        color: white;
+    }
+
+    .btn-facebook:hover {
+        transform: scale(1.1) rotate(-5deg);
+        box-shadow: 0 10px 30px rgba(24, 119, 242, 0.5);
+    }
+
+    .btn-whatsapp {
+        background: #25d366;
+        color: white;
+    }
+
+    .btn-whatsapp:hover {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .display-3 {
+            font-size: 2.5rem !important;
+        }
+        
+        .btn-social {
+            width: 60px !important;
+            height: 60px !important;
+        }
+        
+        .btn-social i {
+            font-size: 1.5rem !important;
+        }
+    }
+</style>
+
+<!-- AOS Animation -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({
+        once: true,
+        duration: 800,
+        easing: 'ease-out-cubic'
+    });
+</script>

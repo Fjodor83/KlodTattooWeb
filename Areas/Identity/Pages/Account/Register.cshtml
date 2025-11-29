@@ -1,63 +1,319 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Registrazione";
 }
 
-<h1>@ViewData["Title"]</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Header -->
+            <div class="text-center mb-5" data-aos="fade-down">
+                <h1 class="display-4 fw-bold text-uppercase mb-3" style="color: #d4af37; letter-spacing: 2px;">
+                    <i class="fas fa-user-plus me-3"></i>Registrazione
+                </h1>
+                <p class="lead text-muted">Crea il tuo account Klod Tattoo</p>
+                <div class="golden-underline mx-auto mt-3" style="width: 80px; height: 3px; background: #d4af37;"></div>
+            </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm Password" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-        </form>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to register.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
+            <div class="row g-4">
+                <!-- Registration Form -->
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="card shadow-lg border-0 h-100" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
+                        <div class="card-header border-0 text-center py-4" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
+                            <h3 class="h5 mb-0 text-uppercase fw-bold text-dark">
+                                <i class="fas fa-user-circle me-2"></i>Crea Nuovo Account
+                            </h3>
                         </div>
-                    </form>
-                }
-            }
-        </section>
+                        <div class="card-body p-4">
+                            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3 mb-4" role="alert"></div>
+                                
+                                <!-- Email Field -->
+                                <div class="form-floating mb-4">
+                                    <input asp-for="Input.Email" 
+                                           class="form-control form-control-dark" 
+                                           autocomplete="username" 
+                                           aria-required="true" 
+                                           placeholder="name@example.com"
+                                           style="background: rgba(255,255,255,0.05); border: 2px solid rgba(212, 175, 55, 0.3); color: #fff;" />
+                                        <i class="fas fa-envelope me-2"></i>Email
+                                    </label>
+                                    <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Password Field -->
+                                <div class="form-floating mb-4">
+                                    <input asp-for="Input.Password" 
+                                           class="form-control form-control-dark" 
+                                           autocomplete="new-password" 
+                                           aria-required="true" 
+                                           placeholder="Password"
+                                           style="background: rgba(255,255,255,0.05); border: 2px solid rgba(212, 175, 55, 0.3); color: #fff;" />
+                                        <i class="fas fa-lock me-2"></i>Password
+                                    </label>
+                                    <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Confirm Password Field -->
+                                <div class="form-floating mb-4">
+                                    <input asp-for="Input.ConfirmPassword" 
+                                           class="form-control form-control-dark" 
+                                           autocomplete="new-password" 
+                                           aria-required="true" 
+                                           placeholder="Confirm Password"
+                                           style="background: rgba(255,255,255,0.05); border: 2px solid rgba(212, 175, 55, 0.3); color: #fff;" />
+                                        <i class="fas fa-lock me-2"></i>Conferma Password
+                                    </label>
+                                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Password Requirements -->
+                                <div class="alert alert-info border-0 mb-4" style="background: rgba(23, 162, 184, 0.1);">
+                                    <h6 class="text-info mb-2">
+                                        <i class="fas fa-info-circle me-2"></i>Requisiti Password
+                                    </h6>
+                                    <ul class="small text-light mb-0 ps-3">
+                                        <li>Minimo 6 caratteri</li>
+                                        <li>Almeno una lettera maiuscola</li>
+                                        <li>Almeno un numero</li>
+                                        <li>Almeno un carattere speciale (!@@#$%^&*)</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="d-grid mb-4">
+                                    <button id="registerSubmit" type="submit" class="btn btn-gold btn-lg py-3 rounded-pill shadow-lg">
+                                        <i class="fas fa-user-plus me-2"></i>Registrati
+                                    </button>
+                                </div>
+
+                                <!-- Login Link -->
+                                <div class="text-center">
+                                    <p class="text-muted mb-0">
+                                        Hai già un account? 
+                                        <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="text-warning text-decoration-none fw-semibold">
+                                            <i class="fas fa-sign-in-alt me-1"></i>Accedi qui
+                                        </a>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benefits / External Login Panel -->
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="card shadow-lg border-0 h-100" style="background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%); border: 2px solid #d4af37;">
+                        <div class="card-header border-0 text-center py-4" style="background: rgba(212, 175, 55, 0.1);">
+                            <h3 class="h5 mb-0 text-uppercase fw-bold text-warning">
+                                <i class="fas fa-crown me-2"></i>Perché Registrarsi?
+                            </h3>
+                        </div>
+                        <div class="card-body p-4 d-flex flex-column">
+                            @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+                            {
+                                <!-- External Registration Section -->
+                                <div class="mb-4">
+                                    <h4 class="h6 text-warning mb-3">
+                                        <i class="fas fa-share-alt me-2"></i>Registrati con un altro servizio
+                                    </h4>
+                                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                        <div class="d-grid gap-2">
+                                            @foreach (var provider in Model.ExternalLogins!)
+                                            {
+                                                <button type="submit" 
+                                                        class="btn btn-outline-light btn-lg" 
+                                                        name="provider" 
+                                                        value="@provider.Name" 
+                                                        title="Log in using your @provider.DisplayName account">
+                                                    <i class="fab fa-@provider.Name.ToLower() me-2"></i>Registrati con @provider.DisplayName
+                                                </button>
+                                            }
+                                        </div>
+                                    </form>
+                                    <hr class="border-secondary my-4">
+                                </div>
+                            }
+
+                            <!-- Benefits List -->
+                            <div class="flex-grow-1">
+                                <h4 class="h6 text-warning mb-4">
+                                    <i class="fas fa-gift me-2"></i>Vantaggi Esclusivi
+                                </h4>
+                                <div class="benefits-list">
+                                    <div class="benefit-item mb-4 p-3 rounded" style="background: rgba(212, 175, 55, 0.05); border-left: 3px solid #d4af37;">
+                                        <div class="d-flex align-items-start">
+                                            <div class="icon-wrapper me-3">
+                                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                                     style="width: 40px; height: 40px; min-width: 40px;">
+                                                    <i class="fas fa-calendar-check text-dark"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h6 class="text-light mb-1">Prenotazioni Online</h6>
+                                                <small class="text-muted">Prenota i tuoi appuntamenti 24/7 in totale autonomia</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="benefit-item mb-4 p-3 rounded" style="background: rgba(212, 175, 55, 0.05); border-left: 3px solid #d4af37;">
+                                        <div class="d-flex align-items-start">
+                                            <div class="icon-wrapper me-3">
+                                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                                     style="width: 40px; height: 40px; min-width: 40px;">
+                                                    <i class="fas fa-images text-dark"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h6 class="text-light mb-1">Portfolio Personale</h6>
+                                                <small class="text-muted">Visualizza lo storico di tutti i tuoi tatuaggi</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="benefit-item mb-4 p-3 rounded" style="background: rgba(212, 175, 55, 0.05); border-left: 3px solid #d4af37;">
+                                        <div class="d-flex align-items-start">
+                                            <div class="icon-wrapper me-3">
+                                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                                     style="width: 40px; height: 40px; min-width: 40px;">
+                                                    <i class="fas fa-percent text-dark"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h6 class="text-light mb-1">Offerte Esclusive</h6>
+                                                <small class="text-muted">Accesso prioritario a promozioni e sconti</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="benefit-item mb-4 p-3 rounded" style="background: rgba(212, 175, 55, 0.05); border-left: 3px solid #d4af37;">
+                                        <div class="d-flex align-items-start">
+                                            <div class="icon-wrapper me-3">
+                                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                                     style="width: 40px; height: 40px; min-width: 40px;">
+                                                    <i class="fas fa-bell text-dark"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h6 class="text-light mb-1">Notifiche Smart</h6>
+                                                <small class="text-muted">Promemoria automatici per i tuoi appuntamenti</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="benefit-item p-3 rounded" style="background: rgba(212, 175, 55, 0.05); border-left: 3px solid #d4af37;">
+                                        <div class="d-flex align-items-start">
+                                            <div class="icon-wrapper me-3">
+                                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                                     style="width: 40px; height: 40px; min-width: 40px;">
+                                                    <i class="fas fa-headset text-dark"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h6 class="text-light mb-1">Supporto Prioritario</h6>
+                                                <small class="text-muted">Assistenza dedicata per clienti registrati</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Privacy Note -->
+                            <div class="alert alert-success border-0 mt-4 mb-0" style="background: rgba(40, 167, 69, 0.2);">
+                                <h6 class="text-success mb-2">
+                                    <i class="fas fa-shield-alt me-2"></i>Privacy Garantita
+                                </h6>
+                                <small class="text-light">
+                                    La registrazione è gratuita e sicura. I tuoi dati sono protetti e non saranno mai condivisi.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Banner -->
+            <div class="row mt-4">
+                <div class="col-12" data-aos="fade-up">
+                    <div class="alert border-0 shadow" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-star fa-2x text-dark me-3"></i>
+                            <div>
+                                <h6 class="text-dark fw-bold mb-1">Unisciti alla Famiglia Klod Tattoo</h6>
+                                <p class="mb-0 text-dark">
+                                    Oltre 1000+ clienti soddisfatti hanno già creato il loro account. Registrati ora e inizia il tuo viaggio artistico!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+    .btn-gold {
+        background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);
+        border: none;
+        color: #000;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+    .btn-gold:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        color: #000;
+    }
+
+    .form-control-dark:focus {
+        background: rgba(255,255,255,0.1);
+        border-color: #d4af37;
+        box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+        color: #fff;
+    }
+
+    .benefit-item {
+        transition: all 0.3s ease;
+    }
+
+    .benefit-item:hover {
+        background: rgba(212, 175, 55, 0.15) !important;
+        transform: translateX(5px);
+    }
+
+    .card {
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    a:hover {
+        color: #d4af37 !important;
+    }
+
+    @@media (max-width: 768px) {
+        .display-4 {
+            font-size: 2rem !important;
+        }
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({
+        once: true,
+        duration: 800,
+        easing: 'ease-out-cubic'
+    });
+</script>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

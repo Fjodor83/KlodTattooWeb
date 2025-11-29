@@ -3,98 +3,430 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - KlodTattooWeb</title>
+    <title>@ViewData["Title"] - Klod Tattoo Studio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
+    
+    <!-- CSS -->
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/KlodTattooWeb.styles.css" asp-append-version="true" />
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!-- GLightbox -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow mb-3">
+    <!-- Header/Navbar -->
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark shadow-lg" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); backdrop-filter: blur(10px);">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">KLOD TATTOO</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Logo/Brand -->
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-dragon me-2" style="color: #d4af37; font-size: 1.5rem;"></i>
+                    <span class="fw-bold text-uppercase" style="color: #d4af37; letter-spacing: 2px; font-size: 1.2rem;">
+                        Klod Tattoo
+                    </span>
+                </a>
+
+                <!-- Mobile Toggle -->
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1 justify-content-end">
+
+                <!-- Nav Items -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Portfolio" asp-action="Index">Portfolio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Services" asp-action="Index">Servizi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Info" asp-action="Index">Info</a>
+                            <a class="nav-link px-3 position-relative nav-link-custom" 
+                               asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i>Home
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Contacts" asp-action="Index">Contatti</a>
+                            <a class="nav-link px-3 position-relative nav-link-custom" 
+                               asp-area="" asp-controller="Portfolio" asp-action="Index">
+                                <i class="fas fa-images me-1"></i>Portfolio
+                            </a>
                         </li>
-                        <li class="nav-item ms-2">
-                            <a class="btn btn-primary btn-sm mt-1" asp-area="" asp-controller="Booking" asp-action="Create">Prenota</a>
+                        <li class="nav-item">
+                            <a class="nav-link px-3 position-relative nav-link-custom" 
+                               asp-area="" asp-controller="Services" asp-action="Index">
+                                <i class="fas fa-palette me-1"></i>Servizi
+                            </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3 position-relative nav-link-custom" 
+                               asp-area="" asp-controller="Info" asp-action="Index">
+                                <i class="fas fa-info-circle me-1"></i>Info
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3 position-relative nav-link-custom" 
+                               asp-area="" asp-controller="Contacts" asp-action="Index">
+                                <i class="fas fa-envelope me-1"></i>Contatti
+                            </a>
+                        </li>
+                        
+                        <!-- CTA Button -->
+                        <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                            <a class="btn btn-gold px-4 py-2 rounded-pill shadow" 
+                               asp-area="" asp-controller="Booking" asp-action="Create">
+                                <i class="fas fa-calendar-check me-2"></i>Prenota
+                            </a>
+                        </li>
+
+                        <!-- Admin Link (if authenticated) -->
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+                            <li class="nav-item ms-lg-2">
+                                <a class="nav-link px-3 text-warning" 
+                                   asp-area="" asp-controller="Admin" asp-action="Index">
+                                    <i class="fas fa-user-shield me-1"></i>Admin
+                                </a>
                             </li>
                         }
                     </ul>
-                    <partial name="_LoginPartial" />
+
+                    <!-- Login Partial -->
+                    <div class="ms-lg-3 mt-2 mt-lg-0">
+                        <partial name="_LoginPartial" />
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
 
-    <div class="container flex-grow-1">
-        <main role="main" class="pb-3">
+    <!-- Main Content -->
+    <div class="flex-grow-1">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
-    <footer class="lux-footer">
-        <div class="container text-center py-4">
-            <div class="gold-line"></div>
 
-            <div class="row mt-3">
-                <div class="col-md-4 text-center text-md-start">
-                    &copy; 2025 - KlodTattooWeb
+    <!-- Footer -->
+    <footer class="footer-custom mt-5" style="background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); border-top: 2px solid #d4af37;">
+        <div class="container py-5">
+            <!-- Top Section -->
+            <div class="row g-4 mb-4">
+                <!-- About Column -->
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="text-uppercase fw-bold mb-3" style="color: #d4af37;">
+                        <i class="fas fa-dragon me-2"></i>Klod Tattoo
+                    </h5>
+                    <p class="text-muted small">
+                        Studio professionale di tatuaggi a Obernburg am Main. 
+                        Arte sulla pelle dal 2015. Specializzati in realistico, traditional e blackwork.
+                    </p>
+                    <div class="social-links mt-3">
+                        <a href="https://instagram.com/klodback" target="_blank" class="social-icon me-2" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com/klod.backa" target="_blank" class="social-icon me-2" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://wa.me/491722487670" target="_blank" class="social-icon me-2" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="tel:+491722487670" class="social-icon" title="Telefono">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <div class="col-md-4 text-center">
-                    <a href="https://instagram.com/klodback" class="lux-social"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="lux-social"><i class="fab fa-facebook"></i></a>
+                <!-- Quick Links Column -->
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="text-uppercase fw-bold mb-3 text-light">Link Rapidi</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a asp-controller="Home" asp-action="Index" class="text-muted text-decoration-none">
+                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>Home
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a asp-controller="Portfolio" asp-action="Index" class="text-muted text-decoration-none">
+                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>Portfolio
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a asp-controller="Services" asp-action="Index" class="text-muted text-decoration-none">
+                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>Servizi
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a asp-controller="Info" asp-action="Index" class="text-muted text-decoration-none">
+                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>Info & FAQ
+                            </a>
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="col-md-4 text-center text-md-end">
-                    <a asp-controller="Info" asp-action="Index" class="lux-link">
-                        Privacy & FAQ
+                <!-- Services Column -->
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="text-uppercase fw-bold mb-3 text-light">Servizi</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <span class="text-muted">
+                                <i class="fas fa-check text-success me-2"></i>Tatuaggi Custom
+                            </span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="text-muted">
+                                <i class="fas fa-check text-success me-2"></i>Cover Up
+                            </span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="text-muted">
+                                <i class="fas fa-check text-success me-2"></i>Restauro Tatuaggi
+                            </span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="text-muted">
+                                <i class="fas fa-check text-success me-2"></i>Consulenza Gratuita
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="text-uppercase fw-bold mb-3 text-light">Contatti</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2 d-flex align-items-start">
+                            <i class="fas fa-map-marker-alt text-warning me-2 mt-1"></i>
+                            <span class="text-muted small">
+                                Lindenstraße 26<br>
+                                63785 Obernburg am Main
+                            </span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-phone text-warning me-2"></i>
+                            <a href="tel:+491722487670" class="text-muted text-decoration-none small">
+                                +49 172 2487670
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-envelope text-warning me-2"></i>
+                            <a href="mailto:info@klodtattoo.de" class="text-muted text-decoration-none small">
+                                info@klodtattoo.de
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-clock text-warning me-2"></i>
+                            <span class="text-muted small">Mo-Fr: 10:00-19:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <hr class="my-4" style="border-color: rgba(212, 175, 55, 0.3);">
+
+            <!-- Bottom Section -->
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="text-muted small mb-0">
+                        &copy; 2025 <strong style="color: #d4af37;">Klod Tattoo Studio</strong>. Tutti i diritti riservati.
+                    </p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a asp-controller="Home" asp-action="Privacy" class="text-muted text-decoration-none small me-3 hover-gold">
+                        <i class="fas fa-shield-alt me-1"></i>Privacy Policy
+                    </a>
+                    <a href="#" class="text-muted text-decoration-none small hover-gold">
+                        <i class="fas fa-file-contract me-1"></i>Termini di Servizio
                     </a>
                 </div>
             </div>
         </div>
+
+        <!-- Back to Top Button -->
+        <button id="backToTop" class="btn-back-to-top" onclick="scrollToTop()" style="display: none;">
+            <i class="fas fa-arrow-up"></i>
+        </button>
     </footer>
+
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    
     <script>
+        // GLightbox initialization
         const lightbox = GLightbox({
             touchNavigation: true,
             loop: true,
             closeButton: true,
             zoomable: true,
         });
+
+        // Back to Top Button
+        window.onscroll = function() {
+            const backToTopBtn = document.getElementById("backToTop");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopBtn.style.display = "flex";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Active nav link highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentLocation = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link-custom');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentLocation) {
+                    link.classList.add('active');
+                }
+            });
+        });
     </script>
 
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- Cookie Consent -->
+    <partial name="_CookieConsentPartial" />
+
+    <!-- Custom Styles -->
+    <style>
+        /* Navbar Custom Styles */
+        .navbar {
+            border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link-custom {
+            color: rgba(255, 255, 255, 0.85) !important;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link-custom:hover,
+        .nav-link-custom.active {
+            color: #d4af37 !important;
+        }
+
+        .nav-link-custom::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #d4af37;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link-custom:hover::after,
+        .nav-link-custom.active::after {
+            width: 80%;
+        }
+
+        /* Button Gold */
+        .btn-gold {
+            background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);
+            border: none;
+            color: #000;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+            color: #000;
+        }
+
+        /* Social Icons */
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: #d4af37;
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        /* Footer Links */
+        .footer-links a:hover {
+            color: #d4af37 !important;
+            padding-left: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .hover-gold:hover {
+            color: #d4af37 !important;
+        }
+
+        /* Back to Top Button */
+        .btn-back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);
+            border: none;
+            color: #000;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Responsive */
+        @@media (max-width: 991px) {
+            .navbar-collapse {
+                background: rgba(26, 26, 26, 0.98);
+                padding: 1rem;
+                margin-top: 1rem;
+                border-radius: 10px;
+            }
+
+            .nav-link-custom::after {
+                display: none;
+            }
+        }
+    </style>
 </body>
 </html>

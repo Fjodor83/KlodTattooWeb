@@ -1,82 +1,263 @@
 ﻿@page
 @model LoginModel
-
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Login";
 }
 
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                    <label asp-for="Input.Email" class="form-label">Email</label>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
-                    <label asp-for="Input.Password" class="form-label">Password</label>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="checkbox mb-3">
-                    <label asp-for="Input.RememberMe" class="form-label">
-                        <input class="form-check-input" asp-for="Input.RememberMe" />
-                        @Html.DisplayNameFor(m => m.Input.RememberMe)
-                    </label>
-                </div>
-                <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                </div>
-                <div>
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
-                </div>
-            </form>
-        </section>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to log in.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Header -->
+            <div class="text-center mb-5" data-aos="fade-down">
+                <h1 class="display-4 fw-bold text-uppercase mb-3" style="color: #d4af37; letter-spacing: 2px;">
+                    <i class="fas fa-user-lock me-3"></i>Login
+                </h1>
+                <p class="lead text-muted">Accedi al tuo account Klod Tattoo</p>
+                <div class="golden-underline mx-auto mt-3" style="width: 80px; height: 3px; background: #d4af37;"></div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Login Form -->
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="card shadow-lg border-0 h-100" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
+                        <div class="card-header border-0 text-center py-4" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
+                            <h3 class="h5 mb-0 text-uppercase fw-bold text-dark">
+                                <i class="fas fa-sign-in-alt me-2"></i>Accedi con il tuo Account
+                            </h3>
                         </div>
-                    </form>
-                }
-            }
-        </section>
+                        <div class="card-body p-4">
+                            <form id="account" method="post">
+                                <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3 mb-4" role="alert"></div>
+                                
+                                <!-- Email Field -->
+                                <div class="form-floating mb-4">
+                                    <input asp-for="Input.Email" 
+                                           class="form-control form-control-dark" 
+                                           autocomplete="username" 
+                                           aria-required="true" 
+                                           placeholder="name@example.com"
+                                           style="background: rgba(255,255,255,0.05); border: 2px solid rgba(212, 175, 55, 0.3); color: #fff;" />
+                                        <i class="fas fa-envelope me-2"></i>Email
+                                    </label>
+                                    <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Password Field -->
+                                <div class="form-floating mb-4">
+                                    <input asp-for="Input.Password" 
+                                           class="form-control form-control-dark" 
+                                           autocomplete="current-password" 
+                                           aria-required="true" 
+                                           placeholder="Password"
+                                           style="background: rgba(255,255,255,0.05); border: 2px solid rgba(212, 175, 55, 0.3); color: #fff;" />
+                                        <i class="fas fa-lock me-2"></i>Password
+                                    </label>
+                                    <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Remember Me -->
+                                <div class="form-check mb-5 ps-4 py-3 rounded" style="background: rgba(212, 175, 55, 0.05);">
+                                    <input class="form-check-input" 
+                                           asp-for="Input.RememberMe" 
+                                           type="checkbox"
+                                           style="border-color: #d4af37; background-color: transparent;" />
+                                    <label asp-for="Input.RememberMe" class="form-check-label text-light">
+                                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                    </label>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="d-grid mb-4">
+                                    <button id="login-submit" type="submit" class="btn btn-gold btn-lg py-3 rounded-pill shadow-lg">
+                                        <i class="fas fa-sign-in-alt me-2"></i>Accedi
+                                    </button>
+                                </div>
+
+                                <!-- Links -->
+                                <div class="text-center">
+                                    <div class="mb-2">
+                                        <a id="forgot-password" 
+                                           asp-page="./ForgotPassword" 
+                                           class="text-decoration-none text-warning">
+                                            <i class="fas fa-question-circle me-1"></i>Password dimenticata?
+                                        </a>
+                                    </div>
+                                    <div class="mb-2">
+                                        <a asp-page="./Register" 
+                                           asp-route-returnUrl="@Model.ReturnUrl" 
+                                           class="text-decoration-none text-light">
+                                            <i class="fas fa-user-plus me-1"></i>Registrati come nuovo utente
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a id="resend-confirmation" 
+                                           asp-page="./ResendEmailConfirmation" 
+                                           class="text-decoration-none text-muted small">
+                                            <i class="fas fa-envelope me-1"></i>Reinvia conferma email
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- External Login / Info Panel -->
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="card shadow-lg border-0 h-100" style="background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%); border: 2px solid #d4af37;">
+                        <div class="card-header border-0 text-center py-4" style="background: rgba(212, 175, 55, 0.1);">
+                            <h3 class="h5 mb-0 text-uppercase fw-bold text-warning">
+                                <i class="fas fa-shield-alt me-2"></i>Info & Sicurezza
+                            </h3>
+                        </div>
+                        <div class="card-body p-4 d-flex flex-column">
+                            @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+                            {
+                                <!-- External Login Section -->
+                                <div class="mb-4">
+                                    <h4 class="h6 text-warning mb-3">
+                                        <i class="fas fa-share-alt me-2"></i>Accedi con un altro servizio
+                                    </h4>
+                                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                        <div class="d-grid gap-2">
+                                            @foreach (var provider in Model.ExternalLogins!)
+                                            {
+                                                <button type="submit" 
+                                                        class="btn btn-outline-light btn-lg" 
+                                                        name="provider" 
+                                                        value="@provider.Name" 
+                                                        title="Log in using your @provider.DisplayName account">
+                                                    <i class="fab fa-@provider.Name.ToLower() me-2"></i>@provider.DisplayName
+                                                </button>
+                                            }
+                                        </div>
+                                    </form>
+                                    <hr class="border-secondary my-4">
+                                </div>
+                            }
+
+                            <!-- Benefits Section -->
+                            <div class="flex-grow-1">
+                                <h4 class="h6 text-warning mb-4">
+                                    <i class="fas fa-star me-2"></i>Vantaggi dell'Account
+                                </h4>
+                                <ul class="list-unstyled">
+                                    <li class="mb-3 d-flex align-items-start">
+                                        <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                                        <div>
+                                            <strong class="text-light d-block">Prenotazioni Rapide</strong>
+                                            <small class="text-muted">Prenota i tuoi appuntamenti in pochi click</small>
+                                        </div>
+                                    </li>
+                                    <li class="mb-3 d-flex align-items-start">
+                                        <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                                        <div>
+                                            <strong class="text-light d-block">Storico Tatuaggi</strong>
+                                            <small class="text-muted">Traccia tutti i tuoi lavori con noi</small>
+                                        </div>
+                                    </li>
+                                    <li class="mb-3 d-flex align-items-start">
+                                        <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                                        <div>
+                                            <strong class="text-light d-block">Offerte Esclusive</strong>
+                                            <small class="text-muted">Accesso a promozioni riservate</small>
+                                        </div>
+                                    </li>
+                                    <li class="mb-3 d-flex align-items-start">
+                                        <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                                        <div>
+                                            <strong class="text-light d-block">Notifiche Personalizzate</strong>
+                                            <small class="text-muted">Rimani aggiornato sui tuoi appuntamenti</small>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Security Note -->
+                            <div class="alert alert-info border-0 mt-4 mb-0" style="background: rgba(23, 162, 184, 0.2);">
+                                <h6 class="text-info mb-2">
+                                    <i class="fas fa-lock me-2"></i>Sicurezza Garantita
+                                </h6>
+                                <small class="text-light">
+                                    I tuoi dati sono protetti con crittografia SSL e non vengono mai condivisi con terze parti.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Help Section -->
+            <div class="row mt-4">
+                <div class="col-12" data-aos="fade-up">
+                    <div class="alert border-0 shadow" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-info-circle fa-2x text-dark me-3"></i>
+                            <div>
+                                <h6 class="text-dark fw-bold mb-1">Hai bisogno di aiuto?</h6>
+                                <p class="mb-0 text-dark">
+                                    Se hai problemi con l'accesso, <a asp-controller="Home" asp-action="Contact" class="text-dark fw-bold text-decoration-underline">contattaci</a> o chiama il +49 172 2487670
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+    .btn-gold {
+        background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);
+        border: none;
+        color: #000;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+    .btn-gold:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        color: #000;
+    }
+
+    .form-control-dark:focus {
+        background: rgba(255,255,255,0.1);
+        border-color: #d4af37;
+        box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+        color: #fff;
+    }
+
+    .form-check-input:checked {
+        background-color: #d4af37;
+        border-color: #d4af37;
+    }
+
+    .card {
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    a:hover {
+        color: #d4af37 !important;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({
+        once: true,
+        duration: 800,
+        easing: 'ease-out-cubic'
+    });
+</script>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

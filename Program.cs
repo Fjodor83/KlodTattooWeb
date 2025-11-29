@@ -61,6 +61,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 // ---------------------------
+// Cookie Policy
+// ---------------------------
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+    options.CheckConsentNeeded = context => true;
+});
+
+// ---------------------------
 // Email Sender
 // ---------------------------
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
@@ -163,6 +172,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCookiePolicy();
 app.UseStaticFiles();
 
 app.UseRouting();
