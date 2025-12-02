@@ -1,7 +1,9 @@
-﻿@page
+@page
 @model LoginModel
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = @Localizer["Page_Title"];
 }
 
 <div class="container py-5">
@@ -10,9 +12,9 @@
             <!-- Header -->
             <div class="text-center mb-5" data-aos="fade-down">
                 <h1 class="display-4 fw-bold text-uppercase mb-3" style="color: #d4af37; letter-spacing: 2px;">
-                    <i class="fas fa-user-lock me-3"></i>Login
+                    <i class="fas fa-user-lock me-3"></i>@Localizer["Page_Title"]
                 </h1>
-                <p class="lead text-muted">Accedi al tuo account Klod Tattoo</p>
+                <p class="lead text-muted">@Localizer["Page_Subtitle"]</p>
                 <div class="golden-underline mx-auto mt-3" style="width: 80px; height: 3px; background: #d4af37;"></div>
             </div>
 
@@ -22,7 +24,7 @@
                     <div class="card shadow-lg border-0 h-100" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
                         <div class="card-header border-0 text-center py-4" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
                             <h3 class="h5 mb-0 text-uppercase fw-bold text-dark">
-                                <i class="fas fa-sign-in-alt me-2"></i>Accedi con il tuo Account
+                                <i class="fas fa-sign-in-alt me-2"></i>@Localizer["Form_Title"]
                             </h3>
                         </div>
                         <div class="card-body p-4">
@@ -37,7 +39,8 @@
                                            aria-required="true" 
                                            placeholder="name@example.com"
                                            style="background: rgba(255,255,255,0.05); border: 2px solid rgba(212, 175, 55, 0.3); color: #fff;" />
-                                        <i class="fas fa-envelope me-2"></i>Email
+                                    <label asp-for="Input.Email" class="form-label">
+                                        <i class="fas fa-envelope me-2"></i>@Localizer["Label_Email"]
                                     </label>
                                     <span asp-validation-for="Input.Email" class="text-danger small"></span>
                                 </div>
@@ -50,7 +53,8 @@
                                            aria-required="true" 
                                            placeholder="Password"
                                            style="background: rgba(255,255,255,0.05); border: 2px solid rgba(212, 175, 55, 0.3); color: #fff;" />
-                                        <i class="fas fa-lock me-2"></i>Password
+                                    <label asp-for="Input.Password" class="form-label">
+                                        <i class="fas fa-lock me-2"></i>@Localizer["Label_Password"]
                                     </label>
                                     <span asp-validation-for="Input.Password" class="text-danger small"></span>
                                 </div>
@@ -69,7 +73,7 @@
                                 <!-- Submit Button -->
                                 <div class="d-grid mb-4">
                                     <button id="login-submit" type="submit" class="btn btn-gold btn-lg py-3 rounded-pill shadow-lg">
-                                        <i class="fas fa-sign-in-alt me-2"></i>Accedi
+                                        <i class="fas fa-sign-in-alt me-2"></i>@Localizer["Button_Login"]
                                     </button>
                                 </div>
 
@@ -79,21 +83,21 @@
                                         <a id="forgot-password" 
                                            asp-page="./ForgotPassword" 
                                            class="text-decoration-none text-warning">
-                                            <i class="fas fa-question-circle me-1"></i>Password dimenticata?
+                                            <i class="fas fa-question-circle me-1"></i>@Localizer["Link_ForgotPassword"]
                                         </a>
                                     </div>
                                     <div class="mb-2">
                                         <a asp-page="./Register" 
                                            asp-route-returnUrl="@Model.ReturnUrl" 
                                            class="text-decoration-none text-light">
-                                            <i class="fas fa-user-plus me-1"></i>Registrati come nuovo utente
+                                            <i class="fas fa-user-plus me-1"></i>@Localizer["Link_Register"]
                                         </a>
                                     </div>
                                     <div>
                                         <a id="resend-confirmation" 
                                            asp-page="./ResendEmailConfirmation" 
                                            class="text-decoration-none text-muted small">
-                                            <i class="fas fa-envelope me-1"></i>Reinvia conferma email
+                                            <i class="fas fa-envelope me-1"></i>@Localizer["Link_ResendEmailConfirmation"]
                                         </a>
                                     </div>
                                 </div>
@@ -107,7 +111,7 @@
                     <div class="card shadow-lg border-0 h-100" style="background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%); border: 2px solid #d4af37;">
                         <div class="card-header border-0 text-center py-4" style="background: rgba(212, 175, 55, 0.1);">
                             <h3 class="h5 mb-0 text-uppercase fw-bold text-warning">
-                                <i class="fas fa-shield-alt me-2"></i>Info & Sicurezza
+                                <i class="fas fa-shield-alt me-2"></i>@Localizer["Info_Title"]
                             </h3>
                         </div>
                         <div class="card-body p-4 d-flex flex-column">
@@ -116,7 +120,7 @@
                                 <!-- External Login Section -->
                                 <div class="mb-4">
                                     <h4 class="h6 text-warning mb-3">
-                                        <i class="fas fa-share-alt me-2"></i>Accedi con un altro servizio
+                                        <i class="fas fa-share-alt me-2"></i>@Localizer["ExternalLogin_Title"]
                                     </h4>
                                     <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                                         <div class="d-grid gap-2">
@@ -139,35 +143,35 @@
                             <!-- Benefits Section -->
                             <div class="flex-grow-1">
                                 <h4 class="h6 text-warning mb-4">
-                                    <i class="fas fa-star me-2"></i>Vantaggi dell'Account
+                                    <i class="fas fa-star me-2"></i>@Localizer["Benefits_Title"]
                                 </h4>
                                 <ul class="list-unstyled">
                                     <li class="mb-3 d-flex align-items-start">
                                         <i class="fas fa-check-circle text-success me-3 mt-1"></i>
                                         <div>
-                                            <strong class="text-light d-block">Prenotazioni Rapide</strong>
-                                            <small class="text-muted">Prenota i tuoi appuntamenti in pochi click</small>
+                                            <strong class="text-light d-block">@Localizer["Benefit1_Title"]</strong>
+                                            <small class="text-muted">@Localizer["Benefit1_Text"]</small>
                                         </div>
                                     </li>
                                     <li class="mb-3 d-flex align-items-start">
                                         <i class="fas fa-check-circle text-success me-3 mt-1"></i>
                                         <div>
-                                            <strong class="text-light d-block">Storico Tatuaggi</strong>
-                                            <small class="text-muted">Traccia tutti i tuoi lavori con noi</small>
+                                            <strong class="text-light d-block">@Localizer["Benefit2_Title"]</strong>
+                                            <small class="text-muted">@Localizer["Benefit2_Text"]</small>
                                         </div>
                                     </li>
                                     <li class="mb-3 d-flex align-items-start">
                                         <i class="fas fa-check-circle text-success me-3 mt-1"></i>
                                         <div>
-                                            <strong class="text-light d-block">Offerte Esclusive</strong>
-                                            <small class="text-muted">Accesso a promozioni riservate</small>
+                                            <strong class="text-light d-block">@Localizer["Benefit3_Title"]</strong>
+                                            <small class="text-muted">@Localizer["Benefit3_Text"]</small>
                                         </div>
                                     </li>
                                     <li class="mb-3 d-flex align-items-start">
                                         <i class="fas fa-check-circle text-success me-3 mt-1"></i>
                                         <div>
-                                            <strong class="text-light d-block">Notifiche Personalizzate</strong>
-                                            <small class="text-muted">Rimani aggiornato sui tuoi appuntamenti</small>
+                                            <strong class="text-light d-block">@Localizer["Benefit4_Title"]</strong>
+                                            <small class="text-muted">@Localizer["Benefit4_Text"]</small>
                                         </div>
                                     </li>
                                 </ul>
@@ -176,10 +180,10 @@
                             <!-- Security Note -->
                             <div class="alert alert-info border-0 mt-4 mb-0" style="background: rgba(23, 162, 184, 0.2);">
                                 <h6 class="text-info mb-2">
-                                    <i class="fas fa-lock me-2"></i>Sicurezza Garantita
+                                    <i class="fas fa-lock me-2"></i>@Localizer["Security_Title"]
                                 </h6>
                                 <small class="text-light">
-                                    I tuoi dati sono protetti con crittografia SSL e non vengono mai condivisi con terze parti.
+                                    @Localizer["Security_Text"]
                                 </small>
                             </div>
                         </div>
@@ -194,9 +198,9 @@
                         <div class="d-flex align-items-center">
                             <i class="fas fa-info-circle fa-2x text-dark me-3"></i>
                             <div>
-                                <h6 class="text-dark fw-bold mb-1">Hai bisogno di aiuto?</h6>
+                                <h6 class="text-dark fw-bold mb-1">@Localizer["Help_Title"]</h6>
                                 <p class="mb-0 text-dark">
-                                    Se hai problemi con l'accesso, <a asp-controller="Home" asp-action="Contact" class="text-dark fw-bold text-decoration-underline">contattaci</a> o chiama il +49 172 2487670
+                                    @Localizer["Help_Text"]
                                 </p>
                             </div>
                         </div>

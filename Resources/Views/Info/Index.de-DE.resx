@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Page_Title" xml:space="preserve">
+    <value>Nützliche Informationen</value>
+  </data>
+  <data name="Page_Subtitle" xml:space="preserve">
+    <value>Alles, was Sie für Ihr Tattoo wissen müssen</value>
+  </data>
+  <data name="Aftercare_Title" xml:space="preserve">
+    <value>Tattoo-Pflege</value>
+  </data>
+  <data name="Aftercare_Instructions" xml:space="preserve">
+    <value>Befolgen Sie diese Anweisungen sorgfältig, um eine perfekte Heilung Ihres Tattoos zu gewährleisten.</value>
+  </data>
+  <data name="Aftercare_Step1_Title" xml:space="preserve">
+    <value>Der Verband</value>
+  </data>
+  <data name="Aftercare_Step1_Text" xml:space="preserve">
+    <value>Lassen Sie den Schutzverband 2-4 Stunden nach der Sitzung drauf.</value>
+  </data>
+  <data name="Aftercare_Step2_Title" xml:space="preserve">
+    <value>Waschen</value>
+  </data>
+  <data name="Aftercare_Step2_Text" xml:space="preserve">
+    <value>Waschen Sie es vorsichtig mit lauwarmem Wasser und neutraler Seife.</value>
+  </data>
+  <data name="Aftercare_Step3_Title" xml:space="preserve">
+    <value>Trocknen</value>
+  </data>
+  <data name="Aftercare_Step3_Text" xml:space="preserve">
+    <value>Tupfen Sie es mit sauberem Küchenpapier ab, nicht reiben.</value>
+  </data>
+  <data name="Aftercare_Step4_Title" xml:space="preserve">
+    <value>Feuchtigkeit</value>
+  </data>
+  <data name="Aftercare_Step4_Text" xml:space="preserve">
+    <value>Tragen Sie 3-4 Mal täglich eine dünne Schicht Spezialcreme auf.</value>
+  </data>
+  <data name="Aftercare_Step5_Title" xml:space="preserve">
+    <value>Schutz</value>
+  </data>
+  <data name="Aftercare_Step5_Text" xml:space="preserve">
+    <value>Vermeiden Sie direkte Sonne, Schwimmbad und Meer für mindestens 2 Wochen.</value>
+  </data>
+  <data name="Aftercare_Step6_Title" xml:space="preserve">
+    <value>Heilung</value>
+  </data>
+  <data name="Aftercare_Step6_Text" xml:space="preserve">
+    <value>Kratzen Sie nicht an den Krusten, die sich bilden.</value>
+  </data>
+  <data name="Tips_Title" xml:space="preserve">
+    <value>Wichtige Tipps</value>
+  </data>
+  <data name="Tips_Dos_Title" xml:space="preserve">
+    <value>Was zu tun ist</value>
+  </data>
+  <data name="Tips_Dos_1" xml:space="preserve">
+    <value>Trinken Sie viel Wasser</value>
+  </data>
+  <data name="Tips_Dos_2" xml:space="preserve">
+    <value>Tragen Sie bequeme Kleidung</value>
+  </data>
+  <data name="Tips_Dos_3" xml:space="preserve">
+    <value>Essen Sie gut vor der Sitzung</value>
+  </data>
+  <data name="Tips_Dos_4" xml:space="preserve">
+    <value>Schlafen Sie gut in der Nacht davor</value>
+  </data>
+  <data name="Tips_Dos_5" xml:space="preserve">
+    <value>Befolgen Sie den Rat des Künstlers</value>
+  </data>
+  <data name="Tips_Donts_Title" xml:space="preserve">
+    <value>Was zu vermeiden ist</value>
+  </data>
+  <data name="Tips_Donts_1" xml:space="preserve">
+    <value>Alkohol vor der Sitzung</value>
+  </data>
+  <data name="Tips_Donts_2" xml:space="preserve">
+    <value>Aspirin oder Blutverdünner</value>
+  </data>
+  <data name="Tips_Donts_3" xml:space="preserve">
+    <value>Sonnenexposition davor</value>
+  </data>
+  <data name="Tips_Donts_4" xml:space="preserve">
+    <value>Mit leerem Magen kommen</value>
+  </data>
+  <data name="Tips_Donts_5" xml:space="preserve">
+    <value>Zu viele Begleitpersonen mitbringen</value>
+  </data>
+  <data name="Emergency_Title" xml:space="preserve">
+    <value>Im Zweifelsfall</value>
+  </data>
+  <data name="Emergency_Text" xml:space="preserve">
+    <value>Wenn Sie übermäßige Rötungen, abnormale Schwellungen bemerken oder Zweifel an der Heilung haben, kontaktieren Sie uns sofort.</value>
+  </data>
+  <data name="FAQ_Title" xml:space="preserve">
+    <value>Häufig gestellte Fragen</value>
+  </data>
+  <data name="FAQ_Subtitle" xml:space="preserve">
+    <value>Antworten auf die häufigsten Fragen</value>
+  </data>
+  <data name="FAQ_Q1" xml:space="preserve">
+    <value>Tut ein Tattoo weh?</value>
+  </data>
+  <data name="FAQ_A1_P1" xml:space="preserve">
+    <value>Der Schmerz ist subjektiv und hängt von der Körperstelle ab.</value>
+  </data>
+  <data name="FAQ_A1_P2" xml:space="preserve">
+    <value>Die meisten Menschen beschreiben es als erträgliches Unbehagen.</value>
+  </data>
+  <data name="FAQ_Q2" xml:space="preserve">
+    <value>Wie viel kostet ein Tattoo?</value>
+  </data>
+  <data name="FAQ_A2_P1" xml:space="preserve">
+    <value>Der Preis variiert je nach Größe, Stil und Komplexität.</value>
+  </data>
+  <data name="FAQ_A2_L1" xml:space="preserve">
+    <value>Klein: €80 - €150</value>
+  </data>
+  <data name="FAQ_A2_L2" xml:space="preserve">
+    <value>Mittel: €200 - €450</value>
+  </data>
+  <data name="FAQ_A2_L3" xml:space="preserve">
+    <value>Groß/Ganzer Tag: €500+</value>
+  </data>
+  <data name="FAQ_A2_L4" xml:space="preserve">
+    <value>Anzahlung bei Buchung erforderlich</value>
+  </data>
+  <data name="FAQ_A2_P2" xml:space="preserve">
+    <value>Kontaktieren Sie uns für ein individuelles Angebot.</value>
+  </data>
+  <data name="FAQ_Q3" xml:space="preserve">
+    <value>Kann ich eine Begleitperson mitbringen?</value>
+  </data>
+  <data name="FAQ_A3_P1" xml:space="preserve">
+    <value>Aus Hygiene- und Konzentrationsgründen bevorzugen wir es, wenn Sie alleine kommen.</value>
+  </data>
+  <data name="FAQ_A3_P2" xml:space="preserve">
+    <value>Falls nötig, kann eine Begleitperson im Empfangsbereich warten.</value>
+  </data>
+  <data name="FAQ_Q4" xml:space="preserve">
+    <value>Wie buche ich einen Termin?</value>
+  </data>
+  <data name="FAQ_A4_P1" xml:space="preserve">
+    <value>Sie können direkt online über unsere Website buchen.</value>
+  </data>
+  <data name="FAQ_A4_L1" xml:space="preserve">
+    <value>Wählen Sie den Service</value>
+  </data>
+  <data name="FAQ_A4_L2" xml:space="preserve">
+    <value>Wählen Sie Datum und Uhrzeit</value>
+  </data>
+  <data name="FAQ_Q5" xml:space="preserve">
+    <value>Machen Sie Cover-ups?</value>
+  </data>
+  <data name="FAQ_A5_P1" xml:space="preserve">
+    <value>Ja, wir sind auf das Abdecken alter Tattoos spezialisiert.</value>
+  </data>
+  <data name="FAQ_A5_P2" xml:space="preserve">
+    <value>Eine vorherige Beratung ist notwendig, um die Machbarkeit zu prüfen.</value>
+  </data>
+  <data name="CTA_Title" xml:space="preserve">
+    <value>Haben Sie weitere Fragen?</value>
+  </data>
+  <data name="CTA_Subtitle" xml:space="preserve">
+    <value>Wir sind hier, um Ihnen bei der Realisierung Ihres Projekts zu helfen</value>
+  </data>
+  <data name="CTA_Button_Contact" xml:space="preserve">
+    <value>Kontaktieren Sie uns</value>
+  </data>
+  <data name="CTA_Button_Book" xml:space="preserve">
+    <value>Jetzt buchen</value>
+  </data>
+</root>

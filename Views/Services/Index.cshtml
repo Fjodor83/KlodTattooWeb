@@ -1,14 +1,16 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Servizi e Prezzi";
+    ViewData["Title"] = @Localizer["Page_Title"];
 }
 
 <div class="container py-5">
     <!-- Header Section -->
     <div class="text-center mb-5" data-aos="fade-down">
         <h1 class="display-3 fw-bold text-uppercase mb-3" style="color: #d4af37; letter-spacing: 3px;">
-            Servizi e Prezzi
+            @Localizer["Page_Title"]
         </h1>
-        <p class="lead text-muted fs-4">Trasparenza e professionalità per il tuo prossimo tatuaggio</p>
+        <p class="lead text-muted fs-4">@Localizer["Page_Subtitle"]</p>
         <div class="golden-underline mx-auto mt-3" style="width: 100px; height: 4px; background: linear-gradient(90deg, transparent, #d4af37, transparent);"></div>
     </div>
 
@@ -26,38 +28,38 @@
                             <i class="fas fa-bolt fa-2x text-dark"></i>
                         </div>
                     </div>
-                    <h3 class="h4 text-light mb-2">Small Tattoos</h3>
-                    <p class="text-muted small mb-0">Perfetto per il primo tatuaggio</p>
+                    <h3 class="h4 text-light mb-2">@Localizer["Card_Small_Title"]</h3>
+                    <p class="text-muted small mb-0">@Localizer["Card_Small_Subtitle"]</p>
                 </div>
                 <div class="card-body p-4">
                     <div class="price-tag mb-4">
-                        <h4 class="display-4 fw-bold mb-0" style="color: #d4af37;">€80 - €150</h4>
-                        <p class="text-muted small">Prezzo indicativo</p>
+                        <h4 class="display-4 fw-bold mb-0" style="color: #d4af37;">@Localizer["Card_Small_Price"]</h4>
+                        <p class="text-muted small">@Localizer["Card_Small_PriceNote"]</p>
                     </div>
                     <ul class="list-unstyled text-start mb-4">
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Scritte e lettering</span>
+                            <span class="text-light">@Localizer["Card_Small_Feature1"]</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Simboli minimal</span>
+                            <span class="text-light">@Localizer["Card_Small_Feature2"]</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Piccoli disegni (max 5cm)</span>
+                            <span class="text-light">@Localizer["Card_Small_Feature3"]</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Durata: 30-60 minuti</span>
+                            <span class="text-light">@Localizer["Card_Small_Feature4"]</span>
                         </li>
                         <li class="d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Consulenza inclusa</span>
+                            <span class="text-light">@Localizer["Card_Small_Feature5"]</span>
                         </li>
                     </ul>
                     <a asp-controller="Booking" asp-action="Create" class="btn btn-outline-gold w-100 py-3 rounded-pill">
-                        <i class="fas fa-calendar-check me-2"></i>Prenota Ora
+                        <i class="fas fa-calendar-check me-2"></i>@Localizer["Card_Small_Button"]
                     </a>
                 </div>
             </div>
@@ -70,48 +72,48 @@
                 <!-- Popular Badge -->
                 <div class="position-absolute top-0 end-0 m-3" style="z-index: 10;">
                     <span class="badge rounded-pill py-2 px-3" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
-                        <i class="fas fa-star me-1"></i>Più Popolare
+                        <i class="fas fa-star me-1"></i>@Localizer["Card_Medium_Badge"]
                     </span>
                 </div>
                 <div class="card-header border-0 py-4" style="background: rgba(212, 175, 55, 0.2);">
                     <div class="icon-wrapper mx-auto mb-3" style="width: 80px; height: 80px;">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center h-100" 
+                        <div class="rounded-circle d-flex align-items-center justify-content-center h-100"
                              style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
                             <i class="fas fa-hand-holding-heart fa-2x text-dark"></i>
                         </div>
                     </div>
-                    <h3 class="h4 text-light mb-2">Medium Pieces</h3>
-                    <p class="text-muted small mb-0">Il giusto equilibrio</p>
+                    <h3 class="h4 text-light mb-2">@Localizer["Card_Medium_Title"]</h3>
+                    <p class="text-muted small mb-0">@Localizer["Card_Medium_Subtitle"]</p>
                 </div>
                 <div class="card-body p-4">
                     <div class="price-tag mb-4">
-                        <h4 class="display-4 fw-bold mb-0" style="color: #d4af37;">€200 - €400</h4>
-                        <p class="text-muted small">Prezzo indicativo</p>
+                        <h4 class="display-4 fw-bold mb-0" style="color: #d4af37;">@Localizer["Card_Medium_Price"]</h4>
+                        <p class="text-muted small">@Localizer["Card_Medium_PriceNote"]</p>
                     </div>
                     <ul class="list-unstyled text-start mb-4">
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Avambraccio o polpaccio</span>
+                            <span class="text-light">@Localizer["Card_Medium_Feature1"]</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Spalla o scapola</span>
+                            <span class="text-light">@Localizer["Card_Medium_Feature2"]</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Design elaborato (10-15cm)</span>
+                            <span class="text-light">@Localizer["Card_Medium_Feature3"]</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Durata: 2-4 ore</span>
+                            <span class="text-light">@Localizer["Card_Medium_Feature4"]</span>
                         </li>
                         <li class="d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Bozza personalizzata</span>
+                            <span class="text-light">@Localizer["Card_Medium_Feature5"]</span>
                         </li>
                     </ul>
                     <a asp-controller="Booking" asp-action="Create" class="btn btn-gold w-100 py-3 rounded-pill shadow-lg">
-                        <i class="fas fa-calendar-check me-2"></i>Prenota Ora
+                        <i class="fas fa-calendar-check me-2"></i>@Localizer["Card_Medium_Button"]
                     </a>
                 </div>
             </div>
@@ -128,38 +130,38 @@
                             <i class="fas fa-dragon fa-2x text-dark"></i>
                         </div>
                     </div>
-                    <h3 class="h4 text-light mb-2">Full Sessions</h3>
-                    <p class="text-muted small mb-0">Progetti ambiziosi</p>
+                    <h3 class="h4 text-light mb-2">@Localizer["Card_Full_Title"]</h3>
+                    <p class="text-muted small mb-0">@Localizer["Card_Full_Subtitle"]</p>
                 </div>
                 <div class="card-body p-4">
                     <div class="price-tag mb-4">
-                        <h4 class="display-4 fw-bold mb-0" style="color: #d4af37;">€500+</h4>
-                        <p class="text-muted small">A seduta (6-8 ore)</p>
+                        <h4 class="display-4 fw-bold mb-0" style="color: #d4af37;">@Localizer["Card_Full_Price"]</h4>
+                        <p class="text-muted small">@Localizer["Card_Full_PriceNote"]</p>
                     </div>
                     <ul class="list-unstyled text-start mb-4">
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Schiena completa</span>
+                            <span class="text-light">@Localizer["Card_Full_Feature1"]</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Manica intera (braccio/gamba)</span>
+                            <span class="text-light">@Localizer["Card_Full_Feature2"]</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Progetti multi-sessione</span>
+                            <span class="text-light">@Localizer["Card_Full_Feature3"]</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Durata: 6-8 ore/sessione</span>
+                            <span class="text-light">@Localizer["Card_Full_Feature4"]</span>
                         </li>
                         <li class="d-flex align-items-start">
                             <i class="fas fa-check-circle text-success me-3 mt-1"></i>
-                            <span class="text-light">Design completamente custom</span>
+                            <span class="text-light">@Localizer["Card_Full_Feature5"]</span>
                         </li>
                     </ul>
                     <a asp-controller="Booking" asp-action="Create" class="btn btn-outline-gold w-100 py-3 rounded-pill">
-                        <i class="fas fa-calendar-check me-2"></i>Consulta Preventivo
+                        <i class="fas fa-calendar-check me-2"></i>@Localizer["Card_Full_Button"]
                     </a>
                 </div>
             </div>
@@ -180,7 +182,7 @@
             <div class="card shadow-lg border-0 h-100" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
                 <div class="card-header border-0 py-4" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
                     <h2 class="h4 mb-0 text-uppercase fw-bold text-dark text-center">
-                        <i class="fas fa-list-ol me-2"></i>Come Funziona
+                        <i class="fas fa-list-ol me-2"></i>@Localizer["Process_Title"]
                     </h2>
                 </div>
                 <div class="card-body p-4">
@@ -194,11 +196,10 @@
                         </div>
                         <div class="step-content">
                             <h5 class="text-light mb-2">
-                                <i class="fas fa-comments text-warning me-2"></i>Consulenza
+                                <i class="fas fa-comments text-warning me-2"></i>@Localizer["Process_Step1_Title"]
                             </h5>
                             <p class="text-muted mb-0">
-                                Discutiamo insieme la tua idea, lo stile che preferisci e la posizione ideale. 
-                                Ti fornisco consigli professionali basati sulla mia esperienza.
+                                @Localizer["Process_Step1_Description"]
                             </p>
                         </div>
                     </div>
@@ -213,11 +214,10 @@
                         </div>
                         <div class="step-content">
                             <h5 class="text-light mb-2">
-                                <i class="fas fa-pencil-ruler text-warning me-2"></i>Design Personalizzato
+                                <i class="fas fa-pencil-ruler text-warning me-2"></i>@Localizer["Process_Step2_Title"]
                             </h5>
                             <p class="text-muted mb-0">
-                                Creo una bozza unica e personalizzata basata sulle tue richieste. 
-                                Apportiamo modifiche fino a quando non sei completamente soddisfatto.
+                                @Localizer["Process_Step2_Description"]
                             </p>
                         </div>
                     </div>
@@ -225,18 +225,17 @@
                     <!-- Step 3 -->
                     <div class="process-step d-flex mb-4 p-3 rounded" style="background: rgba(212, 175, 55, 0.05); border-left: 4px solid #d4af37;">
                         <div class="step-number me-4">
-                            <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                            <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center"
                                  style="width: 50px; height: 50px; min-width: 50px;">
                                 <span class="fw-bold fs-4 text-dark">3</span>
                             </div>
                         </div>
                         <div class="step-content">
                             <h5 class="text-light mb-2">
-                                <i class="fas fa-calendar-check text-warning me-2"></i>Prenotazione
+                                <i class="fas fa-calendar-check text-warning me-2"></i>@Localizer["Process_Step3_Title"]
                             </h5>
                             <p class="text-muted mb-0">
-                                Fissiamo la data dell'appuntamento. Viene richiesto un deposito di €50 
-                                per confermare la prenotazione e bloccare il tuo slot.
+                                @Localizer["Process_Step3_Description"]
                             </p>
                         </div>
                     </div>
@@ -244,25 +243,24 @@
                     <!-- Step 4 -->
                     <div class="process-step d-flex p-3 rounded" style="background: rgba(212, 175, 55, 0.05); border-left: 4px solid #d4af37;">
                         <div class="step-number me-4">
-                            <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                            <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center"
                                  style="width: 50px; height: 50px; min-width: 50px;">
                                 <span class="fw-bold fs-4 text-dark">4</span>
                             </div>
                         </div>
                         <div class="step-content">
                             <h5 class="text-light mb-2">
-                                <i class="fas fa-paint-brush text-warning me-2"></i>Realizzazione
+                                <i class="fas fa-paint-brush text-warning me-2"></i>@Localizer["Process_Step4_Title"]
                             </h5>
                             <p class="text-muted mb-0">
-                                È il momento di creare la tua opera d'arte! Lavoro con massima attenzione, 
-                                igiene e professionalità per garantire un risultato perfetto.
+                                @Localizer["Process_Step4_Description"]
                             </p>
                         </div>
                     </div>
 
                     <div class="mt-4 text-center">
                         <a asp-controller="Booking" asp-action="Create" class="btn btn-gold btn-lg px-5 py-3 rounded-pill shadow-lg">
-                            <i class="fas fa-calendar-plus me-2"></i>Prenota la Tua Consulenza Gratuita
+                            <i class="fas fa-calendar-plus me-2"></i>@Localizer["Process_ButtonCTA"]
                         </a>
                     </div>
                 </div>
@@ -276,19 +274,19 @@
                 <div class="card shadow-lg border-0" style="background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%); border: 2px solid #d4af37 !important;">
                     <div class="card-body p-4">
                         <h3 class="h5 mb-4 text-warning text-center">
-                            <i class="fas fa-euro-sign me-2"></i>Politica Depositi
+                            <i class="fas fa-euro-sign me-2"></i>@Localizer["Deposit_Title"]
                         </h3>
                         <div class="deposit-info">
                             <div class="mb-3 p-3 rounded" style="background: rgba(212, 175, 55, 0.1);">
                                 <div class="d-flex align-items-center mb-2">
                                     <i class="fas fa-money-bill-wave text-warning me-3 fs-4"></i>
                                     <div>
-                                        <strong class="text-light d-block">Deposito Richiesto</strong>
-                                        <span class="text-muted small">€50 non rimborsabile</span>
+                                        <strong class="text-light d-block">@Localizer["Deposit_Required_Title"]</strong>
+                                        <span class="text-muted small">@Localizer["Deposit_Required_Amount"]</span>
                                     </div>
                                 </div>
                                 <p class="text-muted small mb-0 ps-5">
-                                    Verrà scalato dal prezzo finale del tatuaggio
+                                    @Localizer["Deposit_Required_Note"]
                                 </p>
                             </div>
 
@@ -296,12 +294,12 @@
                                 <div class="d-flex align-items-center mb-2">
                                     <i class="fas fa-calendar-alt text-success me-3 fs-4"></i>
                                     <div>
-                                        <strong class="text-light d-block">Modifica Appuntamento</strong>
-                                        <span class="text-muted small">Possibile con preavviso</span>
+                                        <strong class="text-light d-block">@Localizer["Deposit_Reschedule_Title"]</strong>
+                                        <span class="text-muted small">@Localizer["Deposit_Reschedule_Subtitle"]</span>
                                     </div>
                                 </div>
                                 <p class="text-muted small mb-0 ps-5">
-                                    Con almeno 48 ore di anticipo senza perdere il deposito
+                                    @Localizer["Deposit_Reschedule_Note"]
                                 </p>
                             </div>
 
@@ -309,12 +307,12 @@
                                 <div class="d-flex align-items-center mb-2">
                                     <i class="fas fa-exclamation-triangle text-danger me-3 fs-4"></i>
                                     <div>
-                                        <strong class="text-light d-block">No Show / Cancellazione</strong>
-                                        <span class="text-muted small">Deposito non rimborsabile</span>
+                                        <strong class="text-light d-block">@Localizer["Deposit_NoShow_Title"]</strong>
+                                        <span class="text-muted small">@Localizer["Deposit_NoShow_Subtitle"]</span>
                                     </div>
                                 </div>
                                 <p class="text-muted small mb-0 ps-5">
-                                    In caso di mancata presentazione o cancellazione tardiva
+                                    @Localizer["Deposit_NoShow_Note"]
                                 </p>
                             </div>
                         </div>
@@ -325,32 +323,32 @@
                 <div class="card shadow-lg border-0" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
                     <div class="card-body p-4">
                         <h3 class="h6 mb-4 text-warning text-center">
-                            <i class="fas fa-credit-card me-2"></i>Metodi di Pagamento Accettati
+                            <i class="fas fa-credit-card me-2"></i>@Localizer["Payment_Title"]
                         </h3>
                         <div class="payment-methods text-center">
                             <div class="row g-2">
                                 <div class="col-6">
                                     <div class="payment-badge p-2 rounded" style="background: rgba(212, 175, 55, 0.1);">
                                         <i class="fas fa-money-bill-wave text-warning fs-3 mb-2"></i>
-                                        <p class="small text-light mb-0">Contanti</p>
+                                        <p class="small text-light mb-0">@Localizer["Payment_Cash"]</p>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="payment-badge p-2 rounded" style="background: rgba(212, 175, 55, 0.1);">
                                         <i class="fas fa-credit-card text-warning fs-3 mb-2"></i>
-                                        <p class="small text-light mb-0">Carta</p>
+                                        <p class="small text-light mb-0">@Localizer["Payment_Card"]</p>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="payment-badge p-2 rounded" style="background: rgba(212, 175, 55, 0.1);">
                                         <i class="fas fa-university text-warning fs-3 mb-2"></i>
-                                        <p class="small text-light mb-0">Bonifico</p>
+                                        <p class="small text-light mb-0">@Localizer["Payment_Transfer"]</p>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="payment-badge p-2 rounded" style="background: rgba(212, 175, 55, 0.1);">
                                         <i class="fab fa-paypal text-warning fs-3 mb-2"></i>
-                                        <p class="small text-light mb-0">PayPal</p>
+                                        <p class="small text-light mb-0">@Localizer["Payment_PayPal"]</p>
                                     </div>
                                 </div>
                             </div>
@@ -362,9 +360,9 @@
                 <div class="card shadow-lg border-0" style="background: linear-gradient(135deg, #28a745 0%, #20923b 100%);">
                     <div class="card-body p-4 text-center">
                         <i class="fas fa-shield-alt fa-3x text-white mb-3"></i>
-                        <h4 class="h6 text-white fw-bold mb-2">Garanzia di Qualità</h4>
+                        <h4 class="h6 text-white fw-bold mb-2">@Localizer["Guarantee_Title"]</h4>
                         <p class="small text-white mb-0">
-                            Ritocchi gratuiti entro 30 giorni se necessario
+                            @Localizer["Guarantee_Description"]
                         </p>
                     </div>
                 </div>
@@ -378,17 +376,17 @@
             <div class="card shadow-lg border-0" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
                 <div class="card-body p-5 text-center">
                     <h3 class="display-6 fw-bold text-dark mb-3">
-                        <i class="fas fa-question-circle me-2"></i>Hai Domande sui Prezzi?
+                        <i class="fas fa-question-circle me-2"></i>@Localizer["FAQ_Question"]
                     </h3>
                     <p class="lead text-dark mb-4">
-                        Ogni tatuaggio è unico. Contattaci per un preventivo personalizzato gratuito!
+                        @Localizer["FAQ_Answer"]
                     </p>
                     <div class="d-flex justify-content-center gap-3 flex-wrap">
                         <a asp-controller="Contacts" asp-action="Index" class="btn btn-dark btn-lg px-5 py-3 rounded-pill shadow">
-                            <i class="fas fa-envelope me-2"></i>Contattaci
+                            <i class="fas fa-envelope me-2"></i>@Localizer["FAQ_ButtonContact"]
                         </a>
                         <a asp-controller="Info" asp-action="Index" class="btn btn-outline-dark btn-lg px-5 py-3 rounded-pill shadow">
-                            <i class="fas fa-info-circle me-2"></i>FAQ Complete
+                            <i class="fas fa-info-circle me-2"></i>@Localizer["FAQ_ButtonFAQ"]
                         </a>
                     </div>
                 </div>

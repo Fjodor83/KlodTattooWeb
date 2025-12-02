@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Page_Title" xml:space="preserve">
+    <value>Unsere Dienstleistungen</value>
+  </data>
+  <data name="Page_Subtitle" xml:space="preserve">
+    <value>Wählen Sie den perfekten künstlerischen Weg für Sie</value>
+  </data>
+  <data name="Card_Small_Title" xml:space="preserve">
+    <value>Kleine Tattoos</value>
+  </data>
+  <data name="Card_Small_Subtitle" xml:space="preserve">
+    <value>Minimal &amp; Fine Line</value>
+  </data>
+  <data name="Card_Small_Price" xml:space="preserve">
+    <value>€80 - €150</value>
+  </data>
+  <data name="Card_Small_PriceNote" xml:space="preserve">
+    <value>Preis variiert je nach Komplexität</value>
+  </data>
+  <data name="Card_Small_Feature1" xml:space="preserve">
+    <value>Individuelles Design</value>
+  </data>
+  <data name="Card_Small_Feature2" xml:space="preserve">
+    <value>Schnelle Ausführung (1-2 Stunden)</value>
+  </data>
+  <data name="Card_Small_Feature3" xml:space="preserve">
+    <value>Nachsorge inklusive</value>
+  </data>
+  <data name="Card_Small_Feature4" xml:space="preserve">
+    <value>Kostenloses Nachstechen (falls nötig)</value>
+  </data>
+  <data name="Card_Small_Feature5" xml:space="preserve">
+    <value>Ideal für erste Tattoos</value>
+  </data>
+  <data name="Card_Small_Button" xml:space="preserve">
+    <value>Klein Buchen</value>
+  </data>
+  <data name="Card_Medium_Badge" xml:space="preserve">
+    <value>Beliebteste</value>
+  </data>
+  <data name="Card_Medium_Title" xml:space="preserve">
+    <value>Mittlere Stücke</value>
+  </data>
+  <data name="Card_Medium_Subtitle" xml:space="preserve">
+    <value>Realistisch &amp; Traditional</value>
+  </data>
+  <data name="Card_Medium_Price" xml:space="preserve">
+    <value>€200 - €450</value>
+  </data>
+  <data name="Card_Medium_PriceNote" xml:space="preserve">
+    <value>Halbtagessitzung</value>
+  </data>
+  <data name="Card_Medium_Feature1" xml:space="preserve">
+    <value>Ausführliche Beratung</value>
+  </data>
+  <data name="Card_Medium_Feature2" xml:space="preserve">
+    <value>Komplexe Details und Schattierungen</value>
+  </data>
+  <data name="Card_Medium_Feature3" xml:space="preserve">
+    <value>Premium-Pflegeset inklusive</value>
+  </data>
+  <data name="Card_Medium_Feature4" xml:space="preserve">
+    <value>Check-up nach 2 Wochen</value>
+  </data>
+  <data name="Card_Medium_Feature5" xml:space="preserve">
+    <value>Maßgeschneidertes Design</value>
+  </data>
+  <data name="Card_Medium_Button" xml:space="preserve">
+    <value>Mittel Buchen</value>
+  </data>
+  <data name="Card_Full_Title" xml:space="preserve">
+    <value>Volle Sitzungen</value>
+  </data>
+  <data name="Card_Full_Subtitle" xml:space="preserve">
+    <value>Große Projekte &amp; Cover-up</value>
+  </data>
+  <data name="Card_Full_Price" xml:space="preserve">
+    <value>€500+</value>
+  </data>
+  <data name="Card_Full_PriceNote" xml:space="preserve">
+    <value>Ganzer Tag oder mehrere Sitzungen</value>
+  </data>
+  <data name="Card_Full_Feature1" xml:space="preserve">
+    <value>Exklusives Design</value>
+  </data>
+  <data name="Card_Full_Feature2" xml:space="preserve">
+    <value>Mehrere geplante Sitzungen</value>
+  </data>
+  <data name="Card_Full_Feature3" xml:space="preserve">
+    <value>24/7 Volle Unterstützung</value>
+  </data>
+  <data name="Card_Full_Feature4" xml:space="preserve">
+    <value>Professionelle Nachsorgeprodukte</value>
+  </data>
+  <data name="Card_Full_Feature5" xml:space="preserve">
+    <value>Abschließendes Fotoshooting</value>
+  </data>
+  <data name="Card_Full_Button" xml:space="preserve">
+    <value>Sitzung Buchen</value>
+  </data>
+  <data name="Process_Title" xml:space="preserve">
+    <value>Wie es Funktioniert</value>
+  </data>
+  <data name="Process_Step1_Title" xml:space="preserve">
+    <value>Beratung</value>
+  </data>
+  <data name="Process_Step1_Description" xml:space="preserve">
+    <value>Wir besprechen Ihre Idee, den Stil und die Platzierung. Auch per WhatsApp.</value>
+  </data>
+  <data name="Process_Step2_Title" xml:space="preserve">
+    <value>Design</value>
+  </data>
+  <data name="Process_Step2_Description" xml:space="preserve">
+    <value>Ich erstelle einen einzigartigen Entwurf für Sie. Änderungen bis zur Genehmigung inklusive.</value>
+  </data>
+  <data name="Process_Step3_Title" xml:space="preserve">
+    <value>Termin</value>
+  </data>
+  <data name="Process_Step3_Description" xml:space="preserve">
+    <value>Wir legen das Datum fest. Eine Anzahlung ist erforderlich, um den Slot zu reservieren.</value>
+  </data>
+  <data name="Process_Step4_Title" xml:space="preserve">
+    <value>Tätowierung</value>
+  </data>
+  <data name="Process_Step4_Description" xml:space="preserve">
+    <value>Umsetzung des Werkes unter Einhaltung höchster Hygienestandards.</value>
+  </data>
+  <data name="Process_ButtonCTA" xml:space="preserve">
+    <value>Starten Sie Ihr Projekt</value>
+  </data>
+  <data name="Deposit_Title" xml:space="preserve">
+    <value>Anzahlungsrichtlinie</value>
+  </data>
+  <data name="Deposit_Required_Title" xml:space="preserve">
+    <value>Anzahlung Erforderlich</value>
+  </data>
+  <data name="Deposit_Required_Amount" xml:space="preserve">
+    <value>€50 - €100</value>
+  </data>
+  <data name="Deposit_Required_Note" xml:space="preserve">
+    <value>Die Anzahlung wird vom Endpreis des Tattoos abgezogen.</value>
+  </data>
+  <data name="Deposit_Reschedule_Title" xml:space="preserve">
+    <value>Terminverschiebung</value>
+  </data>
+  <data name="Deposit_Reschedule_Subtitle" xml:space="preserve">
+    <value>Bis zu 48h vorher</value>
+  </data>
+  <data name="Deposit_Reschedule_Note" xml:space="preserve">
+    <value>Sie können das Datum verschieben, die Anzahlung bleibt gültig.</value>
+  </data>
+  <data name="Deposit_NoShow_Title" xml:space="preserve">
+    <value>Späte Stornierung</value>
+  </data>
+  <data name="Deposit_NoShow_Subtitle" xml:space="preserve">
+    <value>Weniger als 48h oder Nichterscheinen</value>
+  </data>
+  <data name="Deposit_NoShow_Note" xml:space="preserve">
+    <value>Die Anzahlung wird als Entschädigung für die reservierte Zeit einbehalten.</value>
+  </data>
+  <data name="Payment_Title" xml:space="preserve">
+    <value>Akzeptierte Zahlungsmethoden</value>
+  </data>
+  <data name="Payment_Cash" xml:space="preserve">
+    <value>Barzahlung</value>
+  </data>
+  <data name="Payment_Card" xml:space="preserve">
+    <value>Karten</value>
+  </data>
+  <data name="Payment_Transfer" xml:space="preserve">
+    <value>Überweisung</value>
+  </data>
+  <data name="Payment_PayPal" xml:space="preserve">
+    <value>PayPal</value>
+  </data>
+  <data name="Guarantee_Title" xml:space="preserve">
+    <value>Zufriedenheitsgarantie</value>
+  </data>
+  <data name="Guarantee_Description" xml:space="preserve">
+    <value>Wenn das Tattoo während der Heilung nachgestochen werden muss, ist die Kontrollsitzung immer kostenlos.</value>
+  </data>
+  <data name="FAQ_Question" xml:space="preserve">
+    <value>Haben Sie weitere Fragen?</value>
+  </data>
+  <data name="FAQ_Answer" xml:space="preserve">
+    <value>Konsultieren Sie unseren vollständigen FAQ-Bereich oder kontaktieren Sie uns direkt.</value>
+  </data>
+  <data name="FAQ_ButtonContact" xml:space="preserve">
+    <value>Kontaktieren Sie uns</value>
+  </data>
+  <data name="FAQ_ButtonFAQ" xml:space="preserve">
+    <value>Zu den FAQs</value>
+  </data>
+</root>

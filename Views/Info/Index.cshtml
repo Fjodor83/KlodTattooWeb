@@ -1,14 +1,16 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Info & Aftercare";
+    ViewData["Title"] = @Localizer["Page_Title"];
 }
 
 <div class="container py-5">
     <!-- Header Section -->
     <div class="text-center mb-5" data-aos="fade-down">
         <h1 class="display-3 fw-bold text-uppercase mb-3" style="color: #d4af37; letter-spacing: 3px;">
-            Aftercare & FAQ
+            @Localizer["Page_Title"]
         </h1>
-        <p class="lead text-muted fs-4">Tutto quello che devi sapere per prenderti cura del tuo tatuaggio</p>
+        <p class="lead text-muted fs-4">@Localizer["Page_Subtitle"]</p>
         <div class="golden-underline mx-auto mt-3" style="width: 100px; height: 4px; background: linear-gradient(90deg, transparent, #d4af37, transparent);"></div>
     </div>
 
@@ -19,11 +21,11 @@
             <div class="card h-100 shadow-lg border-0 overflow-hidden" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
                 <div class="card-header border-0 text-center py-4" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
                     <i class="fas fa-hand-holding-medical fa-3x text-dark mb-3"></i>
-                    <h3 class="h4 mb-0 text-uppercase fw-bold text-dark">Cura del Tatuaggio</h3>
+                    <h3 class="h4 mb-0 text-uppercase fw-bold text-dark">@Localizer["Aftercare_Title"]</h3>
                 </div>
                 <div class="card-body p-4">
                     <p class="text-light mb-4 lead">
-                        Segui attentamente queste istruzioni per garantire una guarigione perfetta:
+                        @Localizer["Aftercare_Instructions"]
                     </p>
 
                     <div class="aftercare-steps">
@@ -37,9 +39,9 @@
                             </div>
                             <div class="step-content">
                                 <h5 class="text-light mb-2">
-                                    <i class="fas fa-clock text-warning me-2"></i>Prime Ore
+                                    <i class="fas fa-clock text-warning me-2"></i>@Localizer["Aftercare_Step1_Title"]
                                 </h5>
-                                <p class="text-muted mb-0">Lascia la pellicola protettiva per almeno 2-4 ore.</p>
+                                <p class="text-muted mb-0">@Localizer["Aftercare_Step1_Text"]</p>
                             </div>
                         </div>
 
@@ -53,9 +55,9 @@
                             </div>
                             <div class="step-content">
                                 <h5 class="text-light mb-2">
-                                    <i class="fas fa-hand-sparkles text-warning me-2"></i>Pulizia
+                                    <i class="fas fa-hand-sparkles text-warning me-2"></i>@Localizer["Aftercare_Step2_Title"]
                                 </h5>
-                                <p class="text-muted mb-0">Lava delicatamente con acqua tiepida e sapone neutro.</p>
+                                <p class="text-muted mb-0">@Localizer["Aftercare_Step2_Text"]</p>
                             </div>
                         </div>
 
@@ -69,9 +71,9 @@
                             </div>
                             <div class="step-content">
                                 <h5 class="text-light mb-2">
-                                    <i class="fas fa-wind text-warning me-2"></i>Asciugatura
+                                    <i class="fas fa-wind text-warning me-2"></i>@Localizer["Aftercare_Step3_Title"]
                                 </h5>
-                                <p class="text-muted mb-0">Asciuga tamponando con carta assorbente pulita (non strofinare).</p>
+                                <p class="text-muted mb-0">@Localizer["Aftercare_Step3_Text"]</p>
                             </div>
                         </div>
 
@@ -85,9 +87,9 @@
                             </div>
                             <div class="step-content">
                                 <h5 class="text-light mb-2">
-                                    <i class="fas fa-pump-medical text-warning me-2"></i>Idratazione
+                                    <i class="fas fa-pump-medical text-warning me-2"></i>@Localizer["Aftercare_Step4_Title"]
                                 </h5>
-                                <p class="text-muted mb-0">Applica uno strato sottile di crema specifica (es. Bepanthenol) 3-4 volte al giorno.</p>
+                                <p class="text-muted mb-0">@Localizer["Aftercare_Step4_Text"]</p>
                             </div>
                         </div>
 
@@ -101,9 +103,9 @@
                             </div>
                             <div class="step-content">
                                 <h5 class="text-light mb-2">
-                                    <i class="fas fa-ban text-warning me-2"></i>Evitare
+                                    <i class="fas fa-ban text-warning me-2"></i>@Localizer["Aftercare_Step5_Title"]
                                 </h5>
-                                <p class="text-muted mb-0">Sole diretto, piscina, mare e sauna per almeno 2 settimane.</p>
+                                <p class="text-muted mb-0">@Localizer["Aftercare_Step5_Text"]</p>
                             </div>
                         </div>
 
@@ -117,9 +119,9 @@
                             </div>
                             <div class="step-content">
                                 <h5 class="text-light mb-2">
-                                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>Attenzione
+                                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>@Localizer["Aftercare_Step6_Title"]
                                 </h5>
-                                <p class="text-muted mb-0">Non grattare le crosticine che si formeranno.</p>
+                                <p class="text-muted mb-0">@Localizer["Aftercare_Step6_Text"]</p>
                             </div>
                         </div>
                     </div>
@@ -132,34 +134,34 @@
             <div class="card h-100 shadow-lg border-0 overflow-hidden" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
                 <div class="card-header border-0 text-center py-4" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
                     <i class="fas fa-lightbulb fa-3x text-dark mb-3"></i>
-                    <h3 class="h4 mb-0 text-uppercase fw-bold text-dark">Consigli Importanti</h3>
+                    <h3 class="h4 mb-0 text-uppercase fw-bold text-dark">@Localizer["Tips_Title"]</h3>
                 </div>
                 <div class="card-body p-4">
                     <!-- Do's Section -->
                     <div class="mb-4">
                         <h5 class="text-success mb-3">
-                            <i class="fas fa-check-circle me-2"></i>Da Fare
+                            <i class="fas fa-check-circle me-2"></i>@Localizer["Tips_Dos_Title"]
                         </h5>
                         <ul class="list-unstyled">
                             <li class="mb-3 d-flex align-items-start">
                                 <i class="fas fa-check text-success me-3 mt-1"></i>
-                                <span class="text-light">Mantieni il tatuaggio sempre pulito e idratato</span>
+                                <span class="text-light">@Localizer["Tips_Dos_1"]</span>
                             </li>
                             <li class="mb-3 d-flex align-items-start">
                                 <i class="fas fa-check text-success me-3 mt-1"></i>
-                                <span class="text-light">Indossa abiti morbidi e traspiranti</span>
+                                <span class="text-light">@Localizer["Tips_Dos_2"]</span>
                             </li>
                             <li class="mb-3 d-flex align-items-start">
                                 <i class="fas fa-check text-success me-3 mt-1"></i>
-                                <span class="text-light">Usa crema solare ad alta protezione dopo la guarigione</span>
+                                <span class="text-light">@Localizer["Tips_Dos_3"]</span>
                             </li>
                             <li class="mb-3 d-flex align-items-start">
                                 <i class="fas fa-check text-success me-3 mt-1"></i>
-                                <span class="text-light">Bevi molta acqua per favorire la guarigione</span>
+                                <span class="text-light">@Localizer["Tips_Dos_4"]</span>
                             </li>
                             <li class="d-flex align-items-start">
                                 <i class="fas fa-check text-success me-3 mt-1"></i>
-                                <span class="text-light">Contattami per qualsiasi dubbio o problema</span>
+                                <span class="text-light">@Localizer["Tips_Dos_5"]</span>
                             </li>
                         </ul>
                     </div>
@@ -167,28 +169,28 @@
                     <!-- Don'ts Section -->
                     <div>
                         <h5 class="text-danger mb-3">
-                            <i class="fas fa-times-circle me-2"></i>Da Non Fare
+                            <i class="fas fa-times-circle me-2"></i>@Localizer["Tips_Donts_Title"]
                         </h5>
                         <ul class="list-unstyled">
                             <li class="mb-3 d-flex align-items-start">
                                 <i class="fas fa-times text-danger me-3 mt-1"></i>
-                                <span class="text-light">Non esporre il tatuaggio al sole diretto</span>
+                                <span class="text-light">@Localizer["Tips_Donts_1"]</span>
                             </li>
                             <li class="mb-3 d-flex align-items-start">
                                 <i class="fas fa-times text-danger me-3 mt-1"></i>
-                                <span class="text-light">Non fare bagni prolungati (vasca, piscina, mare)</span>
+                                <span class="text-light">@Localizer["Tips_Donts_2"]</span>
                             </li>
                             <li class="mb-3 d-flex align-items-start">
                                 <i class="fas fa-times text-danger me-3 mt-1"></i>
-                                <span class="text-light">Non grattare o staccare le crosticine</span>
+                                <span class="text-light">@Localizer["Tips_Donts_3"]</span>
                             </li>
                             <li class="mb-3 d-flex align-items-start">
                                 <i class="fas fa-times text-danger me-3 mt-1"></i>
-                                <span class="text-light">Non applicare troppa crema (crea uno strato troppo spesso)</span>
+                                <span class="text-light">@Localizer["Tips_Donts_4"]</span>
                             </li>
                             <li class="d-flex align-items-start">
                                 <i class="fas fa-times text-danger me-3 mt-1"></i>
-                                <span class="text-light">Non praticare sport intensi nelle prime 48 ore</span>
+                                <span class="text-light">@Localizer["Tips_Donts_5"]</span>
                             </li>
                         </ul>
                     </div>
@@ -196,10 +198,10 @@
                     <!-- Emergency Alert -->
                     <div class="alert alert-warning mt-4 mb-0" role="alert">
                         <h6 class="alert-heading fw-bold">
-                            <i class="fas fa-exclamation-triangle me-2"></i>Quando Contattarmi
+                            <i class="fas fa-exclamation-triangle me-2"></i>@Localizer["Emergency_Title"]
                         </h6>
                         <p class="mb-0 small">
-                            Se noti rossore eccessivo, gonfiore, pus o febbre, contattami immediatamente o consulta un medico.
+                            @Localizer["Emergency_Text"]
                         </p>
                     </div>
                 </div>
@@ -211,8 +213,8 @@
     <div class="row mt-5">
         <div class="col-lg-10 mx-auto" data-aos="fade-up">
             <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold text-uppercase mb-3">Domande Frequenti</h2>
-                <p class="text-muted lead">Le risposte alle domande più comuni</p>
+                <h2 class="display-5 fw-bold text-uppercase mb-3">@Localizer["FAQ_Title"]</h2>
+                <p class="text-muted lead">@Localizer["FAQ_Subtitle"]</p>
                 <div class="golden-underline mx-auto" style="width: 80px; height: 4px; background-color: #d4af37;"></div>
             </div>
 
@@ -228,18 +230,16 @@
                                 aria-controls="collapseOne"
                                 style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-left: 4px solid #d4af37;">
                             <i class="fas fa-question-circle text-warning me-3"></i>
-                            Fa male farsi un tatuaggio?
+                            @Localizer["FAQ_Q1"]
                         </button>
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
                         <div class="accordion-body text-muted p-4" style="background: #1a1a1a;">
                             <p class="mb-3">
-                                Il dolore è <strong>soggettivo</strong> e dipende dalla zona del corpo, dalla tua soglia del dolore personale e dalla durata della sessione.
+                                @Localizer["FAQ_A1_P1"]
                             </p>
                             <p class="mb-0">
-                                In generale, è una sensazione di <strong>fastidio sopportabile</strong>, simile a un graffio continuo.
-                                Le zone più sensibili includono costole, piedi, mani e zone vicine alle ossa.
-                                La maggior parte dei clienti trova l'esperienza molto più gestibile di quanto immaginassero!
+                                @Localizer["FAQ_A1_P2"]
                             </p>
                         </div>
                     </div>
@@ -256,23 +256,22 @@
                                 aria-controls="collapseTwo"
                                 style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-left: 4px solid #d4af37;">
                             <i class="fas fa-euro-sign text-warning me-3"></i>
-                            Quanto costa un tatuaggio?
+                            @Localizer["FAQ_Q2"]
                         </button>
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
                         <div class="accordion-body text-muted p-4" style="background: #1a1a1a;">
                             <p class="mb-3">
-                                Il prezzo varia in base a diversi fattori:
+                                @Localizer["FAQ_A2_P1"]
                             </p>
                             <ul class="mb-3">
-                                <li><strong>Dimensione:</strong> più grande = più tempo e materiale</li>
-                                <li><strong>Dettaglio:</strong> lavori realistici e complessi richiedono più tempo</li>
-                                <li><strong>Colore vs. Black & Grey:</strong> i colori aumentano il tempo di lavoro</li>
-                                <li><strong>Posizionamento:</strong> alcune zone sono più difficili da tatuare</li>
+                                <li>@Localizer["FAQ_A2_L1"]</li>
+                                <li>@Localizer["FAQ_A2_L2"]</li>
+                                <li>@Localizer["FAQ_A2_L3"]</li>
+                                <li>@Localizer["FAQ_A2_L4"]</li>
                             </ul>
                             <div class="alert alert-info mb-0">
-                                <strong>Prezzo minimo:</strong> €80 per piccoli tatuaggi.<br>
-                                Per un preventivo preciso, <a asp-controller="Booking" asp-action="Create" class="alert-link fw-bold">prenota una consulenza gratuita</a>.
+                                @Localizer["FAQ_A2_P2"]
                             </div>
                         </div>
                     </div>
@@ -289,19 +288,16 @@
                                 aria-controls="collapseThree"
                                 style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-left: 4px solid #d4af37;">
                             <i class="fas fa-users text-warning me-3"></i>
-                            Posso portare un accompagnatore?
+                            @Localizer["FAQ_Q3"]
                         </button>
                     </h2>
                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
                         <div class="accordion-body text-muted p-4" style="background: #1a1a1a;">
                             <p class="mb-3">
-                                Per motivi di <strong>igiene</strong>, <strong>concentrazione</strong> e <strong>comfort</strong>,
-                                preferiamo che il cliente venga da solo durante la sessione.
+                                @Localizer["FAQ_A3_P1"]
                             </p>
                             <p class="mb-0">
-                                In casi particolari (es. prima volta, ansia, minori accompagnati),
-                                è possibile concordare la presenza di un accompagnatore.
-                                <strong>Contattami in anticipo</strong> per discutere la situazione.
+                                @Localizer["FAQ_A3_P2"]
                             </p>
                         </div>
                     </div>
@@ -318,17 +314,17 @@
                                 aria-controls="collapseFour"
                                 style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-left: 4px solid #d4af37;">
                             <i class="fas fa-calendar-alt text-warning me-3"></i>
-                            Quanto tempo ci vuole per guarire?
+                            @Localizer["FAQ_Q4"]
                         </button>
                     </h2>
                     <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
                         <div class="accordion-body text-muted p-4" style="background: #1a1a1a;">
                             <p class="mb-3">
-                                La guarigione completa richiede tipicamente:
+                                @Localizer["FAQ_A4_P1"]
                             </p>
                             <ul class="mb-0">
-                                <li><strong>2-3 settimane:</strong> guarigione superficiale (crosticine cadono, pelle si rigenera)</li>
-                                <li><strong>3-6 mesi:</strong> guarigione profonda completa (gli strati sottocutanei si rigenerano)</li>
+                                <li>@Localizer["FAQ_A4_L1"]</li>
+                                <li>@Localizer["FAQ_A4_L2"]</li>
                             </ul>
                         </div>
                     </div>
@@ -345,17 +341,16 @@
                                 aria-controls="collapseFive"
                                 style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-left: 4px solid #d4af37;">
                             <i class="fas fa-pencil-ruler text-warning me-3"></i>
-                            Posso portare il mio disegno?
+                            @Localizer["FAQ_Q5"]
                         </button>
                     </h2>
                     <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
                         <div class="accordion-body text-muted p-4" style="background: #1a1a1a;">
                             <p class="mb-3">
-                                Assolutamente sì! Puoi portare <strong>riferimenti, idee, foto</strong> o disegni che ti ispirano.
+                                @Localizer["FAQ_A5_P1"]
                             </p>
                             <p class="mb-0">
-                                Lavorerò con te per creare un <strong>design personalizzato</strong> che rispetta la tua visione
-                                ma è anche ottimizzato per la tecnica del tatuaggio e per la zona del corpo scelta.
+                                @Localizer["FAQ_A5_P2"]
                             </p>
                         </div>
                     </div>
@@ -369,13 +364,13 @@
         <div class="col-lg-8 mx-auto" data-aos="zoom-in">
             <div class="text-center p-5 rounded shadow-lg" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
                 <i class="fas fa-comments fa-3x text-dark mb-4"></i>
-                <h3 class="display-6 fw-bold text-dark mb-3">Hai Altre Domande?</h3>
-                <p class="lead text-dark mb-4">Non esitare a contattarmi per qualsiasi dubbio o chiarimento</p>
+                <h3 class="display-6 fw-bold text-dark mb-3">@Localizer["CTA_Title"]</h3>
+                <p class="lead text-dark mb-4">@Localizer["CTA_Subtitle"]</p>
                 <a asp-controller="Home" asp-action="Contact" class="btn btn-dark btn-lg px-5 py-3 rounded-pill shadow me-2">
-                    <i class="fas fa-envelope me-2"></i> Contattami
+                    <i class="fas fa-envelope me-2"></i> @Localizer["CTA_Button_Contact"]
                 </a>
                 <a asp-controller="Booking" asp-action="Create" class="btn btn-outline-dark btn-lg px-5 py-3 rounded-pill shadow">
-                    <i class="fas fa-calendar-check me-2"></i> Prenota
+                    <i class="fas fa-calendar-check me-2"></i> @Localizer["CTA_Button_Book"]
                 </a>
             </div>
         </div>

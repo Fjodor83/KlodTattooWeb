@@ -1,14 +1,16 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Kontakt";
+    ViewData["Title"] = @Localizer["Page_Title"];
 }
 
 <div class="container py-5">
     <!-- Header Section -->
     <div class="text-center mb-5" data-aos="fade-down">
         <h1 class="display-3 fw-bold text-uppercase mb-3" style="color: #d4af37; letter-spacing: 3px;">
-            Kontakt
+            @Localizer["Page_Title"]
         </h1>
-        <p class="lead text-muted fs-4">Besuche uns im Studio oder schreibe uns für weitere Informationen</p>
+        <p class="lead text-muted fs-4">@Localizer["Page_Subtitle"]</p>
         <div class="golden-underline mx-auto mt-3" style="width: 100px; height: 4px; background: linear-gradient(90deg, transparent, #d4af37, transparent);"></div>
     </div>
 
@@ -18,7 +20,7 @@
             <div class="card h-100 shadow-lg border-0" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
                 <div class="card-header border-0 text-center py-4" style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
                     <i class="fas fa-store fa-3x text-dark mb-3"></i>
-                    <h3 class="h4 mb-0 text-uppercase fw-bold text-dark">Klod Tattoo Studio</h3>
+                    <h3 class="h4 mb-0 text-uppercase fw-bold text-dark">@Localizer["Studio_Name"]</h3>
                 </div>
                 <div class="card-body p-4">
                     <!-- Address -->
@@ -31,10 +33,10 @@
                             </div>
                         </div>
                         <div>
-                            <h5 class="h6 mb-2 text-warning">Adresse</h5>
-                            <p class="text-light mb-1 fw-semibold">Lindenstraße 26</p>
-                            <p class="text-muted mb-0">63785 Obernburg am Main</p>
-                            <p class="text-muted mb-0">Deutschland</p>
+                            <h5 class="h6 mb-2 text-warning">@Localizer["Label_Address"]</h5>
+                            <p class="text-light mb-1 fw-semibold">@Localizer["Address_Street"]</p>
+                            <p class="text-muted mb-0">@Localizer["Address_City"]</p>
+                            <p class="text-muted mb-0">@Localizer["Address_Country"]</p>
                         </div>
                     </div>
 
@@ -48,11 +50,11 @@
                             </div>
                         </div>
                         <div>
-                            <h5 class="h6 mb-2 text-warning">Telefon</h5>
+                            <h5 class="h6 mb-2 text-warning">@Localizer["Label_Phone"]</h5>
                             <a href="tel:+491722487670" class="text-light text-decoration-none fw-semibold d-block hover-gold">
                                 +49 172 2487670
                             </a>
-                            <small class="text-muted">Klick zum Anrufen</small>
+                            <small class="text-muted">@Localizer["Phone_Tooltip"]</small>
                         </div>
                     </div>
 
@@ -66,11 +68,11 @@
                             </div>
                         </div>
                         <div>
-                            <h5 class="h6 mb-2 text-warning">E-Mail</h5>
+                            <h5 class="h6 mb-2 text-warning">@Localizer["Label_Email"]</h5>
                             <a href="mailto:info@klodtattoo.de" class="text-light text-decoration-none fw-semibold d-block hover-gold">
                                 info@klodtattoo.de
                             </a>
-                            <small class="text-muted">Schreib uns eine Nachricht</small>
+                            <small class="text-muted">@Localizer["Email_Tooltip"]</small>
                         </div>
                     </div>
 
@@ -84,11 +86,11 @@
                             </div>
                         </div>
                         <div>
-                            <h5 class="h6 mb-2 text-warning">Instagram</h5>
+                            <h5 class="h6 mb-2 text-warning">@Localizer["Label_Instagram"]</h5>
                             <a href="https://instagram.com/klodback" target="_blank" class="text-light text-decoration-none fw-semibold d-block hover-gold">
-                                @@klodback
+                                @Localizer["Instagram_Username"]
                             </a>
-                            <small class="text-muted">Folge uns für Updates</small>
+                            <small class="text-muted">@Localizer["Instagram_Tooltip"]</small>
                         </div>
                     </div>
 
@@ -97,29 +99,29 @@
                     <!-- Opening Hours -->
                     <div class="opening-hours">
                         <h4 class="h5 mb-4 text-center text-warning">
-                            <i class="fas fa-clock me-2"></i>Öffnungszeiten
+                            <i class="fas fa-clock me-2"></i>@Localizer["Label_OpeningHours"]
                         </h4>
                         <div class="schedule">
                             <div class="schedule-item d-flex justify-content-between align-items-center mb-3 p-3 rounded" 
                                  style="background: rgba(212, 175, 55, 0.05);">
                                 <span class="text-light fw-semibold">
-                                    <i class="fas fa-calendar-day text-warning me-2"></i>Mo - Fr
+                                    <i class="fas fa-calendar-day text-warning me-2"></i>@Localizer["OpeningHours_Weekdays"]
                                 </span>
-                                <span class="text-warning fw-bold">10:00 - 19:00</span>
+                                <span class="text-warning fw-bold">@Localizer["OpeningHours_Weekdays_Time"]</span>
                             </div>
                             <div class="schedule-item d-flex justify-content-between align-items-center mb-3 p-3 rounded" 
                                  style="background: rgba(212, 175, 55, 0.05);">
                                 <span class="text-light fw-semibold">
-                                    <i class="fas fa-calendar-day text-warning me-2"></i>Samstag
+                                    <i class="fas fa-calendar-day text-warning me-2"></i>@Localizer["OpeningHours_Saturday"]
                                 </span>
-                                <span class="text-warning fw-bold">10:00 - 14:00</span>
+                                <span class="text-warning fw-bold">@Localizer["OpeningHours_Saturday_Time"]</span>
                             </div>
                             <div class="schedule-item d-flex justify-content-between align-items-center p-3 rounded" 
                                  style="background: rgba(212, 175, 55, 0.05);">
                                 <span class="text-light fw-semibold">
-                                    <i class="fas fa-calendar-day text-warning me-2"></i>Sonntag
+                                    <i class="fas fa-calendar-day text-warning me-2"></i>@Localizer["OpeningHours_Sunday"]
                                 </span>
-                                <span class="text-danger fw-bold">Geschlossen</span>
+                                <span class="text-danger fw-bold">@Localizer["OpeningHours_Closed"]</span>
                             </div>
                         </div>
                     </div>
@@ -127,7 +129,7 @@
                     <!-- CTA Button -->
                     <div class="mt-4 text-center">
                         <a asp-controller="Booking" asp-action="Create" class="btn btn-gold w-100 py-3 rounded-pill shadow-lg">
-                            <i class="fas fa-calendar-check me-2"></i>Jetzt Termin Buchen
+                            <i class="fas fa-calendar-check me-2"></i>@Localizer["Button_BookAppointment"]
                         </a>
                     </div>
                 </div>
@@ -141,11 +143,11 @@
                 <div class="card shadow-lg border-0 mb-4 flex-grow-1" style="min-height: 450px;">
                     <div class="card-header border-0 py-3 text-center" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
                         <h5 class="mb-0 text-light">
-                            <i class="fas fa-map-marked-alt text-warning me-2"></i>Finde Uns
+                            <i class="fas fa-map-marked-alt text-warning me-2"></i>@Localizer["Label_FindUs"]
                         </h5>
                     </div>
                     <div class="card-body p-0 position-relative" style="height: 100%;">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2512.1234567890!2d9.11456!3d49.84712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1234567890abcdef!2sLindenstraße%2026%2C%2063785%20Obernburg%20am%20Main!5e0!3m2!1sde!2sde!4v0000000000000!5m2!1sde!2sde"
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2512.1234567890!2d9.11456!3d49.84712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1234567890abcdef!2sLindenstrae%2026%2C%2063785%20Obernburg%20am%20Main!5e0!3m2!1sde!2sde!4v0000000000000!5m2!1sde!2sde"
                                 width="100%" 
                                 height="100%" 
                                 style="border:0; filter: grayscale(0.3) contrast(1.1);" 
@@ -161,16 +163,16 @@
                         <div class="info-card text-center p-4 rounded shadow h-100" 
                              style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
                             <i class="fas fa-parking fa-2x text-dark mb-3"></i>
-                            <h5 class="h6 text-dark fw-bold mb-2">Parkplätze</h5>
-                            <p class="small text-dark mb-0">Kostenlose Parkplätze in der Nähe verfügbar</p>
+                            <h5 class="h6 text-dark fw-bold mb-2">@Localizer["Label_Parking"]</h5>
+                            <p class="small text-dark mb-0">@Localizer["Parking_Description"]</p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="info-card text-center p-4 rounded shadow h-100" 
                              style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border: 2px solid #d4af37;">
                             <i class="fas fa-wheelchair fa-2x text-warning mb-3"></i>
-                            <h5 class="h6 text-light fw-bold mb-2">Barrierefrei</h5>
-                            <p class="small text-muted mb-0">Studio im Erdgeschoss zugänglich</p>
+                            <h5 class="h6 text-light fw-bold mb-2">@Localizer["Label_Accessible"]</h5>
+                            <p class="small text-muted mb-0">@Localizer["Accessible_Description"]</p>
                         </div>
                     </div>
                 </div>
@@ -184,9 +186,9 @@
             <div class="card shadow-lg border-0 overflow-hidden" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
                 <div class="card-body p-5 text-center">
                     <h3 class="display-6 fw-bold text-uppercase mb-3" style="color: #d4af37;">
-                        Folge Uns
+                        @Localizer["Social_Title"]
                     </h3>
-                    <p class="lead text-muted mb-4">Bleib auf dem Laufenden mit unseren neuesten Arbeiten</p>
+                    <p class="lead text-muted mb-4">@Localizer["Social_Subtitle"]</p>
                     
                     <div class="social-buttons d-flex justify-content-center gap-3 flex-wrap">
                         <a href="https://instagram.com/klodback" 
@@ -204,7 +206,7 @@
                         <a href="https://wa.me/491722487670" 
                            target="_blank" 
                            class="btn btn-social btn-whatsapp btn-lg rounded-circle shadow-lg"
-                           style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                           style="width: 70px; height: 70px; display: flex; align-items-center; justify-content: center;">
                             <i class="fab fa-whatsapp fa-2x"></i>
                         </a>
                     </div>
@@ -212,7 +214,7 @@
                     <div class="mt-4">
                         <p class="text-muted mb-0">
                             <i class="fas fa-heart text-danger me-2"></i>
-                            Über <strong class="text-warning">5.000+</strong> zufriedene Follower
+                            @Localizer["Social_FollowerCount"]
                         </p>
                     </div>
                 </div>
@@ -227,9 +229,9 @@
                 <div class="d-flex align-items-center">
                     <i class="fas fa-info-circle fa-2x text-white me-3"></i>
                     <div>
-                        <h6 class="alert-heading text-white fw-bold mb-1">Termine nur nach Vereinbarung</h6>
+                        <h6 class="alert-heading text-white fw-bold mb-1">@Localizer["Appointment_Info_Title"]</h6>
                         <p class="mb-0 text-white">
-                            Bitte buche deinen Termin online oder kontaktiere uns telefonisch. Walk-ins nach Verfügbarkeit.
+                            @Localizer["Appointment_Info_Description"]
                         </p>
                     </div>
                 </div>

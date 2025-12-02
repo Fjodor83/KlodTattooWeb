@@ -1,7 +1,8 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
 @model KlodTattooWeb.Models.BookingRequest
 
 @{
-    ViewData["Title"] = "Prenota un Appuntamento";
+    ViewData["Title"] = @Localizer["Page_Title"];
 }
 
 <div class="container mt-5">
@@ -9,45 +10,46 @@
         <div class="col-md-8">
             <div class="card bg-dark text-white border-secondary shadow-lg">
                 <div class="card-header bg-black border-secondary text-center py-4">
-                    <h2 class="text-uppercase" style="color: #d4af37;">Prenota la tua seduta</h2>
+                    <h2 class="text-uppercase mb-2" style="color: #d4af37;">@Localizer["Page_Title"]</h2>
+                    <p class="text-muted mb-0">@Localizer["Page_Subtitle"]</p>
                 </div>
                 <div class="card-body p-5">
                     <form asp-action="Create">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         
                         <div class="mb-4">
-                            <label asp-for="ClientName" class="form-label text-muted">Nome Completo</label>
+                            <label asp-for="ClientName" class="form-label text-muted">@Localizer["Label_FullName"]</label>
                             <input asp-for="ClientName" class="form-control bg-dark text-white border-secondary" />
                             <span asp-validation-for="ClientName" class="text-danger"></span>
                         </div>
 
                         <div class="mb-4">
-                            <label asp-for="Email" class="form-label text-muted">Email</label>
+                            <label asp-for="Email" class="form-label text-muted">@Localizer["Label_Email"]</label>
                             <input asp-for="Email" class="form-control bg-dark text-white border-secondary" />
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-4">
-                                <label asp-for="BodyPart" class="form-label text-muted">Parte del Corpo</label>
-                                <input asp-for="BodyPart" class="form-control bg-dark text-white border-secondary" placeholder="Es. Avambraccio" />
+                                <label asp-for="BodyPart" class="form-label text-muted">@Localizer["Label_BodyPart"]</label>
+                                <input asp-for="BodyPart" class="form-control bg-dark text-white border-secondary" placeholder=@Localizer["Placeholder_BodyPart"] />
                                 <span asp-validation-for="BodyPart" class="text-danger"></span>
                             </div>
                             <div class="col-md-6 mb-4">
-                                <label asp-for="PreferredDate" class="form-label text-muted">Data Preferita</label>
-                                <input asp-for="PreferredDate" class="form-control bg-dark text-white border-secondary" type="date" />
+                                <label asp-for="PreferredDate" class="form-label text-muted">@Localizer["Label_PreferredDate"]</label>
+                                <input asp-for="PreferredDate" class="form-control bg-dark text-white border-secondary" type="text" id="datepicker" placeholder="@Localizer["Placeholder_PreferredDate"]" />
                                 <span asp-validation-for="PreferredDate" class="text-danger"></span>
                             </div>
                         </div>
 
                         <div class="mb-4">
-                            <label asp-for="IdeaDescription" class="form-label text-muted">Descrivi la tua idea</label>
-                            <textarea asp-for="IdeaDescription" class="form-control bg-dark text-white border-secondary" rows="5" placeholder="Descrivi lo stile, il soggetto e le dimensioni approssimative..."></textarea>
+                            <label asp-for="IdeaDescription" class="form-label text-muted">@Localizer["Label_IdeaDescription"]</label>
+                            <textarea asp-for="IdeaDescription" class="form-control bg-dark text-white border-secondary" rows="5" placeholder=@Localizer["Placeholder_IdeaDescription"]></textarea>
                             <span asp-validation-for="IdeaDescription" class="text-danger"></span>
                         </div>
 
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary btn-lg">Invia Richiesta</button>
+                            <button type="submit" class="btn btn-primary btn-lg">@Localizer["Button_SubmitRequest"]</button>
                         </div>
                     </form>
                 </div>
@@ -58,4 +60,18 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentCulture = '@System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName';
+            
+            flatpickr("#datepicker", {
+                locale: currentCulture,
+                dateFormat: "Y-m-d",
+                minDate: "today",
+                theme: "dark",
+                disableMobile: "true"
+            });
+        });
+    </script>
 }

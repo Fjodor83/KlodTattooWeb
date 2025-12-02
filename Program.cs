@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using KlodTattooWeb.Services;
 using KlodTattooWeb.Models;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,8 +60,27 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 // ---------------------------
 // Razor + MVC
 // ---------------------------
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization();
 builder.Services.AddRazorPages();
+
+// ---------------------------
+// Localization (IT/DE)
+// ---------------------------
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[] { "de-DE", "it-IT" };
+    options.DefaultRequestCulture = new RequestCulture("de-DE");  // Tedesco default
+    options.SupportedCultures = supportedCultures.Select(c => new CultureInfo(c)).ToList();
+    options.SupportedUICultures = supportedCultures.Select(c => new CultureInfo(c)).ToList();
+
+    options.RequestCultureProviders = new List<IRequestCultureProvider>
+    {
+        new CookieRequestCultureProvider(),
+        new AcceptLanguageHeaderRequestCultureProvider()
+    };
+});
 
 // ---------------------------
 // Cookie Policy
@@ -173,6 +195,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCookiePolicy();
+
+// Localization middleware
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+
 app.UseStaticFiles();
 
 app.UseRouting();

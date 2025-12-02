@@ -1,21 +1,22 @@
-﻿@model IEnumerable<KlodTattooWeb.Models.PortfolioItem>
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+@model IEnumerable<KlodTattooWeb.Models.PortfolioItem>
 
 @{
-    ViewData["Title"] = "Portfolio";
+    ViewData["Title"] = @Localizer["Page_Title"];
     var availableStyles = ViewBag.TattooStyles as List<string>;
     var selectedStyle = ViewBag.SelectedStyle as string;
 }
 
 <div class="text-center mb-5" data-aos="fade-up">
-    <h1 class="display-4 text-uppercase" style="color: #d4af37;">Klodback Works</h1>
-    <p class="lead text-muted">Inchiostro indelebile, arte eterna.</p>
+    <h1 class="display-4 text-uppercase" style="color: #d4af37;">@Localizer["Page_Title"]</h1>
+    <p class="lead text-muted">@Localizer["Page_Subtitle"]</p>
     <div style="width: 60px; height: 3px; background-color: #d4af37; margin: 20px auto;"></div>
 </div>
 
 <!-- FILTRI -->
 <div class="text-center mb-4" data-aos="fade-up" data-aos-delay="100">
     <a class="btn btn-outline-light btn-sm me-2 mb-2 @(string.IsNullOrEmpty(selectedStyle) ? "active" : "")"
-       asp-action="Index" asp-controller="Portfolio">Tutti</a>
+       asp-action="Index" asp-controller="Portfolio">@Localizer["Filter_All"]</a>
     @if (availableStyles != null)
     {
         @foreach (var style in availableStyles)
@@ -43,7 +44,7 @@
                      style="background: rgba(0,0,0,0.85); opacity: 0; transition: opacity 0.4s ease;">
                     <h5 class="text-uppercase mb-2" style="color: #d4af37;">@item.Title</h5>
                     <p class="text-white small mb-3">@item.TattooStyle?.Name</p>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-light btn-sm rounded-0 px-4">Vedi</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-light btn-sm rounded-0 px-4">@Localizer["Button_View"]</a>
                 </div>
             </div>
         </div>

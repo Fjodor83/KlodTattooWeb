@@ -1,10 +1,12 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Richiesta Inviata";
+    ViewData["Title"] = @Localizer["Page_Title"];
 }
 
 <div class="container mt-5 text-center" style="min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
     <i class="fas fa-check-circle fa-5x mb-4" style="color: #d4af37;"></i>
-    <h1 class="display-4 text-uppercase mb-3">Grazie!</h1>
-    <p class="lead text-muted mb-5">La tua richiesta di prenotazione è stata inviata con successo.<br>Ti contatteremo al più presto per confermare l'appuntamento.</p>
-    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-light btn-lg px-5">Torna alla Home</a>
+    <h1 class="display-4 text-uppercase mb-3">@Localizer["Success_Title"]</h1>
+    <p class="lead text-muted mb-5">@Html.Raw(Localizer["Success_Subtitle"])</p>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-light btn-lg px-5">@Localizer["Button_BackToHome"]</a>
 </div>

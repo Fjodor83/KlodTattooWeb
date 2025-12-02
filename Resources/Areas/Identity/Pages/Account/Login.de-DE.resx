@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Page_Title" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="Page_Subtitle" xml:space="preserve">
+    <value>Melden Sie sich bei Ihrem Klod Tattoo-Konto an</value>
+  </data>
+  <data name="Form_Title" xml:space="preserve">
+    <value>Mit Ihrem Konto anmelden</value>
+  </data>
+  <data name="Label_Email" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="Label_Password" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Button_Login" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="Link_ForgotPassword" xml:space="preserve">
+    <value>Passwort vergessen?</value>
+  </data>
+  <data name="Link_Register" xml:space="preserve">
+    <value>Als neuer Benutzer registrieren</value>
+  </data>
+  <data name="Link_ResendEmailConfirmation" xml:space="preserve">
+    <value>E-Mail-Bestätigung erneut senden</value>
+  </data>
+  <data name="Info_Title" xml:space="preserve">
+    <value>Info und Sicherheit</value>
+  </data>
+  <data name="ExternalLogin_Title" xml:space="preserve">
+    <value>Mit einem anderen Dienst anmelden</value>
+  </data>
+  <data name="Benefits_Title" xml:space="preserve">
+    <value>Kontovorteile</value>
+  </data>
+  <data name="Benefit1_Title" xml:space="preserve">
+    <value>Schnelle Buchungen</value>
+  </data>
+  <data name="Benefit1_Text" xml:space="preserve">
+    <value>Buchen Sie Ihre Termine mit nur wenigen Klicks</value>
+  </data>
+  <data name="Benefit2_Title" xml:space="preserve">
+    <value>Tattoo-Verlauf</value>
+  </data>
+  <data name="Benefit2_Text" xml:space="preserve">
+    <value>Verfolgen Sie alle Ihre Arbeiten mit uns</value>
+  </data>
+  <data name="Benefit3_Title" xml:space="preserve">
+    <value>Exklusive Angebote</value>
+  </data>
+  <data name="Benefit3_Text" xml:space="preserve">
+    <value>Zugang zu reservierten Aktionen</value>
+  </data>
+  <data name="Benefit4_Title" xml:space="preserve">
+    <value>Personalisierte Benachrichtigungen</value>
+  </data>
+  <data name="Benefit4_Text" xml:space="preserve">
+    <value>Bleiben Sie über Ihre Termine auf dem Laufenden</value>
+  </data>
+  <data name="Security_Title" xml:space="preserve">
+    <value>Garantierte Sicherheit</value>
+  </data>
+  <data name="Security_Text" xml:space="preserve">
+    <value>Ihre Daten sind mit SSL-Verschlüsselung geschützt und werden niemals an Dritte weitergegeben.</value>
+  </data>
+  <data name="Help_Title" xml:space="preserve">
+    <value>Benötigen Sie Hilfe?</value>
+  </data>
+  <data name="Help_Text" xml:space="preserve">
+    <value>Wenn Sie Probleme mit der Anmeldung haben, kontaktieren Sie uns oder rufen Sie +49 172 2487670 an</value>
+  </data>
+</root>

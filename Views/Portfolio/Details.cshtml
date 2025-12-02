@@ -1,4 +1,5 @@
-﻿@model KlodTattooWeb.Models.PortfolioItem
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+@model KlodTattooWeb.Models.PortfolioItem
 
 @{
     ViewData["Title"] = Model.Title;
@@ -16,9 +17,9 @@
                      style="max-height: 600px; object-fit: cover; transition: transform 0.5s;">
             </a>
 
-            <p class="text-muted small mb-4">Creato il: @Model.CreatedAt.ToString("dd/MM/yyyy")</p>
+            <p class="text-muted small mb-4">@Localizer["Created_On"] @Model.CreatedAt.ToString("dd/MM/yyyy")</p>
 
-            <a asp-action="Index" class="btn btn-outline-light rounded-0 px-4 py-2">Torna al Portfolio</a>
+            <a asp-action="Index" class="btn btn-outline-light rounded-0 px-4 py-2">@Localizer["Back_To_Portfolio"]</a>
         </div>
     </div>
 </div>

@@ -1,5 +1,10 @@
-﻿<!DOCTYPE html>
-<html lang="it">
+@inject ILogger<Program> logger
+@{
+    var searchedLocation = Localizer.GetString("Nav_Home").SearchedLocation;
+    logger.LogWarning($"Searched location for Nav_Home: {searchedLocation}");
+}
+<!DOCTYPE html>
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,6 +27,10 @@
     
     <!-- GLightbox -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+    <!-- Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
 
     <!-- Cookie Banner CSS -->
     <link rel="stylesheet" href="~/css/cookie-banner.css" asp-append-version="true" />
@@ -52,31 +61,31 @@
                         <li class="nav-item">
                             <a class="nav-link px-3 position-relative nav-link-custom" 
                                asp-area="" asp-controller="Home" asp-action="Index">
-                                <i class="fas fa-home me-1"></i>Home
+                                <i class="fas fa-home me-1"></i>@Localizer["Nav_Home"]
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link px-3 position-relative nav-link-custom" 
                                asp-area="" asp-controller="Portfolio" asp-action="Index">
-                                <i class="fas fa-images me-1"></i>Portfolio
+                                <i class="fas fa-images me-1"></i>@Localizer["Nav_Portfolio"]
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link px-3 position-relative nav-link-custom" 
                                asp-area="" asp-controller="Services" asp-action="Index">
-                                <i class="fas fa-palette me-1"></i>Servizi
+                                <i class="fas fa-palette me-1"></i>@Localizer["Nav_Services"]
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link px-3 position-relative nav-link-custom" 
                                asp-area="" asp-controller="Info" asp-action="Index">
-                                <i class="fas fa-info-circle me-1"></i>Info
+                                <i class="fas fa-info-circle me-1"></i>@Localizer["Nav_Info"]
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link px-3 position-relative nav-link-custom" 
                                asp-area="" asp-controller="Contacts" asp-action="Index">
-                                <i class="fas fa-envelope me-1"></i>Contatti
+                                <i class="fas fa-envelope me-1"></i>@Localizer["Nav_Contacts"]
                             </a>
                         </li>
                         
@@ -84,7 +93,7 @@
                         <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
                             <a class="btn btn-gold px-4 py-2 rounded-pill shadow" 
                                asp-area="" asp-controller="Booking" asp-action="Create">
-                                <i class="fas fa-calendar-check me-2"></i>Prenota
+                                <i class="fas fa-calendar-check me-2"></i>@Localizer["Nav_Book"]
                             </a>
                         </li>
 
@@ -94,7 +103,7 @@
                             <li class="nav-item ms-lg-2">
                                 <a class="nav-link px-3 text-warning" 
                                    asp-area="" asp-controller="Admin" asp-action="Index">
-                                    <i class="fas fa-user-shield me-1"></i>Admin
+                                    <i class="fas fa-user-shield me-1"></i>@Localizer["Nav_Admin"]
                                 </a>
                             </li>
                         }
@@ -102,7 +111,7 @@
 
                     <!-- Login Partial -->
                     <div class="ms-lg-3 mt-2 mt-lg-0">
-                        <partial name="_LoginPartial" />
+                        <partial name="_LanguagePartial" /> <partial name="_LoginPartial" />
                     </div>
                 </div>
             </div>
@@ -127,8 +136,7 @@
                         <i class="fas fa-dragon me-2"></i>Klod Tattoo
                     </h5>
                     <p class="text-muted small">
-                        Studio professionale di tatuaggi a Obernburg am Main. 
-                        Arte sulla pelle dal 2015. Specializzati in realistico, traditional e blackwork.
+                        @Localizer["Footer_Description"]
                     </p>
                     <div class="social-links mt-3">
                         <a href="https://instagram.com/klodback" target="_blank" class="social-icon me-2" title="Instagram">
@@ -148,26 +156,26 @@
 
                 <!-- Quick Links Column -->
                 <div class="col-lg-2 col-md-6">
-                    <h6 class="text-uppercase fw-bold mb-3 text-light">Link Rapidi</h6>
+                    <h6 class="text-uppercase fw-bold mb-3 text-light">@Localizer["Footer_QuickLinks"]</h6>
                     <ul class="list-unstyled footer-links">
                         <li class="mb-2">
                             <a asp-controller="Home" asp-action="Index" class="text-muted text-decoration-none">
-                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>Home
+                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>@Localizer["Nav_Home"]
                             </a>
                         </li>
                         <li class="mb-2">
                             <a asp-controller="Portfolio" asp-action="Index" class="text-muted text-decoration-none">
-                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>Portfolio
+                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>@Localizer["Nav_Portfolio"]
                             </a>
                         </li>
                         <li class="mb-2">
                             <a asp-controller="Services" asp-action="Index" class="text-muted text-decoration-none">
-                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>Servizi
+                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>@Localizer["Nav_Services"]
                             </a>
                         </li>
                         <li class="mb-2">
                             <a asp-controller="Info" asp-action="Index" class="text-muted text-decoration-none">
-                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>Info & FAQ
+                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>@Localizer["Nav_Info"] & FAQ
                             </a>
                         </li>
                     </ul>
@@ -175,26 +183,26 @@
 
                 <!-- Services Column -->
                 <div class="col-lg-3 col-md-6">
-                    <h6 class="text-uppercase fw-bold mb-3 text-light">Servizi</h6>
+                    <h6 class="text-uppercase fw-bold mb-3 text-light">@Localizer["Footer_Services"]</h6>
                     <ul class="list-unstyled footer-links">
                         <li class="mb-2">
                             <span class="text-muted">
-                                <i class="fas fa-check text-success me-2"></i>Tatuaggi Custom
+                                <i class="fas fa-check text-success me-2"></i>@Localizer["Footer_Service_Custom"]
                             </span>
                         </li>
                         <li class="mb-2">
                             <span class="text-muted">
-                                <i class="fas fa-check text-success me-2"></i>Cover Up
+                                <i class="fas fa-check text-success me-2"></i>@Localizer["Footer_Service_CoverUp"]
                             </span>
                         </li>
                         <li class="mb-2">
                             <span class="text-muted">
-                                <i class="fas fa-check text-success me-2"></i>Restauro Tatuaggi
+                                <i class="fas fa-check text-success me-2"></i>@Localizer["Footer_Service_Restoration"]
                             </span>
                         </li>
                         <li class="mb-2">
                             <span class="text-muted">
-                                <i class="fas fa-check text-success me-2"></i>Consulenza Gratuita
+                                <i class="fas fa-check text-success me-2"></i>@Localizer["Footer_Service_Consultation"]
                             </span>
                         </li>
                     </ul>
@@ -202,12 +210,12 @@
 
                 <!-- Contact Column -->
                 <div class="col-lg-3 col-md-6">
-                    <h6 class="text-uppercase fw-bold mb-3 text-light">Contatti</h6>
+                    <h6 class="text-uppercase fw-bold mb-3 text-light">@Localizer["Footer_Contacts"]</h6>
                     <ul class="list-unstyled">
                         <li class="mb-2 d-flex align-items-start">
                             <i class="fas fa-map-marker-alt text-warning me-2 mt-1"></i>
                             <span class="text-muted small">
-                                Lindenstraße 26<br>
+                                Lindenstra�e 26<br>
                                 63785 Obernburg am Main
                             </span>
                         </li>
@@ -238,18 +246,18 @@
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                     <p class="text-muted small mb-0">
-                        &copy; 2025 <strong style="color: #d4af37;">Klod Tattoo Studio</strong>. Tutti i diritti riservati.
+                        &copy; 2025 <strong style="color: #d4af37;">Klod Tattoo Studio</strong>. @Localizer["Footer_Rights"]
                     </p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <a asp-controller="Home" asp-action="Privacy" class="text-muted text-decoration-none small me-3 hover-gold">
-                        <i class="fas fa-shield-alt me-1"></i>Privacy Policy
+                        <i class="fas fa-shield-alt me-1"></i>@Localizer["Footer_Privacy"]
                     </a>
                     <a asp-controller="Home" asp-action="Cookie" class="text-muted text-decoration-none small me-3 hover-gold">
-                        <i class="fas fa-cookie-bite me-1"></i>Cookie Policy
+                        <i class="fas fa-cookie-bite me-1"></i>@Localizer["Footer_Cookie"]
                     </a>
                     <a href="#" class="text-muted text-decoration-none small hover-gold">
-                        <i class="fas fa-file-contract me-1"></i>Termini di Servizio
+                        <i class="fas fa-file-contract me-1"></i>@Localizer["Footer_Terms"]
                     </a>
                 </div>
             </div>
@@ -266,6 +274,11 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    
+    <!-- Flatpickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/de.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/it.js"></script>
 
     <!-- Cookie Consent JS -->
     <script src="~/js/cookie-consent.js" asp-append-version="true"></script>

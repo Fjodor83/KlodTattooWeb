@@ -1,4 +1,5 @@
-﻿@{
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+@{
     ViewData["Title"] = "Home";
 }
 
@@ -11,15 +12,15 @@
 
     <div class="content position-relative px-3" style="z-index: 1; max-width: 900px;" data-aos="fade-up" data-aos-duration="1000">
         <h1 class="display-1 fw-bold text-uppercase mb-4" style="letter-spacing: 8px; color: #d4af37; text-shadow: 2px 2px 8px rgba(0,0,0,0.8);">
-            Klod Tattoo
+            @Localizer["Hero_Title"]
         </h1>
         <p class="lead mb-5 fs-2" style="letter-spacing: 3px; text-shadow: 1px 1px 4px rgba(0,0,0,0.8);">
-            Kunst auf deiner Haut
+            @Localizer["Hero_Subtitle"]
         </p>
         <a asp-controller="Booking" asp-action="Create"
            class="btn btn-gold btn-lg px-5 py-3 rounded-pill shadow-lg"
            data-aos="fade-up" data-aos-delay="200">
-            <i class="fas fa-calendar-check me-2"></i> Jetzt buchen
+            <i class="fas fa-calendar-check me-2"></i> @Localizer["Hero_Button"]
         </a>
     </div>
 
@@ -40,63 +41,58 @@
             <div class="position-relative">
                 <h2 class="text-uppercase mb-4 display-5 fw-bold"
                     style="border-left: 5px solid #d4af37; padding-left: 20px;">
-                    Biography
+                    @Localizer["Bio_Title"]
                 </h2>
 
                 <p class="lead text-muted mb-4 fs-5">
-                    Benvenuti in <strong style="color: #d4af37;">Klod Tattoo</strong>: qui l'arte non si osserva… <strong>si indossa</strong>.
+                    @Localizer["Bio_Text1"]
                 </p>
 
                 <p class="text-muted mb-3 lh-lg">
-                    Ogni linea, ogni ombra e ogni dettaglio nasce da una visione studiata e costruita su misura per te.
-                    Non creo tatuaggi "standard": ogni progetto è un pezzo irripetibile, pensato per raccontare la tua storia
-                    con stile, forza ed eleganza.
+                    @Localizer["Bio_Text2"]
                 </p>
 
                 <div class="highlight-box p-4 mb-4 rounded" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-left: 4px solid #d4af37;">
                     <p class="text-light mb-0">
                         <i class="fas fa-graduation-cap text-warning me-2"></i>
-                        La mia formazione parte dal <strong>Liceo Artistico</strong> e si perfeziona all'
-                        <strong>Istituto delle Belle Arti</strong>, dove ho trasformato il disegno in una vera disciplina estetica.
+                        @Localizer["Bio_Highlight"]
                     </p>
                 </div>
 
                 <p class="text-muted mb-4 lh-lg">
-                    Questa base accademica, unita agli anni di esperienza sul campo, mi permette di combinare precisione tecnica
-                    e sensibilità artistica in ogni lavoro.
+                    @Localizer["Bio_Text3"]
                 </p>
 
                 <div class="row g-3 mb-4">
                     <div class="col-6">
                         <div class="feature-badge text-center p-3 rounded bg-dark">
                             <i class="fas fa-certificate text-warning fs-3 mb-2"></i>
-                            <p class="small text-light mb-0">Inchiostri Certificati</p>
+                            <p class="small text-light mb-0">@Localizer["Feature_Ink"]</p>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="feature-badge text-center p-3 rounded bg-dark">
                             <i class="fas fa-shield-alt text-warning fs-3 mb-2"></i>
-                            <p class="small text-light mb-0">Igiene Impeccabile</p>
+                            <p class="small text-light mb-0">@Localizer["Feature_Hygiene"]</p>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="feature-badge text-center p-3 rounded bg-dark">
                             <i class="fas fa-tools text-warning fs-3 mb-2"></i>
-                            <p class="small text-light mb-0">Attrezzature Pro</p>
+                            <p class="small text-light mb-0">@Localizer["Feature_Equipment"]</p>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="feature-badge text-center p-3 rounded bg-dark">
                             <i class="fas fa-infinity text-warning fs-3 mb-2"></i>
-                            <p class="small text-light mb-0">Risultati Duraturi</p>
+                            <p class="small text-light mb-0">@Localizer["Feature_Results"]</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="quote-box p-4 rounded shadow-sm" style="background: #f8f9fa; border-left: 5px solid #d4af37;">
                     <p class="mb-0 text-dark fs-5 fst-italic">
-                        "Da Klod Tattoo non ricevi un tatuaggio: <br />
-                        <strong style="color: #d4af37;">ricevi un'opera d'arte creata per accompagnarti per sempre.</strong>"
+                        @Localizer["Quote_Text"]
                     </p>
                 </div>
             </div>
@@ -114,19 +110,19 @@
                         <div class="col-4">
                             <div class="stat-card text-center p-2 rounded shadow" style="background: rgba(212, 175, 55, 0.95);">
                                 <h4 class="mb-0 fw-bold text-dark">10+</h4>
-                                <small class="text-dark">Anni</small>
+                                <small class="text-dark">@Localizer["Stats_Years"]</small>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="stat-card text-center p-2 rounded shadow" style="background: rgba(212, 175, 55, 0.95);">
                                 <h4 class="mb-0 fw-bold text-dark">1000+</h4>
-                                <small class="text-dark">Tatuaggi</small>
+                                <small class="text-dark">@Localizer["Stats_Tattoos"]</small>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="stat-card text-center p-2 rounded shadow" style="background: rgba(212, 175, 55, 0.95);">
                                 <h4 class="mb-0 fw-bold text-dark">5⭐</h4>
-                                <small class="text-dark">Rating</small>
+                                <small class="text-dark">@Localizer["Stats_Rating"]</small>
                             </div>
                         </div>
                     </div>
@@ -145,8 +141,8 @@
     <!-- STYLES SECTION -->
     <div class="row text-center mb-5">
         <div class="col-12 mb-5" data-aos="fade-up">
-            <h2 class="display-5 fw-bold text-uppercase mb-3" style="color: #d4af37;">I Nostri Stili</h2>
-            <p class="text-muted lead">Specializzazioni artistiche per ogni esigenza</p>
+            <h2 class="display-5 fw-bold text-uppercase mb-3" style="color: #d4af37;">@Localizer["Styles_Title"]</h2>
+            <p class="text-muted lead">@Localizer["Styles_Subtitle"]</p>
             <div class="golden-underline mx-auto" style="width: 80px; height: 4px; background-color: #d4af37;"></div>
         </div>
 
@@ -156,12 +152,12 @@
                 <div class="style-icon mb-3">
                     <i class="fas fa-eye fa-3x" style="color: #d4af37;"></i>
                 </div>
-                <h3 class="h4 mb-3" style="color: #d4af37;">Realistico</h3>
-                <p class="text-muted mb-3">Ritratti e dettagli fotografici con precisione chirurgica.</p>
+                <h3 class="h4 mb-3" style="color: #d4af37;">@Localizer["Style_Realistic_Title"]</h3>
+                <p class="text-muted mb-3">@Localizer["Style_Realistic_Desc"]</p>
                 <ul class="list-unstyled text-muted small">
-                    <li><i class="fas fa-check text-success me-2"></i>Ritratti realistici</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Dettagli fotografici</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Chiaroscuro perfetto</li>
+                    <li><i class="fas fa-check text-success me-2"></i>@Localizer["Style_Realistic_Feat1"]</li>
+                    <li><i class="fas fa-check text-success me-2"></i>@Localizer["Style_Realistic_Feat2"]</li>
+                    <li><i class="fas fa-check text-success me-2"></i>@Localizer["Style_Realistic_Feat3"]</li>
                 </ul>
             </div>
         </div>
@@ -172,12 +168,12 @@
                 <div class="style-icon mb-3">
                     <i class="fas fa-anchor fa-3x" style="color: #d4af37;"></i>
                 </div>
-                <h3 class="h4 mb-3" style="color: #d4af37;">Traditional</h3>
-                <p class="text-muted mb-3">Linee solide e colori vibranti della tradizione Old School.</p>
+                <h3 class="h4 mb-3" style="color: #d4af37;">@Localizer["Style_Traditional_Title"]</h3>
+                <p class="text-muted mb-3">@Localizer["Style_Traditional_Desc"]</p>
                 <ul class="list-unstyled text-muted small">
-                    <li><i class="fas fa-check text-success me-2"></i>Linee bold</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Colori saturi</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Stile classico</li>
+                    <li><i class="fas fa-check text-success me-2"></i>@Localizer["Style_Traditional_Feat1"]</li>
+                    <li><i class="fas fa-check text-success me-2"></i>@Localizer["Style_Traditional_Feat2"]</li>
+                    <li><i class="fas fa-check text-success me-2"></i>@Localizer["Style_Traditional_Feat3"]</li>
                 </ul>
             </div>
         </div>
@@ -188,12 +184,12 @@
                 <div class="style-icon mb-3">
                     <i class="fas fa-moon fa-3x" style="color: #d4af37;"></i>
                 </div>
-                <h3 class="h4 mb-3" style="color: #d4af37;">Blackwork</h3>
-                <p class="text-muted mb-3">Contrasti forti, geometrie e design dal forte impatto visivo.</p>
+                <h3 class="h4 mb-3" style="color: #d4af37;">@Localizer["Style_Blackwork_Title"]</h3>
+                <p class="text-muted mb-3">@Localizer["Style_Blackwork_Desc"]</p>
                 <ul class="list-unstyled text-muted small">
-                    <li><i class="fas fa-check text-success me-2"></i>Alto contrasto</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Pattern geometrici</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Impatto drammatico</li>
+                    <li><i class="fas fa-check text-success me-2"></i>@Localizer["Style_Blackwork_Feat1"]</li>
+                    <li><i class="fas fa-check text-success me-2"></i>@Localizer["Style_Blackwork_Feat2"]</li>
+                    <li><i class="fas fa-check text-success me-2"></i>@Localizer["Style_Blackwork_Feat3"]</li>
                 </ul>
             </div>
         </div>
@@ -209,8 +205,8 @@
     <!-- REVIEWS SECTION -->
     <div class="row mb-5">
         <div class="col-12 text-center mb-5" data-aos="fade-up">
-            <h2 class="display-5 fw-bold text-uppercase mb-3">Dicono di Noi</h2>
-            <p class="text-muted lead">La soddisfazione dei nostri clienti è la nostra priorità</p>
+            <h2 class="display-5 fw-bold text-uppercase mb-3">@Localizer["Reviews_Title"]</h2>
+            <p class="text-muted lead">@Localizer["Reviews_Subtitle"]</p>
             <div class="golden-underline mx-auto" style="width: 80px; height: 4px; background-color: #d4af37;"></div>
         </div>
 
@@ -225,7 +221,7 @@
                     <i class="fas fa-star text-warning"></i>
                 </div>
                 <p class="text-light fst-italic mb-4 lh-lg">
-                    "Klod è un artista incredibile. Ha capito subito cosa volevo e il risultato è andato oltre le aspettative. Studio pulitissimo."
+                    @Localizer["Review1_Text"]
                 </p>
                 <div class="d-flex align-items-center">
                     <div class="avatar rounded-circle bg-warning d-flex align-items-center justify-content-center me-3"
@@ -233,8 +229,8 @@
                         <span class="fw-bold text-dark">MR</span>
                     </div>
                     <div>
-                        <p class="mb-0 fw-bold text-light">Marco R.</p>
-                        <small class="text-muted">Cliente verificato</small>
+                        <p class="mb-0 fw-bold text-light">@Localizer["Review1_Author"]</p>
+                        <small class="text-muted">@Localizer["Review1_Type"]</small>
                     </div>
                 </div>
             </div>
@@ -251,7 +247,7 @@
                     <i class="fas fa-star text-warning"></i>
                 </div>
                 <p class="text-light fst-italic mb-4 lh-lg">
-                    "Professionalità al top. Mi sono sentita subito a mio agio. Il tatuaggio è guarito perfettamente seguendo i suoi consigli."
+                    @Localizer["Review2_Text"]
                 </p>
                 <div class="d-flex align-items-center">
                     <div class="avatar rounded-circle bg-warning d-flex align-items-center justify-content-center me-3"
@@ -259,8 +255,8 @@
                         <span class="fw-bold text-dark">GB</span>
                     </div>
                     <div>
-                        <p class="mb-0 fw-bold text-light">Giulia B.</p>
-                        <small class="text-muted">Cliente verificato</small>
+                        <p class="mb-0 fw-bold text-light">@Localizer["Review2_Author"]</p>
+                        <small class="text-muted">@Localizer["Review2_Type"]</small>
                     </div>
                 </div>
             </div>
@@ -277,7 +273,7 @@
                     <i class="fas fa-star text-warning"></i>
                 </div>
                 <p class="text-light fst-italic mb-4 lh-lg">
-                    "Mano leggerissima e precisione chirurgica. Tornerò sicuramente per il prossimo pezzo!"
+                    @Localizer["Review3_Text"]
                 </p>
                 <div class="d-flex align-items-center">
                     <div class="avatar rounded-circle bg-warning d-flex align-items-center justify-content-center me-3"
@@ -285,8 +281,8 @@
                         <span class="fw-bold text-dark">LS</span>
                     </div>
                     <div>
-                        <p class="mb-0 fw-bold text-light">Luca S.</p>
-                        <small class="text-muted">Cliente verificato</small>
+                        <p class="mb-0 fw-bold text-light">@Localizer["Review3_Author"]</p>
+                        <small class="text-muted">@Localizer["Review3_Type"]</small>
                     </div>
                 </div>
             </div>
@@ -298,10 +294,10 @@
         <div class="col-12" data-aos="fade-up">
             <div class="cta-box text-center p-5 rounded shadow-lg position-relative overflow-hidden"
                  style="background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);">
-                <h3 class="display-6 fw-bold text-dark mb-3">Pronto per il Tuo Capolavoro?</h3>
-                <p class="lead text-dark mb-4">Prenota ora una consulenza gratuita e inizia il tuo viaggio artistico</p>
+                <h3 class="display-6 fw-bold text-dark mb-3">@Localizer["CTA_Title"]</h3>
+                <p class="lead text-dark mb-4">@Localizer["CTA_Subtitle"]</p>
                 <a asp-controller="Booking" asp-action="Create" class="btn btn-dark btn-lg px-5 py-3 rounded-pill shadow">
-                    <i class="fas fa-calendar-check me-2"></i> Prenota Ora
+                    <i class="fas fa-calendar-check me-2"></i> @Localizer["CTA_Button"]
                 </a>
             </div>
         </div>

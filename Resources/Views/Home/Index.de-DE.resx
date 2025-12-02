@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Hero_Title" xml:space="preserve">
+    <value>Klod Tattoo</value>
+  </data>
+  <data name="Hero_Subtitle" xml:space="preserve">
+    <value>Kunst auf deiner Haut</value>
+  </data>
+  <data name="Hero_Button" xml:space="preserve">
+    <value>Jetzt buchen</value>
+  </data>
+  <data name="Bio_Title" xml:space="preserve">
+    <value>Biografie</value>
+  </data>
+  <data name="Bio_Text1" xml:space="preserve">
+    <value>Willkommen bei &lt;strong style="color: #d4af37;"&gt;Klod Tattoo&lt;/strong&gt;: Hier wird Kunst nicht beobachtet… &lt;strong&gt;sie wird getragen&lt;/strong&gt;.</value>
+  </data>
+  <data name="Bio_Text2" xml:space="preserve">
+    <value>Jede Linie, jeder Schatten und jedes Detail entsteht aus einer Vision, die studiert und maßgeschneidert für Sie erstellt wurde. Ich erstelle keine "Standard"-Tattoos: Jedes Projekt ist ein unwiederholbares Stück, entworfen, um Ihre Geschichte mit Stil, Kraft und Eleganz zu erzählen.</value>
+  </data>
+  <data name="Bio_Highlight" xml:space="preserve">
+    <value>Meine Ausbildung beginnt am &lt;strong&gt;Kunstgymnasium&lt;/strong&gt; und wird an der &lt;strong&gt;Akademie der Schönen Künste&lt;/strong&gt; perfektioniert, wo ich das Zeichnen in eine echte ästhetische Disziplin verwandelt habe.</value>
+  </data>
+  <data name="Bio_Text3" xml:space="preserve">
+    <value>Diese akademische Basis, kombiniert mit jahrelanger Erfahrung vor Ort, ermöglicht es mir, technische Präzision und künstlerische Sensibilität in jeder Arbeit zu kombinieren.</value>
+  </data>
+  <data name="Feature_Ink" xml:space="preserve">
+    <value>Zertifizierte Tinten</value>
+  </data>
+  <data name="Feature_Hygiene" xml:space="preserve">
+    <value>Tadellose Hygiene</value>
+  </data>
+  <data name="Feature_Equipment" xml:space="preserve">
+    <value>Profi-Ausrüstung</value>
+  </data>
+  <data name="Feature_Results" xml:space="preserve">
+    <value>Dauerhafte Ergebnisse</value>
+  </data>
+  <data name="Quote_Text" xml:space="preserve">
+    <value>"Bei Klod Tattoo erhalten Sie kein Tattoo: &lt;br /&gt; &lt;strong style="color: #d4af37;"&gt;Sie erhalten ein Kunstwerk, das geschaffen wurde, um Sie für immer zu begleiten.&lt;/strong&gt;"</value>
+  </data>
+  <data name="Stats_Years" xml:space="preserve">
+    <value>Jahre</value>
+  </data>
+  <data name="Stats_Tattoos" xml:space="preserve">
+    <value>Tattoos</value>
+  </data>
+  <data name="Stats_Rating" xml:space="preserve">
+    <value>Bewertung</value>
+  </data>
+  <data name="Styles_Title" xml:space="preserve">
+    <value>Unsere Stile</value>
+  </data>
+  <data name="Styles_Subtitle" xml:space="preserve">
+    <value>Künstlerische Spezialisierungen für jeden Bedarf</value>
+  </data>
+  <data name="Style_Realistic_Title" xml:space="preserve">
+    <value>Realistisch</value>
+  </data>
+  <data name="Style_Realistic_Desc" xml:space="preserve">
+    <value>Porträts und fotografische Details mit chirurgischer Präzision.</value>
+  </data>
+  <data name="Style_Realistic_Feat1" xml:space="preserve">
+    <value>Realistische Porträts</value>
+  </data>
+  <data name="Style_Realistic_Feat2" xml:space="preserve">
+    <value>Fotografische Details</value>
+  </data>
+  <data name="Style_Realistic_Feat3" xml:space="preserve">
+    <value>Perfektes Hell-Dunkel</value>
+  </data>
+  <data name="Style_Traditional_Title" xml:space="preserve">
+    <value>Traditional</value>
+  </data>
+  <data name="Style_Traditional_Desc" xml:space="preserve">
+    <value>Solide Linien und lebendige Farben der Old School Tradition.</value>
+  </data>
+  <data name="Style_Traditional_Feat1" xml:space="preserve">
+    <value>Fette Linien</value>
+  </data>
+  <data name="Style_Traditional_Feat2" xml:space="preserve">
+    <value>Gesättigte Farben</value>
+  </data>
+  <data name="Style_Traditional_Feat3" xml:space="preserve">
+    <value>Klassischer Stil</value>
+  </data>
+  <data name="Style_Blackwork_Title" xml:space="preserve">
+    <value>Blackwork</value>
+  </data>
+  <data name="Style_Blackwork_Desc" xml:space="preserve">
+    <value>Starke Kontraste, Geometrien und Designs mit starker visueller Wirkung.</value>
+  </data>
+  <data name="Style_Blackwork_Feat1" xml:space="preserve">
+    <value>Hoher Kontrast</value>
+  </data>
+  <data name="Style_Blackwork_Feat2" xml:space="preserve">
+    <value>Geometrische Muster</value>
+  </data>
+  <data name="Style_Blackwork_Feat3" xml:space="preserve">
+    <value>Dramatische Wirkung</value>
+  </data>
+  <data name="Reviews_Title" xml:space="preserve">
+    <value>Was sie über uns sagen</value>
+  </data>
+  <data name="Reviews_Subtitle" xml:space="preserve">
+    <value>Die Zufriedenheit unserer Kunden ist unsere Priorität</value>
+  </data>
+  <data name="Review1_Text" xml:space="preserve">
+    <value>"Klod ist ein unglaublicher Künstler. Er hat sofort verstanden, was ich wollte, und das Ergebnis hat meine Erwartungen übertroffen. Sehr sauberes Studio."</value>
+  </data>
+  <data name="Review1_Author" xml:space="preserve">
+    <value>Marco R.</value>
+  </data>
+  <data name="Review1_Type" xml:space="preserve">
+    <value>Verifizierter Kunde</value>
+  </data>
+  <data name="Review2_Text" xml:space="preserve">
+    <value>"Top Professionalität. Ich habe mich sofort wohl gefühlt. Das Tattoo ist perfekt verheilt, indem ich seinen Ratschlägen gefolgt bin."</value>
+  </data>
+  <data name="Review2_Author" xml:space="preserve">
+    <value>Giulia B.</value>
+  </data>
+  <data name="Review2_Type" xml:space="preserve">
+    <value>Verifizierter Kunde</value>
+  </data>
+  <data name="Review3_Text" xml:space="preserve">
+    <value>"Sehr leichte Hand und chirurgische Präzision. Ich werde auf jeden Fall für das nächste Stück wiederkommen!"</value>
+  </data>
+  <data name="Review3_Author" xml:space="preserve">
+    <value>Luca S.</value>
+  </data>
+  <data name="Review3_Type" xml:space="preserve">
+    <value>Verifizierter Kunde</value>
+  </data>
+  <data name="CTA_Title" xml:space="preserve">
+    <value>Bereit für Ihr Meisterwerk?</value>
+  </data>
+  <data name="CTA_Subtitle" xml:space="preserve">
+    <value>Buchen Sie jetzt eine kostenlose Beratung und beginnen Sie Ihre künstlerische Reise</value>
+  </data>
+  <data name="CTA_Button" xml:space="preserve">
+    <value>Jetzt buchen</value>
+  </data>
+</root>

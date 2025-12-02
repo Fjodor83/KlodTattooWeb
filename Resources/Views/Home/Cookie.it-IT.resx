@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Page_Title" xml:space="preserve">
+    <value>Cookie Policy</value>
+  </data>
+  <data name="Last_Updated" xml:space="preserve">
+    <value>Ultimo aggiornamento: 01/01/2025</value>
+  </data>
+  <data name="Intro_P1" xml:space="preserve">
+    <value>Questa Cookie Policy spiega cosa sono i cookie e come li utilizziamo. Dovresti leggere questa politica per capire che tipo di cookie utilizziamo, le informazioni che raccogliamo utilizzando i cookie e come tali informazioni vengono utilizzate.</value>
+  </data>
+  <data name="Intro_P2" xml:space="preserve">
+    <value>I cookie non contengono in genere informazioni che identificano personalmente un utente, ma le informazioni personali che memorizziamo su di te potrebbero essere collegate alle informazioni memorizzate e ottenute dai cookie.</value>
+  </data>
+  <data name="Section1_Title" xml:space="preserve">
+    <value>Interpretazione e Definizioni</value>
+  </data>
+  <data name="Section1_P1" xml:space="preserve">
+    <value>Le parole di cui la lettera iniziale è maiuscola hanno significati definiti alle seguenti condizioni. Le seguenti definizioni avranno lo stesso significato indipendentemente dal fatto che appaiano al singolare o al plurale.</value>
+  </data>
+  <data name="Section2_Title" xml:space="preserve">
+    <value>L'uso dei Cookie</value>
+  </data>
+  <data name="Section2_P1" xml:space="preserve">
+    <value>Utilizziamo i cookie per migliorare la tua esperienza durante la navigazione nel sito web.</value>
+  </data>
+  <data name="Section2_P2" xml:space="preserve">
+    <value>Tipo di Cookie che utilizziamo:</value>
+  </data>
+  <data name="Section2_L1_Title" xml:space="preserve">
+    <value>Cookie Necessari</value>
+  </data>
+  <data name="Section2_L1_Text" xml:space="preserve">
+    <value>Questi cookie sono essenziali per fornirti i servizi disponibili attraverso il sito web e per abilitare l'uso di alcune delle sue funzionalità.</value>
+  </data>
+  <data name="Section2_L2_Title" xml:space="preserve">
+    <value>Cookie Funzionali</value>
+  </data>
+  <data name="Section2_L2_Text" xml:space="preserve">
+    <value>Questi cookie ci permettono di ricordare le scelte che fai quando usi il sito web, come ricordare i tuoi dettagli di accesso o la preferenza della lingua.</value>
+  </data>
+  <data name="Section2_L3_Title" xml:space="preserve">
+    <value>Cookie di Tracciamento e Performance</value>
+  </data>
+  <data name="Section2_L3_Text" xml:space="preserve">
+    <value>Questi cookie sono utilizzati per tracciare le informazioni sul traffico al sito web e come gli utenti utilizzano il sito web.</value>
+  </data>
+  <data name="Section2_Note" xml:space="preserve">
+    <value>Nota: Alcuni cookie possono essere di terze parti.</value>
+  </data>
+  <data name="Section3_Title" xml:space="preserve">
+    <value>Le tue scelte riguardo ai Cookie</value>
+  </data>
+  <data name="Section3_P1" xml:space="preserve">
+    <value>Se preferisci evitare l'uso dei cookie sul sito web, devi prima disabilitare l'uso dei cookie nel tuo browser e poi cancellare i cookie salvati nel tuo browser associati a questo sito web.</value>
+  </data>
+  <data name="Section3_L1_Title" xml:space="preserve">
+    <value>Chrome</value>
+  </data>
+  <data name="Section3_L1_Text" xml:space="preserve">
+    <value>Per il browser web Chrome, visita questa pagina di Google.</value>
+  </data>
+  <data name="Section3_L2_Title" xml:space="preserve">
+    <value>Internet Explorer</value>
+  </data>
+  <data name="Section3_L2_Text" xml:space="preserve">
+    <value>Per il browser web Internet Explorer, visita questa pagina di Microsoft.</value>
+  </data>
+  <data name="Section3_L3_Title" xml:space="preserve">
+    <value>Firefox</value>
+  </data>
+  <data name="Section3_L3_Text" xml:space="preserve">
+    <value>Per il browser web Firefox, visita questa pagina di Mozilla.</value>
+  </data>
+  <data name="Section4_Title" xml:space="preserve">
+    <value>Maggiori Informazioni</value>
+  </data>
+  <data name="Section4_P1" xml:space="preserve">
+    <value>Speriamo che questo abbia chiarito le cose per te.</value>
+  </data>
+  <data name="Section4_P2" xml:space="preserve">
+    <value>Se c'è qualcosa di cui non sei sicuro se ti serve o meno, di solito è più sicuro lasciare i cookie abilitati nel caso in cui interagisca con una delle funzionalità che usi sul nostro sito.</value>
+  </data>
+  <data name="Section4_P3" xml:space="preserve">
+    <value>Per ulteriori informazioni generali sui cookie, leggi l'articolo "Cosa sono i cookie".</value>
+  </data>
+  <data name="Section4_L1" xml:space="preserve">
+    <value>Instagram Policy</value>
+  </data>
+  <data name="Section4_L2" xml:space="preserve">
+    <value>Facebook Policy</value>
+  </data>
+  <data name="Section4_L3" xml:space="preserve">
+    <value>WhatsApp Policy</value>
+  </data>
+  <data name="Section5_Title" xml:space="preserve">
+    <value>Contattaci</value>
+  </data>
+  <data name="Section5_P1" xml:space="preserve">
+    <value>Se hai domande su questa Cookie Policy, puoi contattarci:</value>
+  </data>
+  <data name="Section5_L1_Title" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="Section5_L1_Text" xml:space="preserve">
+    <value>info@klodtattoo.de</value>
+  </data>
+  <data name="Section5_L2_Title" xml:space="preserve">
+    <value>Telefono:</value>
+  </data>
+  <data name="Section5_L2_Text" xml:space="preserve">
+    <value>+49 172 2487670</value>
+  </data>
+  <data name="Section5_L3_Title" xml:space="preserve">
+    <value>Indirizzo:</value>
+  </data>
+  <data name="Section5_L3_Text" xml:space="preserve">
+    <value>Lindenstraße 26, 63785 Obernburg am Main, Germania</value>
+  </data>
+  <data name="Section5_L4_Title" xml:space="preserve">
+    <value>Sito Web:</value>
+  </data>
+  <data name="Section5_L4_Text" xml:space="preserve">
+    <value>www.klodtattoo.com</value>
+  </data>
+  <data name="Section6_Title" xml:space="preserve">
+    <value>Dettagli Tecnici</value>
+  </data>
+  <data name="Section6_P1" xml:space="preserve">
+    <value>Di seguito una lista dettagliata dei cookie tecnici utilizzati.</value>
+  </data>
+  <data name="Section6_Subtitle" xml:space="preserve">
+    <value>Cookie di Sessione</value>
+  </data>
+  <data name="Section6_L1_Title" xml:space="preserve">
+    <value>ASP.NET_SessionId</value>
+  </data>
+  <data name="Section6_L1_Text" xml:space="preserve">
+    <value>Mantiene la sessione dell'utente attiva.</value>
+  </data>
+  <data name="Section6_L2_Title" xml:space="preserve">
+    <value>.AspNetCore.Identity.Application</value>
+  </data>
+  <data name="Section6_L2_Text" xml:space="preserve">
+    <value>Gestisce l'autenticazione dell'utente.</value>
+  </data>
+  <data name="Section6_L3_Title" xml:space="preserve">
+    <value>.AspNetCore.Antiforgery</value>
+  </data>
+  <data name="Section6_L3_Text" xml:space="preserve">
+    <value>Previene attacchi CSRF.</value>
+  </data>
+  <data name="Section6_L4_Title" xml:space="preserve">
+    <value>CookieConsent</value>
+  </data>
+  <data name="Section6_L4_Text" xml:space="preserve">
+    <value>Memorizza le preferenze sui cookie.</value>
+  </data>
+  <data name="Section6_Warning" xml:space="preserve">
+    <value>Attenzione: Disabilitare questi cookie potrebbe compromettere il funzionamento del sito.</value>
+  </data>
+  <data name="Section7_Title" xml:space="preserve">
+    <value>Tabella di Riepilogo</value>
+  </data>
+  <data name="Section7_Th1" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="Section7_Th2" xml:space="preserve">
+    <value>Scopo</value>
+  </data>
+  <data name="Section7_Th3" xml:space="preserve">
+    <value>Scadenza</value>
+  </data>
+  <data name="Section7_Td1_1" xml:space="preserve">
+    <value>Sessione</value>
+  </data>
+  <data name="Section7_Td1_2" xml:space="preserve">
+    <value>Identificativo sessione</value>
+  </data>
+  <data name="Section7_Td1_3" xml:space="preserve">
+    <value>Chiusura browser</value>
+  </data>
+  <data name="Section7_Td2_1" xml:space="preserve">
+    <value>Identity</value>
+  </data>
+  <data name="Section7_Td2_2" xml:space="preserve">
+    <value>Autenticazione</value>
+  </data>
+  <data name="Section7_Td2_3" xml:space="preserve">
+    <value>14 giorni</value>
+  </data>
+  <data name="Section7_Td3_1" xml:space="preserve">
+    <value>Consenso</value>
+  </data>
+  <data name="Section7_Td3_2" xml:space="preserve">
+    <value>Preferenze cookie</value>
+  </data>
+  <data name="Section7_Td3_3" xml:space="preserve">
+    <value>1 anno</value>
+  </data>
+  <data name="Section8_Title" xml:space="preserve">
+    <value>Aggiornamenti</value>
+  </data>
+  <data name="Section8_P1" xml:space="preserve">
+    <value>Ci riserviamo il diritto di apportare modifiche a questa Cookie Policy in qualsiasi momento e per qualsiasi motivo.</value>
+  </data>
+  <data name="Section9_Title" xml:space="preserve">
+    <value>Contatti</value>
+  </data>
+  <data name="Section9_P1" xml:space="preserve">
+    <value>Per qualsiasi domanda, contattaci:</value>
+  </data>
+  <data name="Section9_L1" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="Section9_L2" xml:space="preserve">
+    <value>Telefono:</value>
+  </data>
+  <data name="Section9_L3" xml:space="preserve">
+    <value>Indirizzo:</value>
+  </data>
+  <data name="Button_PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="Button_BackToHome" xml:space="preserve">
+    <value>Torna alla Home</value>
+  </data>
+  <data name="Section9_Address" xml:space="preserve">
+    <value>Lindenstraße 26, 63785 Obernburg am Main, Germania</value>
+  </data>
+</root>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Page_Title" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="Last_Updated" xml:space="preserve">
+    <value>Ultimo aggiornamento: 01/01/2025</value>
+  </data>
+  <data name="Intro_P1" xml:space="preserve">
+    <value>Questa Privacy Policy descrive le nostre politiche e procedure sulla raccolta, l'uso e la divulgazione delle tue informazioni quando utilizzi il Servizio e ti informa sui tuoi diritti alla privacy e su come la legge ti protegge.</value>
+  </data>
+  <data name="Section1_Title" xml:space="preserve">
+    <value>Titolare del Trattamento dei Dati</value>
+  </data>
+  <data name="Section1_P1" xml:space="preserve">
+    <value>Il Titolare del trattamento è:</value>
+  </data>
+  <data name="Section2_Title" xml:space="preserve">
+    <value>Tipologie di Dati raccolti</value>
+  </data>
+  <data name="Section2_P1" xml:space="preserve">
+    <value>Fra i Dati Personali raccolti da questa Applicazione, in modo autonomo o tramite terze parti, ci sono:</value>
+  </data>
+  <data name="Section2_L1_Title" xml:space="preserve">
+    <value>Dati di Utilizzo:</value>
+  </data>
+  <data name="Section2_L1_Text" xml:space="preserve">
+    <value>raccolti automaticamente durante l'uso di questa Applicazione.</value>
+  </data>
+  <data name="Section2_L2_Title" xml:space="preserve">
+    <value>Dati Personali:</value>
+  </data>
+  <data name="Section2_L2_Text" xml:space="preserve">
+    <value>forniti liberamente dall'Utente, come:</value>
+  </data>
+  <data name="Section2_L3_Title" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="Section2_L4_Title" xml:space="preserve">
+    <value>Cognome</value>
+  </data>
+  <data name="Section2_L5_Title" xml:space="preserve">
+    <value>Numero di Telefono</value>
+  </data>
+  <data name="Section2_L6_Title" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Section2_L7_Title" xml:space="preserve">
+    <value>Indirizzo</value>
+  </data>
+  <data name="Section2_L8_Text" xml:space="preserve">
+    <value>Questi dati vengono richiesti principalmente per la gestione delle prenotazioni e dei contatti.</value>
+  </data>
+  <data name="Section2_L9_Title" xml:space="preserve">
+    <value>Cookie:</value>
+  </data>
+  <data name="Section2_L9_Text" xml:space="preserve">
+    <value>per dettagli, consultare la Cookie Policy.</value>
+  </data>
+  <data name="Section3_Title" xml:space="preserve">
+    <value>Modalità e luogo del trattamento dei Dati raccolti</value>
+  </data>
+  <data name="Section3_P1" xml:space="preserve">
+    <value>Il Titolare adotta le opportune misure di sicurezza volte ad impedire l’accesso, la divulgazione, la modifica o la distruzione non autorizzate dei Dati Personali.</value>
+  </data>
+  <data name="Section3_L1" xml:space="preserve">
+    <value>Il trattamento viene effettuato mediante strumenti informatici e/o telematici.</value>
+  </data>
+  <data name="Section3_L2" xml:space="preserve">
+    <value>Oltre al Titolare, in alcuni casi, potrebbero avere accesso ai Dati altri soggetti coinvolti nell’organizzazione (personale amministrativo, commerciale, marketing, legali, amministratori di sistema).</value>
+  </data>
+  <data name="Section3_L3" xml:space="preserve">
+    <value>I Dati sono trattati presso le sedi operative del Titolare ed in ogni altro luogo in cui le parti coinvolte nel trattamento siano localizzate.</value>
+  </data>
+  <data name="Section3_L4" xml:space="preserve">
+    <value>I Dati dell’Utente potrebbero essere trasferiti in un paese diverso da quello in cui l’Utente si trova.</value>
+  </data>
+  <data name="Section4_Title" xml:space="preserve">
+    <value>Finalità del Trattamento dei Dati raccolti</value>
+  </data>
+  <data name="Section4_P1" xml:space="preserve">
+    <value>I Dati dell’Utente sono raccolti per consentire al Titolare di fornire il Servizio, adempiere agli obblighi di legge, rispondere a richieste o azioni esecutive, tutelare i propri diritti ed interessi (o quelli di Utenti o di terze parti), individuare eventuali attività dolose o fraudolente.</value>
+  </data>
+  <data name="Section5_Title" xml:space="preserve">
+    <value>Periodo di conservazione</value>
+  </data>
+  <data name="Section5_P1" xml:space="preserve">
+    <value>I Dati sono trattati e conservati per il tempo richiesto dalle finalità per le quali sono stati raccolti.</value>
+  </data>
+  <data name="Section5_L1" xml:space="preserve">
+    <value>I Dati Personali raccolti per scopi collegati all’esecuzione di un contratto tra il Titolare e l’Utente saranno trattenuti sino a quando sia completata l’esecuzione di tale contratto.</value>
+  </data>
+  <data name="Section5_L2" xml:space="preserve">
+    <value>I Dati Personali raccolti per finalità riconducibili all’interesse legittimo del Titolare saranno trattenuti sino al soddisfacimento di tale interesse.</value>
+  </data>
+  <data name="Section5_L3" xml:space="preserve">
+    <value>Il Titolare potrebbe essere obbligato a conservare i Dati Personali per un periodo più lungo in ottemperanza ad un obbligo di legge o per ordine di un’autorità.</value>
+  </data>
+  <data name="Section5_P2" xml:space="preserve">
+    <value>Al termine del periodo di conservazione i Dati Personali saranno cancellati.</value>
+  </data>
+  <data name="Section6_Title" xml:space="preserve">
+    <value>Diritti dell’Utente</value>
+  </data>
+  <data name="Section6_P1" xml:space="preserve">
+    <value>Gli Utenti possono esercitare determinati diritti con riferimento ai Dati trattati dal Titolare.</value>
+  </data>
+  <data name="Section6_L1" xml:space="preserve">
+    <value>Revocare il consenso in ogni momento.</value>
+  </data>
+  <data name="Section6_L2" xml:space="preserve">
+    <value>Opporsi al trattamento dei propri Dati.</value>
+  </data>
+  <data name="Section6_L3" xml:space="preserve">
+    <value>Accedere ai propri Dati.</value>
+  </data>
+  <data name="Section6_L4" xml:space="preserve">
+    <value>Verificare e chiedere la rettificazione.</value>
+  </data>
+  <data name="Section6_L5" xml:space="preserve">
+    <value>Ottenere la limitazione del trattamento.</value>
+  </data>
+  <data name="Section6_L6" xml:space="preserve">
+    <value>Ottenere la cancellazione o rimozione dei propri Dati Personali.</value>
+  </data>
+  <data name="Section6_L7" xml:space="preserve">
+    <value>Ricevere i propri Dati o farli trasferire ad altro titolare.</value>
+  </data>
+  <data name="Section6_P2" xml:space="preserve">
+    <value>Per esercitare i diritti dell'Utente, gli Utenti possono indirizzare una richiesta agli estremi di contatto del Titolare indicati in questo documento.</value>
+  </data>
+  <data name="Section6_P3" xml:space="preserve">
+    <value>Le richieste sono depositate a titolo gratuito e evase dal Titolare nel più breve tempo possibile, in ogni caso entro un mese.</value>
+  </data>
+  <data name="Section7_Title" xml:space="preserve">
+    <value>Modifiche a questa Privacy Policy</value>
+  </data>
+  <data name="Section7_P1" xml:space="preserve">
+    <value>Il Titolare del Trattamento si riserva il diritto di apportare modifiche alla presente privacy policy in qualunque momento notificandolo agli Utenti su questa pagina e, se possibile, su questa Applicazione nonché, qualora tecnicamente e legalmente fattibile, inviando una notifica agli Utenti attraverso uno degli estremi di contatto di cui è in possesso.</value>
+  </data>
+  <data name="Section8_Title" xml:space="preserve">
+    <value>Informazioni legali</value>
+  </data>
+  <data name="Section8_P1" xml:space="preserve">
+    <value>La presente informativa privacy è redatta sulla base di molteplici ordinamenti legislativi, inclusi gli artt. 13 e 14 del Regolamento (UE) 2016/679.</value>
+  </data>
+  <data name="CookiePolicy_Title" xml:space="preserve">
+    <value>Cookie Policy</value>
+  </data>
+  <data name="CookiePolicy_P1" xml:space="preserve">
+    <value>Per maggiori informazioni sull'utilizzo dei cookie, consulta la nostra</value>
+  </data>
+  <data name="Button_CookiePolicy" xml:space="preserve">
+    <value>Cookie Policy</value>
+  </data>
+  <data name="Button_BackToHome" xml:space="preserve">
+    <value>Torna alla Home</value>
+  </data>
+  <data name="Section1_Address" xml:space="preserve">
+    <value>Lindenstraße 26, 63785 Obernburg am Main, Germania</value>
+  </data>
+  <data name="Section1_EmailLabel" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="Section1_PhoneLabel" xml:space="preserve">
+    <value>Telefono:</value>
+  </data>
+</root>

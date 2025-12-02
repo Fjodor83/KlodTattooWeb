@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Page_Title" xml:space="preserve">
+    <value>Informazioni Utili</value>
+  </data>
+  <data name="Page_Subtitle" xml:space="preserve">
+    <value>Tutto quello che devi sapere per il tuo tatuaggio</value>
+  </data>
+  <data name="Aftercare_Title" xml:space="preserve">
+    <value>Cura del Tatuaggio</value>
+  </data>
+  <data name="Aftercare_Instructions" xml:space="preserve">
+    <value>Segui attentamente queste istruzioni per garantire una guarigione perfetta del tuo tatuaggio.</value>
+  </data>
+  <data name="Aftercare_Step1_Title" xml:space="preserve">
+    <value>La Benda</value>
+  </data>
+  <data name="Aftercare_Step1_Text" xml:space="preserve">
+    <value>Tieni la benda protettiva per 2-4 ore dopo la seduta.</value>
+  </data>
+  <data name="Aftercare_Step2_Title" xml:space="preserve">
+    <value>Lavaggio</value>
+  </data>
+  <data name="Aftercare_Step2_Text" xml:space="preserve">
+    <value>Lava delicatamente con acqua tiepida e sapone neutro.</value>
+  </data>
+  <data name="Aftercare_Step3_Title" xml:space="preserve">
+    <value>Asciugatura</value>
+  </data>
+  <data name="Aftercare_Step3_Text" xml:space="preserve">
+    <value>Tampona con carta assorbente pulita, non strofinare.</value>
+  </data>
+  <data name="Aftercare_Step4_Title" xml:space="preserve">
+    <value>Idratazione</value>
+  </data>
+  <data name="Aftercare_Step4_Text" xml:space="preserve">
+    <value>Applica un sottile strato di crema specifica 3-4 volte al giorno.</value>
+  </data>
+  <data name="Aftercare_Step5_Title" xml:space="preserve">
+    <value>Protezione</value>
+  </data>
+  <data name="Aftercare_Step5_Text" xml:space="preserve">
+    <value>Evita sole diretto, piscina e mare per almeno 2 settimane.</value>
+  </data>
+  <data name="Aftercare_Step6_Title" xml:space="preserve">
+    <value>Guarigione</value>
+  </data>
+  <data name="Aftercare_Step6_Text" xml:space="preserve">
+    <value>Non grattare le crosticine che si formeranno.</value>
+  </data>
+  <data name="Tips_Title" xml:space="preserve">
+    <value>Consigli Importanti</value>
+  </data>
+  <data name="Tips_Dos_Title" xml:space="preserve">
+    <value>Cosa Fare</value>
+  </data>
+  <data name="Tips_Dos_1" xml:space="preserve">
+    <value>Bevi molta acqua</value>
+  </data>
+  <data name="Tips_Dos_2" xml:space="preserve">
+    <value>Indossa abiti comodi</value>
+  </data>
+  <data name="Tips_Dos_3" xml:space="preserve">
+    <value>Mangia bene prima della seduta</value>
+  </data>
+  <data name="Tips_Dos_4" xml:space="preserve">
+    <value>Dormi bene la notte prima</value>
+  </data>
+  <data name="Tips_Dos_5" xml:space="preserve">
+    <value>Segui i consigli dell'artista</value>
+  </data>
+  <data name="Tips_Donts_Title" xml:space="preserve">
+    <value>Cosa Evitare</value>
+  </data>
+  <data name="Tips_Donts_1" xml:space="preserve">
+    <value>Alcool prima della seduta</value>
+  </data>
+  <data name="Tips_Donts_2" xml:space="preserve">
+    <value>Aspirina o fluidificanti</value>
+  </data>
+  <data name="Tips_Donts_3" xml:space="preserve">
+    <value>Esposizione al sole prima</value>
+  </data>
+  <data name="Tips_Donts_4" xml:space="preserve">
+    <value>Arrivare a stomaco vuoto</value>
+  </data>
+  <data name="Tips_Donts_5" xml:space="preserve">
+    <value>Portare troppi accompagnatori</value>
+  </data>
+  <data name="Emergency_Title" xml:space="preserve">
+    <value>In caso di dubbi</value>
+  </data>
+  <data name="Emergency_Text" xml:space="preserve">
+    <value>Se noti rossore eccessivo, gonfiore anomalo o hai dubbi sulla guarigione, contattaci immediatamente.</value>
+  </data>
+  <data name="FAQ_Title" xml:space="preserve">
+    <value>Domande Frequenti</value>
+  </data>
+  <data name="FAQ_Subtitle" xml:space="preserve">
+    <value>Risposte ai dubbi più comuni</value>
+  </data>
+  <data name="FAQ_Q1" xml:space="preserve">
+    <value>Fa male fare un tatuaggio?</value>
+  </data>
+  <data name="FAQ_A1_P1" xml:space="preserve">
+    <value>Il dolore è soggettivo e dipende dalla zona del corpo.</value>
+  </data>
+  <data name="FAQ_A1_P2" xml:space="preserve">
+    <value>La maggior parte delle persone lo descrive come un fastidio sopportabile.</value>
+  </data>
+  <data name="FAQ_Q2" xml:space="preserve">
+    <value>Quanto costa un tatuaggio?</value>
+  </data>
+  <data name="FAQ_A2_P1" xml:space="preserve">
+    <value>Il prezzo varia in base a dimensione, stile e complessità.</value>
+  </data>
+  <data name="FAQ_A2_L1" xml:space="preserve">
+    <value>Small: €80 - €150</value>
+  </data>
+  <data name="FAQ_A2_L2" xml:space="preserve">
+    <value>Medium: €200 - €450</value>
+  </data>
+  <data name="FAQ_A2_L3" xml:space="preserve">
+    <value>Large/Full Day: €500+</value>
+  </data>
+  <data name="FAQ_A2_L4" xml:space="preserve">
+    <value>Acconto richiesto alla prenotazione</value>
+  </data>
+  <data name="FAQ_A2_P2" xml:space="preserve">
+    <value>Contattaci per un preventivo personalizzato.</value>
+  </data>
+  <data name="FAQ_Q3" xml:space="preserve">
+    <value>Posso portare un accompagnatore?</value>
+  </data>
+  <data name="FAQ_A3_P1" xml:space="preserve">
+    <value>Per motivi di igiene e concentrazione, preferiamo che tu venga da solo.</value>
+  </data>
+  <data name="FAQ_A3_P2" xml:space="preserve">
+    <value>Se necessario, un accompagnatore può attendere nella zona reception.</value>
+  </data>
+  <data name="FAQ_Q4" xml:space="preserve">
+    <value>Come prenoto un appuntamento?</value>
+  </data>
+  <data name="FAQ_A4_P1" xml:space="preserve">
+    <value>Puoi prenotare direttamente online tramite il nostro sito.</value>
+  </data>
+  <data name="FAQ_A4_L1" xml:space="preserve">
+    <value>Scegli il servizio</value>
+  </data>
+  <data name="FAQ_A4_L2" xml:space="preserve">
+    <value>Seleziona data e ora</value>
+  </data>
+  <data name="FAQ_Q5" xml:space="preserve">
+    <value>Fate cover-up?</value>
+  </data>
+  <data name="FAQ_A5_P1" xml:space="preserve">
+    <value>Sì, siamo specializzati in coperture di vecchi tatuaggi.</value>
+  </data>
+  <data name="FAQ_A5_P2" xml:space="preserve">
+    <value>È necessaria una consulenza preliminare per valutare la fattibilità.</value>
+  </data>
+  <data name="CTA_Title" xml:space="preserve">
+    <value>Hai altre domande?</value>
+  </data>
+  <data name="CTA_Subtitle" xml:space="preserve">
+    <value>Siamo qui per aiutarti a realizzare il tuo progetto</value>
+  </data>
+  <data name="CTA_Button_Contact" xml:space="preserve">
+    <value>Contattaci</value>
+  </data>
+  <data name="CTA_Button_Book" xml:space="preserve">
+    <value>Prenota Ora</value>
+  </data>
+</root>

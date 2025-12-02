@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Page_Title" xml:space="preserve">
+    <value>Datenschutzrichtlinie</value>
+  </data>
+  <data name="Last_Updated" xml:space="preserve">
+    <value>Zuletzt aktualisiert: 01.01.2025</value>
+  </data>
+  <data name="Intro_P1" xml:space="preserve">
+    <value>Diese Datenschutzrichtlinie beschreibt unsere Richtlinien und Verfahren zur Erfassung, Verwendung und Offenlegung Ihrer Informationen, wenn Sie den Dienst nutzen, und informiert Sie über Ihre Datenschutzrechte und wie das Gesetz Sie schützt.</value>
+  </data>
+  <data name="Section1_Title" xml:space="preserve">
+    <value>Datenverantwortlicher</value>
+  </data>
+  <data name="Section1_P1" xml:space="preserve">
+    <value>Der Datenverantwortliche ist:</value>
+  </data>
+  <data name="Section2_Title" xml:space="preserve">
+    <value>Arten der erfassten Daten</value>
+  </data>
+  <data name="Section2_P1" xml:space="preserve">
+    <value>Zu den personenbezogenen Daten, die von dieser Anwendung selbstständig oder durch Dritte erfasst werden, gehören:</value>
+  </data>
+  <data name="Section2_L1_Title" xml:space="preserve">
+    <value>Nutzungsdaten:</value>
+  </data>
+  <data name="Section2_L1_Text" xml:space="preserve">
+    <value>werden automatisch während der Nutzung dieser Anwendung erfasst.</value>
+  </data>
+  <data name="Section2_L2_Title" xml:space="preserve">
+    <value>Personenbezogene Daten:</value>
+  </data>
+  <data name="Section2_L2_Text" xml:space="preserve">
+    <value>freiwillig vom Benutzer bereitgestellt, wie:</value>
+  </data>
+  <data name="Section2_L3_Title" xml:space="preserve">
+    <value>Vorname</value>
+  </data>
+  <data name="Section2_L4_Title" xml:space="preserve">
+    <value>Nachname</value>
+  </data>
+  <data name="Section2_L5_Title" xml:space="preserve">
+    <value>Telefonnummer</value>
+  </data>
+  <data name="Section2_L6_Title" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="Section2_L7_Title" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="Section2_L8_Text" xml:space="preserve">
+    <value>Diese Daten werden hauptsächlich für die Verwaltung von Buchungen und Kontakten angefordert.</value>
+  </data>
+  <data name="Section2_L9_Title" xml:space="preserve">
+    <value>Cookies:</value>
+  </data>
+  <data name="Section2_L9_Text" xml:space="preserve">
+    <value>Details finden Sie in der Cookie-Richtlinie.</value>
+  </data>
+  <data name="Section3_Title" xml:space="preserve">
+    <value>Art und Ort der Datenverarbeitung</value>
+  </data>
+  <data name="Section3_P1" xml:space="preserve">
+    <value>Der Verantwortliche trifft angemessene Sicherheitsmaßnahmen, um den unbefugten Zugriff, die Offenlegung, Änderung oder Vernichtung personenbezogener Daten zu verhindern.</value>
+  </data>
+  <data name="Section3_L1" xml:space="preserve">
+    <value>Die Verarbeitung erfolgt mittels IT- und/oder Telematik-Tools.</value>
+  </data>
+  <data name="Section3_L2" xml:space="preserve">
+    <value>Neben dem Verantwortlichen können in einigen Fällen auch andere an der Organisation beteiligte Personen (Verwaltung, Vertrieb, Marketing, Recht, Systemadministratoren) Zugriff auf die Daten haben.</value>
+  </data>
+  <data name="Section3_L3" xml:space="preserve">
+    <value>Die Daten werden in den Betriebsstätten des Verantwortlichen und an jedem anderen Ort verarbeitet, an dem sich die an der Verarbeitung beteiligten Parteien befinden.</value>
+  </data>
+  <data name="Section3_L4" xml:space="preserve">
+    <value>Benutzerdaten können in ein anderes Land als das, in dem sich der Benutzer befindet, übertragen werden.</value>
+  </data>
+  <data name="Section4_Title" xml:space="preserve">
+    <value>Zweck der Datenverarbeitung</value>
+  </data>
+  <data name="Section4_P1" xml:space="preserve">
+    <value>Benutzerdaten werden erfasst, um dem Verantwortlichen die Bereitstellung des Dienstes zu ermöglichen, gesetzlichen Verpflichtungen nachzukommen, auf Anfragen oder Vollstreckungsmaßnahmen zu reagieren, seine Rechte und Interessen (oder die von Benutzern oder Dritten) zu schützen sowie böswillige oder betrügerische Aktivitäten aufzudecken.</value>
+  </data>
+  <data name="Section5_Title" xml:space="preserve">
+    <value>Aufbewahrungsfrist</value>
+  </data>
+  <data name="Section5_P1" xml:space="preserve">
+    <value>Daten werden so lange verarbeitet und gespeichert, wie es für die Zwecke, für die sie erhoben wurden, erforderlich ist.</value>
+  </data>
+  <data name="Section5_L1" xml:space="preserve">
+    <value>Personenbezogene Daten, die für Zwecke im Zusammenhang mit der Erfüllung eines Vertrags zwischen dem Verantwortlichen und dem Benutzer erhoben werden, werden bis zur vollständigen Erfüllung dieses Vertrags gespeichert.</value>
+  </data>
+  <data name="Section5_L2" xml:space="preserve">
+    <value>Personenbezogene Daten, die für Zwecke im Zusammenhang mit dem berechtigten Interesse des Verantwortlichen erhoben werden, werden bis zur Erfüllung dieses Interesses gespeichert.</value>
+  </data>
+  <data name="Section5_L3" xml:space="preserve">
+    <value>Der Verantwortliche kann verpflichtet sein, personenbezogene Daten für einen längeren Zeitraum aufzubewahren, um einer gesetzlichen Verpflichtung oder einer behördlichen Anordnung nachzukommen.</value>
+  </data>
+  <data name="Section5_P2" xml:space="preserve">
+    <value>Nach Ablauf der Aufbewahrungsfrist werden personenbezogene Daten gelöscht.</value>
+  </data>
+  <data name="Section6_Title" xml:space="preserve">
+    <value>Rechte des Benutzers</value>
+  </data>
+  <data name="Section6_P1" xml:space="preserve">
+    <value>Benutzer können bestimmte Rechte in Bezug auf die vom Verantwortlichen verarbeiteten Daten ausüben.</value>
+  </data>
+  <data name="Section6_L1" xml:space="preserve">
+    <value>Einwilligung jederzeit widerrufen.</value>
+  </data>
+  <data name="Section6_L2" xml:space="preserve">
+    <value>Widerspruch gegen die Verarbeitung ihrer Daten einlegen.</value>
+  </data>
+  <data name="Section6_L3" xml:space="preserve">
+    <value>Zugriff auf ihre Daten erhalten.</value>
+  </data>
+  <data name="Section6_L4" xml:space="preserve">
+    <value>Überprüfung und Berichtigung verlangen.</value>
+  </data>
+  <data name="Section6_L5" xml:space="preserve">
+    <value>Einschränkung der Verarbeitung erhalten.</value>
+  </data>
+  <data name="Section6_L6" xml:space="preserve">
+    <value>Löschung oder Entfernung ihrer personenbezogenen Daten erhalten.</value>
+  </data>
+  <data name="Section6_L7" xml:space="preserve">
+    <value>Ihre Daten erhalten oder an einen anderen Verantwortlichen übertragen lassen.</value>
+  </data>
+  <data name="Section6_P2" xml:space="preserve">
+    <value>Um ihre Rechte auszuüben, können Benutzer eine Anfrage an die in diesem Dokument angegebenen Kontaktdaten des Verantwortlichen richten.</value>
+  </data>
+  <data name="Section6_P3" xml:space="preserve">
+    <value>Anfragen werden kostenlos eingereicht und vom Verantwortlichen so schnell wie möglich, in jedem Fall innerhalb eines Monats, bearbeitet.</value>
+  </data>
+  <data name="Section7_Title" xml:space="preserve">
+    <value>Ã„nderungen dieser Datenschutzrichtlinie</value>
+  </data>
+  <data name="Section7_P1" xml:space="preserve">
+    <value>Der Datenverantwortliche behält sich das Recht vor, jederzeit Änderungen an dieser Datenschutzrichtlinie vorzunehmen, indem er die Benutzer auf dieser Seite und möglichst auf dieser Anwendung benachrichtigt sowie, sofern technisch und rechtlich machbar, eine Benachrichtigung an die Benutzer über eine der ihm vorliegenden Kontaktdaten sendet.</value>
+  </data>
+  <data name="Section8_Title" xml:space="preserve">
+    <value>Rechtliche Informationen</value>
+  </data>
+  <data name="Section8_P1" xml:space="preserve">
+    <value>Diese Datenschutzerklärung wurde auf der Grundlage mehrerer Gesetzgebungen erstellt, einschließlich Art. 13 und 14 der Verordnung (EU) 2016/679.</value>
+  </data>
+  <data name="CookiePolicy_Title" xml:space="preserve">
+    <value>Cookie-Richtlinie</value>
+  </data>
+  <data name="CookiePolicy_P1" xml:space="preserve">
+    <value>Weitere Informationen zur Verwendung von Cookies finden Sie in unserer</value>
+  </data>
+  <data name="Button_CookiePolicy" xml:space="preserve">
+    <value>Cookie-Richtlinie</value>
+  </data>
+  <data name="Button_BackToHome" xml:space="preserve">
+    <value>ZurÃ¼ck zur Startseite</value>
+  </data>
+  <data name="Section1_Address" xml:space="preserve">
+    <value>Lindenstraße 26, 63785 Obernburg am Main, Deutschland</value>
+  </data>
+  <data name="Section1_EmailLabel" xml:space="preserve">
+    <value>E-Mail:</value>
+  </data>
+  <data name="Section1_PhoneLabel" xml:space="preserve">
+    <value>Telefon:</value>
+  </data>
+</root>

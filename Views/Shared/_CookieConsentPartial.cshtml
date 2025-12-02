@@ -13,15 +13,15 @@
                 <div class="col-lg-7 col-md-12 mb-3 mb-lg-0">
                     <p class="cookie-banner-text" id="cookieBannerDesc">
                         <span class="cookie-icon">🍪</span>
-                        <strong id="cookieBannerTitle">Questo sito utilizza cookie</strong><br />
-                        Utilizziamo cookie tecnici necessari per il funzionamento del sito e cookie di funzionalità per migliorare la tua esperienza di navigazione.
+                        <strong id="cookieBannerTitle" data-i18n="banner_title">Questo sito utilizza cookie</strong><br />
+                        <span data-i18n="banner_text">Utilizziamo cookie tecnici necessari per il funzionamento del sito e cookie di funzionalità per migliorare la tua esperienza di navigazione.</span>
                     </p>
                     <div class="cookie-links">
                         <a asp-controller="Home" asp-action="Privacy" class="cookie-link">
-                            <i class="fas fa-shield-alt me-1"></i>Privacy Policy
+                            <i class="fas fa-shield-alt me-1"></i><span data-i18n="privacy_link">Privacy Policy</span>
                         </a>
                         <a asp-controller="Home" asp-action="Cookie" class="cookie-link">
-                            <i class="fas fa-cookie-bite me-1"></i>Cookie Policy
+                            <i class="fas fa-cookie-bite me-1"></i><span data-i18n="cookie_policy_link">Cookie Policy</span>
                         </a>
                     </div>
                 </div>
@@ -29,14 +29,14 @@
                 <!-- Pulsanti azione -->
                 <div class="col-lg-5 col-md-12">
                     <div class="cookie-buttons justify-content-lg-end">
-                        <button type="button" id="cookieAcceptAll" class="cookie-btn cookie-btn-accept" aria-label="Accetta tutti i cookie">
-                            <i class="fas fa-check me-1"></i>Accetta Tutto
+                        <button type="button" id="cookieAcceptAll" class="cookie-btn cookie-btn-accept" data-i18n-attr="aria-label" data-i18n="aria_accept" aria-label="Accetta tutti i cookie">
+                            <i class="fas fa-check me-1"></i><span data-i18n="accept_all">Accetta Tutto</span>
                         </button>
-                        <button type="button" id="cookieReject" class="cookie-btn cookie-btn-reject" aria-label="Rifiuta cookie opzionali">
-                            <i class="fas fa-times me-1"></i>Rifiuta
+                        <button type="button" id="cookieReject" class="cookie-btn cookie-btn-reject" data-i18n-attr="aria-label" data-i18n="aria_reject" aria-label="Rifiuta cookie opzionali">
+                            <i class="fas fa-times me-1"></i><span data-i18n="reject">Rifiuta</span>
                         </button>
-                        <button type="button" id="cookieCustomize" class="cookie-btn cookie-btn-customize" aria-label="Personalizza preferenze cookie">
-                            <i class="fas fa-cog me-1"></i>Personalizza
+                        <button type="button" id="cookieCustomize" class="cookie-btn cookie-btn-customize" data-i18n-attr="aria-label" data-i18n="aria_customize" aria-label="Personalizza preferenze cookie">
+                            <i class="fas fa-cog me-1"></i><span data-i18n="customize">Personalizza</span>
                         </button>
                     </div>
                 </div>
@@ -50,15 +50,15 @@
     <!-- Header -->
     <div class="cookie-panel-header">
         <h2 class="cookie-panel-title" id="customizePanelTitle">
-            <i class="fas fa-cookie-bite me-2"></i>Gestisci Preferenze Cookie
+            <i class="fas fa-cookie-bite me-2"></i><span data-i18n="panel_title">Gestisci Preferenze Cookie</span>
         </h2>
-        <button type="button" id="cookieClosePanel" class="cookie-close-btn" aria-label="Chiudi pannello">
+        <button type="button" id="cookieClosePanel" class="cookie-close-btn" data-i18n-attr="aria-label" data-i18n="aria_close" aria-label="Chiudi pannello">
             <i class="fas fa-times"></i>
         </button>
     </div>
 
     <!-- Descrizione -->
-    <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 1.5rem;">
+    <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 1.5rem;" data-i18n="panel_description">
         Scegli quali categorie di cookie accettare. I cookie tecnici necessari sono sempre attivi per garantire il funzionamento base del sito.
     </p>
 
@@ -67,19 +67,19 @@
         <div class="cookie-category-header">
             <h3 class="cookie-category-title">
                 <i class="fas fa-shield-alt me-2" style="color: #28a745;"></i>
-                Cookie Tecnici Necessari
-                <span class="cookie-category-badge always-active">Sempre Attivi</span>
+                <span data-i18n="essential_title">Cookie Tecnici Necessari</span>
+                <span class="cookie-category-badge always-active" data-i18n="essential_badge">Sempre Attivi</span>
             </h3>
             <label class="cookie-toggle">
-                <input type="checkbox" checked disabled aria-label="Cookie tecnici necessari sempre attivi">
+                <input type="checkbox" checked disabled data-i18n-attr="aria-label" data-i18n="aria_essential" aria-label="Cookie tecnici necessari sempre attivi">
                 <span class="cookie-toggle-slider"></span>
             </label>
         </div>
-        <p class="cookie-category-description">
+        <p class="cookie-category-description" data-i18n="essential_description">
             Questi cookie sono essenziali per il corretto funzionamento del sito web. Includono cookie di sessione,
             autenticazione e sicurezza. Non possono essere disattivati.
         </p>
-        <small style="color: #888; font-size: 0.75rem;">
+        <small style="color: #888; font-size: 0.75rem;" data-i18n="essential_examples">
             <strong>Esempi:</strong> .AspNet.Consent, cookie di sessione, anti-forgery tokens
         </small>
     </div>
@@ -89,19 +89,19 @@
         <div class="cookie-category-header">
             <h3 class="cookie-category-title">
                 <i class="fas fa-paint-brush me-2" style="color: #d4af37;"></i>
-                Cookie di Funzionalità
-                <span class="cookie-category-badge">Opzionali</span>
+                <span data-i18n="functional_title">Cookie di Funzionalità</span>
+                <span class="cookie-category-badge" data-i18n="functional_badge">Opzionali</span>
             </h3>
             <label class="cookie-toggle">
-                <input type="checkbox" id="cookieFunctional" aria-label="Abilita cookie di funzionalità">
+                <input type="checkbox" id="cookieFunctional" data-i18n-attr="aria-label" data-i18n="aria_functional" aria-label="Abilita cookie di funzionalità">
                 <span class="cookie-toggle-slider"></span>
             </label>
         </div>
-        <p class="cookie-category-description">
+        <p class="cookie-category-description" data-i18n="functional_description">
             Questi cookie permettono funzionalità avanzate come visualizzazione lightbox delle immagini del portfolio,
             animazioni durante lo scroll e altre funzionalità che migliorano l'esperienza utente.
         </p>
-        <small style="color: #888; font-size: 0.75rem;">
+        <small style="color: #888; font-size: 0.75rem;" data-i18n="functional_examples">
             <strong>Funzionalità:</strong> GLightbox (galleria immagini), AOS (animazioni), preferenze UI
         </small>
     </div>
@@ -111,39 +111,39 @@
         <div class="cookie-category-header">
             <h3 class="cookie-category-title">
                 <i class="fas fa-chart-bar me-2" style="color: #6c757d;"></i>
-                Cookie Analitici
-                <span class="cookie-category-badge not-used">Non Utilizzati</span>
+                <span data-i18n="analytics_title">Cookie Analitici</span>
+                <span class="cookie-category-badge not-used" data-i18n="analytics_badge">Non Utilizzati</span>
             </h3>
             <label class="cookie-toggle">
-                <input type="checkbox" id="cookieAnalytics" disabled aria-label="Cookie analitici non disponibili">
+                <input type="checkbox" id="cookieAnalytics" disabled data-i18n-attr="aria-label" data-i18n="aria_analytics" aria-label="Cookie analitici non disponibili">
                 <span class="cookie-toggle-slider"></span>
             </label>
         </div>
-        <p class="cookie-category-description">
+        <p class="cookie-category-description" data-i18n="analytics_description">
             Al momento non utilizziamo cookie analitici o di tracciamento. Questa categoria è preparata per un futuro
             eventuale utilizzo di strumenti come Google Analytics per comprendere come i visitatori utilizzano il sito.
         </p>
-        <small style="color: #888; font-size: 0.75rem;">
+        <small style="color: #888; font-size: 0.75rem;" data-i18n="analytics_examples">
             <strong>Stato:</strong> Nessun cookie analitico attivo
         </small>
     </div>
 
     <!-- Pulsanti azione panel -->
     <div class="cookie-panel-buttons">
-        <button type="button" id="cookieSaveCustom" class="cookie-btn cookie-btn-customize" aria-label="Salva le tue preferenze">
-            <i class="fas fa-save me-1"></i>Salva Preferenze
+        <button type="button" id="cookieSaveCustom" class="cookie-btn cookie-btn-customize" data-i18n-attr="aria-label" data-i18n="aria_save" aria-label="Salva le tue preferenze">
+            <i class="fas fa-save me-1"></i><span data-i18n="save_preferences">Salva Preferenze</span>
         </button>
-        <button type="button" id="cookieAcceptAllCustom" class="cookie-btn cookie-btn-accept" aria-label="Accetta tutti i cookie">
-            <i class="fas fa-check me-1"></i>Accetta Tutto
+        <button type="button" id="cookieAcceptAllCustom" class="cookie-btn cookie-btn-accept" data-i18n-attr="aria-label" data-i18n="aria_accept" aria-label="Accetta tutti i cookie">
+            <i class="fas fa-check me-1"></i><span data-i18n="accept_all_custom">Accetta Tutto</span>
         </button>
     </div>
 
     <!-- Link utili -->
     <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(212, 175, 55, 0.2); text-align: center;">
         <p style="color: #888; font-size: 0.8rem; margin: 0;">
-            Per maggiori informazioni consulta la nostra
-            <a asp-controller="Home" asp-action="Cookie" style="color: #d4af37;">Cookie Policy</a> e
-            <a asp-controller="Home" asp-action="Privacy" style="color: #d4af37;">Privacy Policy</a>
+            <span data-i18n="more_info">Per maggiori informazioni consulta la nostra</span>
+            <a asp-controller="Home" asp-action="Cookie" style="color: #d4af37;"><span data-i18n="cookie_policy">Cookie Policy</span></a> <span data-i18n="and">e</span>
+            <a asp-controller="Home" asp-action="Privacy" style="color: #d4af37;"><span data-i18n="privacy_policy">Privacy Policy</span></a>
         </p>
     </div>
 </div>

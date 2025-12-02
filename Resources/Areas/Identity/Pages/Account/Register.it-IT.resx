@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Page_Title" xml:space="preserve">
+    <value>Registrazione</value>
+  </data>
+  <data name="Page_Subtitle" xml:space="preserve">
+    <value>Crea il tuo account Klod Tattoo</value>
+  </data>
+  <data name="Form_Title" xml:space="preserve">
+    <value>Crea Nuovo Account</value>
+  </data>
+  <data name="Label_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Label_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Label_ConfirmPassword" xml:space="preserve">
+    <value>Conferma Password</value>
+  </data>
+  <data name="PasswordRequirements_Title" xml:space="preserve">
+    <value>Requisiti Password</value>
+  </data>
+  <data name="PasswordRequirement_1" xml:space="preserve">
+    <value>Minimo 6 caratteri</value>
+  </data>
+  <data name="PasswordRequirement_2" xml:space="preserve">
+    <value>Almeno una lettera maiuscola</value>
+  </data>
+  <data name="PasswordRequirement_3" xml:space="preserve">
+    <value>Almeno un numero</value>
+  </data>
+  <data name="PasswordRequirement_4" xml:space="preserve">
+    <value>Almeno un carattere speciale (!@@#$%^*)</value>
+  </data>
+  <data name="Button_Register" xml:space="preserve">
+    <value>Registrati</value>
+  </data>
+  <data name="LoginLink_Text" xml:space="preserve">
+    <value>Hai già un account?</value>
+  </data>
+  <data name="LoginLink_Link" xml:space="preserve">
+    <value>Accedi qui</value>
+  </data>
+  <data name="Benefits_Panel_Title" xml:space="preserve">
+    <value>Perché Registrarsi?</value>
+  </data>
+  <data name="ExternalRegister_Title" xml:space="preserve">
+    <value>Registrati con un altro servizio</value>
+  </data>
+  <data name="ExternalRegister_Button" xml:space="preserve">
+    <value>Registrati con</value>
+  </data>
+  <data name="Benefits_Title" xml:space="preserve">
+    <value>Vantaggi Esclusivi</value>
+  </data>
+  <data name="Benefit1_Title" xml:space="preserve">
+    <value>Prenotazioni Online</value>
+  </data>
+  <data name="Benefit1_Text" xml:space="preserve">
+    <value>Prenota i tuoi appuntamenti 24/7 in totale autonomia</value>
+  </data>
+  <data name="Benefit2_Title" xml:space="preserve">
+    <value>Portfolio Personale</value>
+  </data>
+  <data name="Benefit2_Text" xml:space="preserve">
+    <value>Visualizza lo storico di tutti i tuoi tatuaggi</value>
+  </data>
+  <data name="Benefit3_Title" xml:space="preserve">
+    <value>Offerte Esclusive</value>
+  </data>
+  <data name="Benefit3_Text" xml:space="preserve">
+    <value>Accesso prioritario a promozioni e sconti</value>
+  </data>
+  <data name="Benefit4_Title" xml:space="preserve">
+    <value>Notifiche Smart</value>
+  </data>
+  <data name="Benefit4_Text" xml:space="preserve">
+    <value>Promemoria automatici per i tuoi appuntamenti</value>
+  </data>
+  <data name="Benefit5_Title" xml:space="preserve">
+    <value>Supporto Prioritario</value>
+  </data>
+  <data name="Benefit5_Text" xml:space="preserve">
+    <value>Assistenza dedicata per clienti registrati</value>
+  </data>
+  <data name="Privacy_Title" xml:space="preserve">
+    <value>Privacy Garantita</value>
+  </data>
+  <data name="Privacy_Text" xml:space="preserve">
+    <value>La registrazione è gratuita e sicura. I tuoi dati sono protetti e non saranno mai condivisi.</value>
+  </data>
+  <data name="Family_Title" xml:space="preserve">
+    <value>Unisciti alla Famiglia Klod Tattoo</value>
+  </data>
+  <data name="Family_Text" xml:space="preserve">
+    <value>Oltre 1000+ clienti soddisfatti hanno già creato il loro account. Registrati ora e inizia il tuo viaggio artistico!</value>
+  </data>
+</root>
