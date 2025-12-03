@@ -65,10 +65,19 @@ else
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    if (databaseProvider == "PostgreSQL")
+    var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL")
+              ?? Environment.GetEnvironmentVariable("RAILWAY_DATABASE_URL");
+
+    if (!string.IsNullOrEmpty(dbUrl))
+    {
+        // Produzione → Railway → PostgreSQL
         options.UseNpgsql(connectionString);
+    }
     else
-        options.UseSqlite(connectionString);
+    {
+        // Locale → SQLite
+        options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+    }
 });
 
 // ---------------------------------------------------------------------
