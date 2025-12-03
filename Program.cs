@@ -11,32 +11,41 @@ using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 // ---------------------------------------------------------------------
-// FIX per compatibilità PostgreSQL timestamp
+// 🔍 DIAGNOSTICA AVVIO (Copia dai log se il deploy fallisce)
 // ---------------------------------------------------------------------
+Console.WriteLine("--------------------------------------------------");
+Console.WriteLine("🚀 AVVIO APPLICAZIONE - DIAGNOSTICA VARIABILI");
+var envVar = Environment.GetEnvironmentVariable("DATABASE_URL");
+var railwayVar = Environment.GetEnvironmentVariable("RAILWAY_DATABASE_URL");
+
+Console.WriteLine($"1. DATABASE_URL presente? {(string.IsNullOrEmpty(envVar) ? "NO ❌" : "SI ✅")}");
+Console.WriteLine($"2. RAILWAY_DATABASE_URL presente? {(string.IsNullOrEmpty(railwayVar) ? "NO ❌" : "SI ✅")}");
+
+if (!string.IsNullOrEmpty(envVar))
+    Console.WriteLine($"   -> Valore inizia con: {envVar.Substring(0, Math.Min(envVar.Length, 15))}...");
+// ---------------------------------------------------------------------
+
+// FIX per compatibilità PostgreSQL timestamp
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-// ---------------------------------------------------------------------
-// Configurazione Porta per Railway
-// ---------------------------------------------------------------------
+// Configurazione Porta
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://*:{port}");
 
 // ---------------------------------------------------------------------
-// 1. RILEVAMENTO DATABASE (Railway vs Locale)
+// 1. RILEVAMENTO DATABASE
 // ---------------------------------------------------------------------
 string? connectionString = null;
 string databaseProvider = "Sqlite"; // Default
 
-// Cerca la variabile d'ambiente (Railway usa DATABASE_URL)
-var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL")
-            ?? Environment.GetEnvironmentVariable("RAILWAY_DATABASE_URL");
+// A) PROVIAMO A LEGGERE DALLE VARIABILI D'AMBIENTE
+var dbUrl = envVar ?? railwayVar; // Usiamo quelle lette sopra
 
 if (!string.IsNullOrEmpty(dbUrl))
 {
-    // SIAMO SU RAILWAY
     try
     {
-        // Normalizza schema (postgres:// -> postgresql://)
+        // Normalizza schema
         if (dbUrl.StartsWith("postgres://"))
             dbUrl = dbUrl.Replace("postgres://", "postgresql://");
 
@@ -45,7 +54,6 @@ if (!string.IsNullOrEmpty(dbUrl))
         var username = userInfo[0];
         var password = userInfo.Length > 1 ? userInfo[1] : "";
 
-        // Costruisci la stringa di connessione corretta per Npgsql
         connectionString =
             $"Host={uri.Host};" +
             $"Port={uri.Port};" +
@@ -55,32 +63,32 @@ if (!string.IsNullOrEmpty(dbUrl))
             $"SSL Mode=Require;Trust Server Certificate=true";
 
         databaseProvider = "PostgreSQL";
-        Console.WriteLine($"🐘 [Boot] Configurazione Railway rilevata. Host: {uri.Host}");
+        Console.WriteLine($"✅ Configurazione Railway OK. Host: {uri.Host}");
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"⚠️ [Boot] Errore parsing DATABASE_URL: {ex.Message}");
+        Console.WriteLine($"⚠️ Errore parsing DATABASE_URL: {ex.Message}");
     }
 }
 
-// Se non siamo su Railway (o il parsing è fallito), proviamo la config locale
+// B) SE FALLISCE, USIAMO APPSETTINGS (LOCALE)
 if (string.IsNullOrEmpty(connectionString))
 {
-    // SIAMO IN LOCALE
+    Console.WriteLine("⚠️ Nessuna variabile ambiente valida trovata. Tentativo lettura appsettings.json...");
     connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-    // Auto-detect: se la stringa locale contiene "Host=", stiamo usando Postgres locale
+    // Auto-detect PostgreSQL locale
     if (!string.IsNullOrEmpty(connectionString) &&
        (connectionString.Contains("Host=", StringComparison.OrdinalIgnoreCase) ||
         connectionString.Contains("postgres", StringComparison.OrdinalIgnoreCase)))
     {
         databaseProvider = "PostgreSQL";
-        Console.WriteLine("🐘 [Boot] Configurazione Locale (PostgreSQL)");
+        Console.WriteLine($"🐘 Configurazione Locale PostgreSQL rilevata: {connectionString}");
     }
     else
     {
         databaseProvider = "Sqlite";
-        Console.WriteLine("🗄️ [Boot] Configurazione Locale (SQLite)");
+        Console.WriteLine("🗄️ Configurazione Locale SQLite (Fallback)");
     }
 }
 
@@ -91,7 +99,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     if (databaseProvider == "PostgreSQL")
     {
-        // Usa la connectionString calcolata sopra (che ora è corretta!)
         options.UseNpgsql(connectionString);
     }
     else
@@ -100,9 +107,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     }
 });
 
-// ---------------------------------------------------------------------
 // Identity
-// ---------------------------------------------------------------------
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -128,62 +133,56 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
-// ---------------------------------------------------------------------
-// BUILD APP
-// ---------------------------------------------------------------------
 var app = builder.Build();
 
 // ---------------------------------------------------------------------
-// Apply Migrations + Seed
+// MIGRATIONS
 // ---------------------------------------------------------------------
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    var db = services.GetRequiredService<AppDbContext>();
     var logger = services.GetRequiredService<ILogger<Program>>();
-    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-
     try
     {
+        var db = services.GetRequiredService<AppDbContext>();
+        // Test connessione prima di migrare
+        Console.WriteLine($"🔄 Tentativo migrazione DB su Provider: {db.Database.ProviderName}");
+
         await db.Database.MigrateAsync();
         logger.LogInformation("📦 Database migrato correttamente");
+
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        string[] roles = { "Admin", "User" };
+        foreach (var role in roles)
+            if (!await roleManager.RoleExistsAsync(role))
+                await roleManager.CreateAsync(new IdentityRole(role));
+
+        // ... (Seed user e tattoo styles omessi per brevità, se funzionano le migrazioni funzionerà anche questo)
+        var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+        var adminEmail = Environment.GetEnvironmentVariable("ADMIN_EMAIL") ?? "admin@klodtattoo.com";
+        var adminPass = Environment.GetEnvironmentVariable("ADMIN_PASSWORD") ?? "Admin@123";
+
+        if (await userManager.FindByEmailAsync(adminEmail) is null)
+        {
+            var admin = new IdentityUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true };
+            await userManager.CreateAsync(admin, adminPass);
+            await userManager.AddToRoleAsync(admin, "Admin");
+        }
+
+        string[] tattooStyles = { "Realistic", "Fine line", "Black Art", "Lettering", "Small Tattoos", "Cartoons", "Animals" };
+        foreach (var t in tattooStyles)
+            if (!db.TattooStyles.Any(s => s.Name == t))
+                db.TattooStyles.Add(new TattooStyle { Name = t });
+
+        await db.SaveChangesAsync();
     }
     catch (Exception ex)
     {
-        logger.LogError(ex, "❌ Errore durante la migration del database.");
+        logger.LogError(ex, "❌ ERRORE CRITICO DATABASE");
+        // Non rilanciamo l'eccezione per permettere di leggere i log
     }
-
-    // Ruoli
-    string[] roles = { "Admin", "User" };
-    foreach (var role in roles)
-        if (!await roleManager.RoleExistsAsync(role))
-            await roleManager.CreateAsync(new IdentityRole(role));
-
-    // Admin
-    var adminEmail = Environment.GetEnvironmentVariable("ADMIN_EMAIL") ?? "admin@klodtattoo.com";
-    var adminPass = Environment.GetEnvironmentVariable("ADMIN_PASSWORD") ?? "Admin@123";
-
-    if (await userManager.FindByEmailAsync(adminEmail) is null)
-    {
-        var admin = new IdentityUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true };
-        var result = await userManager.CreateAsync(admin, adminPass);
-        if (result.Succeeded)
-            await userManager.AddToRoleAsync(admin, "Admin");
-    }
-
-    // Seed Tattoo Styles
-    string[] tattooStyles = { "Realistic", "Fine line", "Black Art", "Lettering", "Small Tattoos", "Cartoons", "Animals" };
-    foreach (var t in tattooStyles)
-        if (!db.TattooStyles.Any(s => s.Name == t))
-            db.TattooStyles.Add(new TattooStyle { Name = t });
-
-    await db.SaveChangesAsync();
 }
 
-// ---------------------------------------------------------------------
-// Middleware
-// ---------------------------------------------------------------------
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -196,15 +195,8 @@ app.UseRouting();
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapRazorPages();
-
-app.MapControllerRoute(
-    name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "areas", pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
