@@ -22,76 +22,62 @@ var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://*:{port}");
 
 // ---------------------------------------------------------------------
-// DATABASE STRATEGY (Auto-Detect)
+// Database Strategy
 // ---------------------------------------------------------------------
-var databaseProvider = "Sqlite"; // Default di partenza
+var databaseProvider = builder.Configuration.GetValue<string>("DatabaseProvider") ?? "Sqlite";
 string? connectionString = null;
 
-// 1. Cerca variabili d'ambiente (Railway/Produzione)
+// 🔥 MODIFICA IMPORTANTE: Cerca PRIMA "DATABASE_URL" (standard Railway) poi "RAILWAY_DATABASE_URL"
 var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL")
             ?? Environment.GetEnvironmentVariable("RAILWAY_DATABASE_URL");
 
 if (!string.IsNullOrEmpty(dbUrl))
 {
-    // Railway fornisce l'URL. Convertiamo da formato URI a Connection String per Npgsql
-    try
-    {
-        // Normalizza lo schema se necessario (alcuni provider usano postgres://)
-        if (dbUrl.StartsWith("postgres://"))
-            dbUrl = dbUrl.Replace("postgres://", "postgresql://");
+    // Railway fornisce spesso l'URL come "postgres://", Npgsql vuole "postgresql://"
+    if (dbUrl.StartsWith("postgres://"))
+        dbUrl = dbUrl.Replace("postgres://", "postgresql://");
 
-        var uri = new Uri(dbUrl);
-        var userInfo = uri.UserInfo.Split(':');
-        var username = userInfo[0];
-        var password = userInfo.Length > 1 ? userInfo[1] : "";
+    var uri = new Uri(dbUrl);
+    var userInfo = uri.UserInfo.Split(':');
+    var username = userInfo[0];
+    var password = userInfo.Length > 1 ? userInfo[1] : "";
 
-        connectionString =
-            $"Host={uri.Host};" +
-            $"Port={uri.Port};" +
-            $"Database={uri.AbsolutePath.TrimStart('/')};" +
-            $"Username={username};" +
-            $"Password={password};" +
-            $"SSL Mode=Require;Trust Server Certificate=true";
+    connectionString =
+        $"Host={uri.Host};" +
+        $"Port={uri.Port};" +
+        $"Database={uri.AbsolutePath.TrimStart('/')};" +
+        $"Username={username};" +
+        $"Password={password};" +
+        $"SSL Mode=Require;Trust Server Certificate=true";
 
-        databaseProvider = "PostgreSQL";
-        Console.WriteLine("🐘 Usando PostgreSQL (da Variabili Ambiente)");
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"⚠️ Errore parsing DATABASE_URL: {ex.Message}. Fallback su appsettings.");
-    }
+    databaseProvider = "PostgreSQL";
+    Console.WriteLine("🐘 Usando PostgreSQL Railway");
 }
-
-// 2. Se non abbiamo trovato nulla nelle variabili, usiamo appsettings.json
-if (string.IsNullOrEmpty(connectionString))
+else
 {
-    connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-    // ANALISI INTELLIGENTE: Se la stringa contiene "Host=", è sicuramente Postgres!
-    if (!string.IsNullOrEmpty(connectionString) &&
-       (connectionString.Contains("Host=", StringComparison.OrdinalIgnoreCase) ||
-        connectionString.Contains("postgres", StringComparison.OrdinalIgnoreCase)))
+    // Fallback locale
+    if (databaseProvider == "PostgreSQL")
     {
-        databaseProvider = "PostgreSQL";
-        Console.WriteLine("🐘 Usando PostgreSQL (da appsettings.json)");
+        connectionString = builder.Configuration.GetConnectionString("PostgreSQL");
+        Console.WriteLine("🐘 Usando PostgreSQL locale");
     }
     else
     {
-        databaseProvider = "Sqlite";
-        Console.WriteLine("🗄️ Usando SQLite (default)");
+        connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        Console.WriteLine("🗄️ Usando SQLite locale");
     }
 }
 
-// 3. Configurazione DbContext in base al provider rilevato
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
+    // Usa le variabili già calcolate sopra per coerenza
     if (databaseProvider == "PostgreSQL")
     {
         options.UseNpgsql(connectionString);
     }
     else
     {
-        options.UseSqlite(connectionString ?? "Data Source=klodtattoo.db");
+        options.UseSqlite(connectionString);
     }
 });
 
@@ -146,9 +132,9 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
-        logger.LogError(ex, "❌ Errore durante la migration del database.");
-        // Non rilanciamo l'eccezione per evitare crash loop continui su Railway se il DB è temporaneamente giù,
-        // ma in produzione è meglio indagare.
+        logger.LogError(ex, "❌ Errore durante la migration del database");
+        // In produzione su Railway, a volte è meglio non crashare subito se il DB sta partendo
+        // throw; 
     }
 
     // Ruoli
@@ -164,9 +150,8 @@ using (var scope = app.Services.CreateScope())
     if (await userManager.FindByEmailAsync(adminEmail) is null)
     {
         var admin = new IdentityUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true };
-        var result = await userManager.CreateAsync(admin, adminPass);
-        if (result.Succeeded)
-            await userManager.AddToRoleAsync(admin, "Admin");
+        await userManager.CreateAsync(admin, adminPass);
+        await userManager.AddToRoleAsync(admin, "Admin");
     }
 
     // Seed Tattoo Styles
