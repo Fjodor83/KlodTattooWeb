@@ -62,7 +62,9 @@ if (!string.IsNullOrEmpty(dbUrl))
         Console.WriteLine($"⚠️ [Boot] Errore parsing DATABASE_URL: {ex.Message}");
     }
 }
-else
+
+// Se non siamo su Railway (o il parsing è fallito), proviamo la config locale
+if (string.IsNullOrEmpty(connectionString))
 {
     // SIAMO IN LOCALE
     connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -77,6 +79,7 @@ else
     }
     else
     {
+        databaseProvider = "Sqlite";
         Console.WriteLine("🗄️ [Boot] Configurazione Locale (SQLite)");
     }
 }
