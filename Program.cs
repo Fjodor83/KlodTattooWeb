@@ -22,9 +22,9 @@ var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://*:{port}");
 
 // ---------------------------------------------------------------------
-// Database Strategy
+// DATABASE STRATEGY (Auto-Detect)
 // ---------------------------------------------------------------------
-var databaseProvider = "Sqlite"; // Default
+var databaseProvider = "Sqlite"; // Default di partenza
 string? connectionString = null;
 
 // 1. Cerca variabili d'ambiente (Railway/Produzione)
@@ -33,32 +33,41 @@ var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL")
 
 if (!string.IsNullOrEmpty(dbUrl))
 {
-    // Railway fornisce spesso l'URL come "postgres://", Npgsql vuole "postgresql://"
-    if (dbUrl.StartsWith("postgres://"))
-        dbUrl = dbUrl.Replace("postgres://", "postgresql://");
+    // Railway fornisce l'URL. Convertiamo da formato URI a Connection String per Npgsql
+    try
+    {
+        // Normalizza lo schema se necessario (alcuni provider usano postgres://)
+        if (dbUrl.StartsWith("postgres://"))
+            dbUrl = dbUrl.Replace("postgres://", "postgresql://");
 
-    var uri = new Uri(dbUrl);
-    var userInfo = uri.UserInfo.Split(':');
-    var username = userInfo[0];
-    var password = userInfo.Length > 1 ? userInfo[1] : "";
+        var uri = new Uri(dbUrl);
+        var userInfo = uri.UserInfo.Split(':');
+        var username = userInfo[0];
+        var password = userInfo.Length > 1 ? userInfo[1] : "";
 
-    connectionString =
-        $"Host={uri.Host};" +
-        $"Port={uri.Port};" +
-        $"Database={uri.AbsolutePath.TrimStart('/')};" +
-        $"Username={username};" +
-        $"Password={password};" +
-        $"SSL Mode=Require;Trust Server Certificate=true";
+        connectionString =
+            $"Host={uri.Host};" +
+            $"Port={uri.Port};" +
+            $"Database={uri.AbsolutePath.TrimStart('/')};" +
+            $"Username={username};" +
+            $"Password={password};" +
+            $"SSL Mode=Require;Trust Server Certificate=true";
 
-    databaseProvider = "PostgreSQL";
-    Console.WriteLine("🐘 Usando PostgreSQL (da Variabili Ambiente)");
+        databaseProvider = "PostgreSQL";
+        Console.WriteLine("🐘 Usando PostgreSQL (da Variabili Ambiente)");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"⚠️ Errore parsing DATABASE_URL: {ex.Message}. Fallback su appsettings.");
+    }
 }
-else
+
+// 2. Se non abbiamo trovato nulla nelle variabili, usiamo appsettings.json
+if (string.IsNullOrEmpty(connectionString))
 {
-    // 2. Fallback su configurazione locale (appsettings.json)
     connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-    // Auto-detect: se la stringa contiene "Host=", è sicuramente Postgres
+    // ANALISI INTELLIGENTE: Se la stringa contiene "Host=", è sicuramente Postgres!
     if (!string.IsNullOrEmpty(connectionString) &&
        (connectionString.Contains("Host=", StringComparison.OrdinalIgnoreCase) ||
         connectionString.Contains("postgres", StringComparison.OrdinalIgnoreCase)))
@@ -68,11 +77,12 @@ else
     }
     else
     {
+        databaseProvider = "Sqlite";
         Console.WriteLine("🗄️ Usando SQLite (default)");
     }
 }
 
-// Configurazione DbContext
+// 3. Configurazione DbContext in base al provider rilevato
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     if (databaseProvider == "PostgreSQL")
@@ -81,7 +91,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     }
     else
     {
-        options.UseSqlite(connectionString ?? builder.Configuration.GetConnectionString("DefaultConnection"));
+        options.UseSqlite(connectionString ?? "Data Source=klodtattoo.db");
     }
 });
 
@@ -136,9 +146,9 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
-        logger.LogError(ex, "❌ Errore durante la migration del database");
-        // Non blocchiamo l'app se la migrazione fallisce (opzionale)
-        // throw; 
+        logger.LogError(ex, "❌ Errore durante la migration del database.");
+        // Non rilanciamo l'eccezione per evitare crash loop continui su Railway se il DB è temporaneamente giù,
+        // ma in produzione è meglio indagare.
     }
 
     // Ruoli
@@ -186,10 +196,12 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+// Areas
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
+// Default
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
