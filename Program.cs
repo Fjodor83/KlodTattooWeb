@@ -11,16 +11,10 @@ using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 // ---------------------------------------------------------------------
-// 🔍 LOG DIAGNOSTICO AVVIO
+// LOG DIAGNOSTICO AVVIO
 // ---------------------------------------------------------------------
 var dbEnvVar = Environment.GetEnvironmentVariable("DATABASE_URL");
 Console.WriteLine($"🔍 [BOOT] DATABASE_URL trovata? {(string.IsNullOrEmpty(dbEnvVar) ? "NO ❌" : "SI ✅")}");
-if (!string.IsNullOrEmpty(dbEnvVar))
-{
-    // Maschero la password per sicurezza nei log
-    var safeLog = System.Text.RegularExpressions.Regex.Replace(dbEnvVar, @":[^/]+@", ":***@");
-    Console.WriteLine($"🔍 [BOOT] Valore: {safeLog}");
-}
 
 // FIX per compatibilità PostgreSQL timestamp
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -30,17 +24,15 @@ var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://*:{port}");
 
 // ---------------------------------------------------------------------
-// CONFIGURAZIONE DATABASE
+// CONFIGURAZIONE DATABASE (SOLO POSTGRESQL)
 // ---------------------------------------------------------------------
 string connectionString;
-string databaseProvider;
 
 if (!string.IsNullOrEmpty(dbEnvVar))
 {
     // CASO 1: RAILWAY (Produzione)
     try
     {
-        // Normalizza lo schema (postgres:// -> postgresql://)
         var validUrl = dbEnvVar.StartsWith("postgres://")
             ? dbEnvVar.Replace("postgres://", "postgresql://")
             : dbEnvVar;
@@ -58,35 +50,29 @@ if (!string.IsNullOrEmpty(dbEnvVar))
             $"Password={password};" +
             $"SSL Mode=Require;Trust Server Certificate=true";
 
-        databaseProvider = "PostgreSQL";
         Console.WriteLine($"🐘 [BOOT] Configurazione Railway Attiva. Host: {uri.Host}");
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"⚠️ [BOOT] Errore parsing URL Railway: {ex.Message}. Passo al fallback.");
+        Console.WriteLine($"⚠️ [BOOT] Errore parsing URL Railway: {ex.Message}. Uso stringa locale.");
         connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-        databaseProvider = "Sqlite";
     }
 }
 else
 {
     // CASO 2: LOCALE (Sviluppo)
     connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    databaseProvider = "Sqlite";
-    Console.WriteLine("🗄️ [BOOT] Configurazione Locale (SQLite)");
+    Console.WriteLine("🐘 [BOOT] Configurazione Locale (PostgreSQL)");
 }
 
-// AddDbContext
+// FORZIAMO SEMPRE POSTGRESQL
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    if (databaseProvider == "PostgreSQL")
-        options.UseNpgsql(connectionString);
-    else
-        options.UseSqlite(connectionString);
+    options.UseNpgsql(connectionString);
 });
 
 // ---------------------------------------------------------------------
-// SETUP SERVIZI (Identity, MVC, ecc.)
+// SETUP SERVIZI
 // ---------------------------------------------------------------------
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<AppDbContext>()
@@ -109,11 +95,11 @@ builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 
-// 🔥 DEBUG: Mostra errori dettagliati anche in produzione per ora
+// Debug errori dettagliati
 app.UseDeveloperExceptionPage();
 
 // ---------------------------------------------------------------------
-// MIGRAZIONI AUTOMATICHE
+// MIGRATIONS
 // ---------------------------------------------------------------------
 using (var scope = app.Services.CreateScope())
 {
@@ -121,11 +107,11 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var db = services.GetRequiredService<AppDbContext>();
-        Console.WriteLine($"🔄 [MIGRATION] Tentativo connessione a: {databaseProvider}");
+        Console.WriteLine($"🔄 [MIGRATION] Tentativo migrazione su PostgreSQL...");
         await db.Database.MigrateAsync();
         Console.WriteLine("✅ [MIGRATION] Successo!");
 
-        // Seed Ruoli e Utente Admin
+        // Seed
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
         var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
 
@@ -143,7 +129,6 @@ using (var scope = app.Services.CreateScope())
             await userManager.AddToRoleAsync(admin, "Admin");
         }
 
-        // Seed Stili
         string[] tattooStyles = { "Realistic", "Fine line", "Black Art", "Lettering", "Small Tattoos", "Cartoons", "Animals" };
         foreach (var t in tattooStyles)
             if (!db.TattooStyles.Any(s => s.Name == t)) db.TattooStyles.Add(new TattooStyle { Name = t });
@@ -153,11 +138,9 @@ using (var scope = app.Services.CreateScope())
     catch (Exception ex)
     {
         Console.WriteLine($"❌ [MIGRATION ERROR] {ex.Message}");
-        // Non blocchiamo l'app, ma vedremo l'errore nei log o a video
     }
 }
 
-// Middleware
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
