@@ -26,7 +26,7 @@ builder.WebHost.UseUrls($"http://*:{port}");
 // ---------------------------------------------------------------------
 // CONFIGURAZIONE DATABASE (SOLO POSTGRESQL)
 // ---------------------------------------------------------------------
-string? connectionString = null;
+string connectionString;
 
 if (!string.IsNullOrEmpty(dbEnvVar))
 {
@@ -55,19 +55,13 @@ if (!string.IsNullOrEmpty(dbEnvVar))
     catch (Exception ex)
     {
         Console.WriteLine($"⚠️ [BOOT] Errore parsing URL Railway: {ex.Message}. Uso stringa locale.");
+        connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     }
 }
-
-// CASO 2: LOCALE (Sviluppo) o fallback
-if (string.IsNullOrEmpty(connectionString))
+else
 {
+    // CASO 2: LOCALE (Sviluppo)
     connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-    if (string.IsNullOrEmpty(connectionString))
-    {
-        throw new InvalidOperationException("❌ Nessuna connection string valida trovata. Imposta DefaultConnection in appsettings.Development.json o DATABASE_URL in Railway.");
-    }
-
     Console.WriteLine("🐘 [BOOT] Configurazione Locale (PostgreSQL)");
 }
 
@@ -86,7 +80,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.Sign
 
 builder.Services.AddControllersWithViews().AddViewLocalization();
 builder.Services.AddRazorPages();
-//my job
+
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
