@@ -86,7 +86,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.Sign
 
 builder.Services.AddControllersWithViews().AddViewLocalization();
 builder.Services.AddRazorPages();
-
+//my job
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
