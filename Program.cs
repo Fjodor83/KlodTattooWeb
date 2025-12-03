@@ -11,103 +11,40 @@ using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 // ---------------------------------------------------------------------
-// 🔍 DIAGNOSTICA AVVIO (Copia dai log se il deploy fallisce)
-// ---------------------------------------------------------------------
-Console.WriteLine("--------------------------------------------------");
-Console.WriteLine("🚀 AVVIO APPLICAZIONE - DIAGNOSTICA VARIABILI");
-var envVar = Environment.GetEnvironmentVariable("DATABASE_URL");
-var railwayVar = Environment.GetEnvironmentVariable("RAILWAY_DATABASE_URL");
-
-Console.WriteLine($"1. DATABASE_URL presente? {(string.IsNullOrEmpty(envVar) ? "NO ❌" : "SI ✅")}");
-Console.WriteLine($"2. RAILWAY_DATABASE_URL presente? {(string.IsNullOrEmpty(railwayVar) ? "NO ❌" : "SI ✅")}");
-
-if (!string.IsNullOrEmpty(envVar))
-    Console.WriteLine($"   -> Valore inizia con: {envVar.Substring(0, Math.Min(envVar.Length, 15))}...");
-// ---------------------------------------------------------------------
-
 // FIX per compatibilità PostgreSQL timestamp
+// ---------------------------------------------------------------------
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-// Configurazione Porta
+// ---------------------------------------------------------------------
+// Configurazione Porta per Railway
+// ---------------------------------------------------------------------
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://*:{port}");
 
 // ---------------------------------------------------------------------
-// 1. RILEVAMENTO DATABASE
+// 🛑 CONFIGURAZIONE MANUALE (HARDCODED PER DEBUG)
 // ---------------------------------------------------------------------
-string? connectionString = null;
-string databaseProvider = "Sqlite"; // Default
+// Ho inserito qui i dati del tuo DB Railway che mi hai fornito.
+// In futuro rimetteremo le variabili, ma ora DEVE funzionare.
+var connectionString = "Host=postgres.railway.internal;" +
+                       "Port=5432;" +
+                       "Database=railway;" +
+                       "Username=postgres;" +
+                       "Password=dHqHqMSTztlmgJNxfKpxRWGGCJSRxPSe;" +
+                       "SSL Mode=Require;" +
+                       "Trust Server Certificate=true";
 
-// A) PROVIAMO A LEGGERE DALLE VARIABILI D'AMBIENTE
-var dbUrl = envVar ?? railwayVar; // Usiamo quelle lette sopra
+Console.WriteLine("🐘 [FORCE] Usando Configurazione Manuale Railway");
 
-if (!string.IsNullOrEmpty(dbUrl))
-{
-    try
-    {
-        // Normalizza schema
-        if (dbUrl.StartsWith("postgres://"))
-            dbUrl = dbUrl.Replace("postgres://", "postgresql://");
-
-        var uri = new Uri(dbUrl);
-        var userInfo = uri.UserInfo.Split(':');
-        var username = userInfo[0];
-        var password = userInfo.Length > 1 ? userInfo[1] : "";
-
-        connectionString =
-            $"Host={uri.Host};" +
-            $"Port={uri.Port};" +
-            $"Database={uri.AbsolutePath.TrimStart('/')};" +
-            $"Username={username};" +
-            $"Password={password};" +
-            $"SSL Mode=Require;Trust Server Certificate=true";
-
-        databaseProvider = "PostgreSQL";
-        Console.WriteLine($"✅ Configurazione Railway OK. Host: {uri.Host}");
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"⚠️ Errore parsing DATABASE_URL: {ex.Message}");
-    }
-}
-
-// B) SE FALLISCE, USIAMO APPSETTINGS (LOCALE)
-if (string.IsNullOrEmpty(connectionString))
-{
-    Console.WriteLine("⚠️ Nessuna variabile ambiente valida trovata. Tentativo lettura appsettings.json...");
-    connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-    // Auto-detect PostgreSQL locale
-    if (!string.IsNullOrEmpty(connectionString) &&
-       (connectionString.Contains("Host=", StringComparison.OrdinalIgnoreCase) ||
-        connectionString.Contains("postgres", StringComparison.OrdinalIgnoreCase)))
-    {
-        databaseProvider = "PostgreSQL";
-        Console.WriteLine($"🐘 Configurazione Locale PostgreSQL rilevata: {connectionString}");
-    }
-    else
-    {
-        databaseProvider = "Sqlite";
-        Console.WriteLine("🗄️ Configurazione Locale SQLite (Fallback)");
-    }
-}
-
-// ---------------------------------------------------------------------
-// 2. CONFIGURAZIONE DbContext
-// ---------------------------------------------------------------------
+// Configurazione DbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    if (databaseProvider == "PostgreSQL")
-    {
-        options.UseNpgsql(connectionString);
-    }
-    else
-    {
-        options.UseSqlite(connectionString ?? "Data Source=klodtattoo.db");
-    }
+    options.UseNpgsql(connectionString);
 });
 
+// ---------------------------------------------------------------------
 // Identity
+// ---------------------------------------------------------------------
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -133,10 +70,16 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
+// ---------------------------------------------------------------------
+// BUILD APP
+// ---------------------------------------------------------------------
 var app = builder.Build();
 
+// 🔥 FORZIAMO LA PAGINA DI ERRORE DETTAGLIATA (Per vedere se ci sono altri problemi)
+app.UseDeveloperExceptionPage();
+
 // ---------------------------------------------------------------------
-// MIGRATIONS
+// Apply Migrations + Seed
 // ---------------------------------------------------------------------
 using (var scope = app.Services.CreateScope())
 {
@@ -145,9 +88,7 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var db = services.GetRequiredService<AppDbContext>();
-        // Test connessione prima di migrare
-        Console.WriteLine($"🔄 Tentativo migrazione DB su Provider: {db.Database.ProviderName}");
-
+        Console.WriteLine("🔄 Tentativo migrazione...");
         await db.Database.MigrateAsync();
         logger.LogInformation("📦 Database migrato correttamente");
 
@@ -157,7 +98,6 @@ using (var scope = app.Services.CreateScope())
             if (!await roleManager.RoleExistsAsync(role))
                 await roleManager.CreateAsync(new IdentityRole(role));
 
-        // ... (Seed user e tattoo styles omessi per brevità, se funzionano le migrazioni funzionerà anche questo)
         var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
         var adminEmail = Environment.GetEnvironmentVariable("ADMIN_EMAIL") ?? "admin@klodtattoo.com";
         var adminPass = Environment.GetEnvironmentVariable("ADMIN_PASSWORD") ?? "Admin@123";
@@ -179,12 +119,9 @@ using (var scope = app.Services.CreateScope())
     catch (Exception ex)
     {
         logger.LogError(ex, "❌ ERRORE CRITICO DATABASE");
-        // Non rilanciamo l'eccezione per permettere di leggere i log
+        // Non blocchiamo l'app, così puoi leggere l'errore a video
     }
 }
-
-// 🔥 FORZIAMO LA PAGINA DI ERRORE DETTAGLIATA (DEBUG)
-app.UseDeveloperExceptionPage();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -192,6 +129,7 @@ app.UseRouting();
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapRazorPages();
 app.MapControllerRoute(name: "areas", pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
