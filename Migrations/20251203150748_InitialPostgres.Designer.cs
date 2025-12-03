@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KlodTattooWeb.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251203145040_NomeMigrazione")]
-    partial class NomeMigrazione
+    [Migration("20251203150748_InitialPostgres")]
+    partial class InitialPostgres
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
