@@ -1,12 +1,16 @@
 ﻿using KlodTattooWeb.Models;
+using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace KlodTattooWeb.Data;
 
-public class AppDbContext : IdentityDbContext
+public class AppDbContext : IdentityDbContext, IDataProtectionKeyContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+    // Per salvare le chiavi di Data Protection nel database
+    public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
 
     public DbSet<PortfolioItem> PortfolioItems { get; set; }
     public DbSet<BookingRequest> BookingRequests { get; set; }
