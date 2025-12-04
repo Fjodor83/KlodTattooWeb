@@ -137,7 +137,18 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"❌ [MIGRATION ERROR] {ex.Message}");
+        Console.WriteLine("❌ [MIGRATION ERROR] An exception occurred during database migration and seeding.");
+        var currentEx = ex;
+        var i = 0;
+        while (currentEx != null)
+        {
+            Console.WriteLine($"-- INNER EXCEPTION LEVEL {i++} --");
+            Console.WriteLine($"Type: {currentEx.GetType().FullName}");
+            Console.WriteLine($"Message: {currentEx.Message}");
+            Console.WriteLine($"StackTrace: {currentEx.StackTrace}");
+            Console.WriteLine("-----------------------------");
+            currentEx = currentEx.InnerException;
+        }
     }
 }
 
