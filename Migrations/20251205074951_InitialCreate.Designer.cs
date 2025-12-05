@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KlodTattooWeb.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251205000452_InitialSchema_Verbose")]
-    partial class InitialSchema_Verbose
+    [Migration("20251205074951_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

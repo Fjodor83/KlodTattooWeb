@@ -1,16 +1,24 @@
-﻿using KlodTattooWeb.Data;
+﻿using KlodTattoo.Data.Helper;
+using KlodTattooWeb.Data;
+using KlodTattooWeb.Models;
+using KlodTattooWeb.Services;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.EntityFrameworkCore;
-using KlodTattooWeb.Services;
-using KlodTattooWeb.Models;
 using Microsoft.AspNetCore.Localization;
-using System.Globalization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.DataProtection;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = ConnectionHelper.GetConnectionString(builder.Configuration);
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
+
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddControllersWithViews();
 // ---------------------------------------------------------------------
 // LOG DIAGNOSTICO AVVIO
 // ---------------------------------------------------------------------
@@ -27,7 +35,7 @@ builder.WebHost.UseUrls($"http://*:{port}");
 // ---------------------------------------------------------------------
 // CONFIGURAZIONE DATABASE (SOLO POSTGRESQL)
 // ---------------------------------------------------------------------
-string connectionString;
+
 
 if (!string.IsNullOrEmpty(dbEnvVar))
 {

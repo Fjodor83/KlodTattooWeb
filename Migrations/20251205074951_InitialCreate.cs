@@ -61,7 +61,7 @@ namespace KlodTattooWeb.Migrations
                     Email = table.Column<string>(type: "text", nullable: false),
                     BodyPart = table.Column<string>(type: "text", nullable: false),
                     IdeaDescription = table.Column<string>(type: "text", nullable: false),
-                    PreferredDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    PreferredDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     IsConfirmed = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -212,7 +212,7 @@ namespace KlodTattooWeb.Migrations
                     Description = table.Column<string>(type: "text", nullable: false),
                     ImageUrl = table.Column<string>(type: "text", nullable: false),
                     TattooStyleId = table.Column<int>(type: "integer", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
