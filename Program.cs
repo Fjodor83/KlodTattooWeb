@@ -11,35 +11,16 @@ using Microsoft.Extensions.Options;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = ConnectionHelper.GetConnectionString(builder.Configuration);
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(connectionString));
 
-
-builder.Services.AddDefaultIdentity<IdentityUser>()
-    .AddEntityFrameworkStores<AppDbContext>();
-builder.Services.AddControllersWithViews();
-// ---------------------------------------------------------------------
-// LOG DIAGNOSTICO AVVIO
-// ---------------------------------------------------------------------
+// ----------------------------------------------------------
+// DATABASE CONFIG (LOCALE o RAILWAY)
+// ----------------------------------------------------------
 var dbEnvVar = Environment.GetEnvironmentVariable("DATABASE_URL");
-Console.WriteLine($"🔍 [BOOT] DATABASE_URL trovata? {(string.IsNullOrEmpty(dbEnvVar) ? "NO ❌" : "SI ✅")}");
-
-// FIX per compatibilità PostgreSQL timestamp
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-
-// Configurazione Porta
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-builder.WebHost.UseUrls($"http://*:{port}");
-
-// ---------------------------------------------------------------------
-// CONFIGURAZIONE DATABASE (SOLO POSTGRESQL)
-// ---------------------------------------------------------------------
-
+var connectionString = ConnectionHelper.GetConnectionString(builder.Configuration);
 
 if (!string.IsNullOrEmpty(dbEnvVar))
 {
-    // CASO 1: RAILWAY (Produzione)
+    // Railway
     try
     {
         var validUrl = dbEnvVar.StartsWith("postgres://")
@@ -48,53 +29,53 @@ if (!string.IsNullOrEmpty(dbEnvVar))
 
         var uri = new Uri(validUrl);
         var userInfo = uri.UserInfo.Split(':');
-        var username = userInfo[0];
-        var password = userInfo.Length > 1 ? userInfo[1] : "";
 
         connectionString =
-            $"Host={uri.Host};" +
-            $"Port={uri.Port};" +
-            $"Database={uri.AbsolutePath.TrimStart('/')};" +
-            $"Username={username};" +
-            $"Password={password};" +
+            $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};" +
+            $"Username={userInfo[0]};Password={(userInfo.Length > 1 ? userInfo[1] : "")};" +
             $"SSL Mode=Require;Trust Server Certificate=true";
 
-        Console.WriteLine($"🐘 [BOOT] Configurazione Railway Attiva. Host: {uri.Host}");
+        Console.WriteLine($"🐘 Railway DB: {uri.Host}");
     }
-    catch (Exception ex)
+    catch
     {
-        Console.WriteLine($"⚠️ [BOOT] Errore parsing URL Railway: {ex.Message}. Uso stringa locale.");
-        connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty;
+        connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "";
     }
 }
 else
 {
-    // CASO 2: LOCALE (Sviluppo)
-    connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty;
-    Console.WriteLine("🐘 [BOOT] Configurazione Locale (PostgreSQL)");
+    // Locale
+    connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "";
+    Console.WriteLine("🐘 PostgreSQL Locale");
 }
 
-// FORZIAMO SEMPRE POSTGRESQL
 builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseNpgsql(connectionString);
-});
+    options.UseNpgsql(connectionString));
 
-// Abilita Data Protection persistente su DB per risolvere l'errore del key ring
+// Fix timestamp PostgreSQL
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+// ----------------------------------------------------------
+// IDENTITY + ROLES (CONFIGURAZIONE CORRETTA E UNICA)
+// ----------------------------------------------------------
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddEntityFrameworkStores<AppDbContext>()
+.AddDefaultTokenProviders();
+
+// ----------------------------------------------------------
+// DATA PROTECTION su DB (obbligatorio su Railway)
+// ----------------------------------------------------------
 builder.Services.AddDataProtection()
     .PersistKeysToDbContext<AppDbContext>();
 
-// ---------------------------------------------------------------------
-// SETUP SERVIZI
-// ---------------------------------------------------------------------
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddDefaultTokenProviders();
-
-builder.Services.AddControllersWithViews().AddViewLocalization();
-builder.Services.AddRazorPages();
-
+// ----------------------------------------------------------
+// LOCALIZATION
+// ----------------------------------------------------------
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     var cultures = new[] { "de-DE", "it-IT" };
@@ -103,75 +84,103 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedUICultures = cultures.Select(c => new CultureInfo(c)).ToList();
 });
 
+// ----------------------------------------------------------
+// SERVICES
+// ----------------------------------------------------------
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
+// MVC + Razor Pages
+builder.Services.AddControllersWithViews().AddViewLocalization();
+builder.Services.AddRazorPages();
+
+// ----------------------------------------------------------
+// AVVIO APP
+// ----------------------------------------------------------
 var app = builder.Build();
 
-// Debug errori dettagliati
-app.UseDeveloperExceptionPage();
+// Dettagli errori solo in dev
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
 
-// ---------------------------------------------------------------------
-// MIGRATIONS - ESEGUIRE SEMPRE PRIMA DI TUTTO IL RESTO
-// ---------------------------------------------------------------------
+// ----------------------------------------------------------
+// MIGRAZIONI + SEED AUTOMATICO
+// ----------------------------------------------------------
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+
     try
     {
         var db = services.GetRequiredService<AppDbContext>();
-        Console.WriteLine($"🔄 [MIGRATION] Tentativo migrazione su PostgreSQL...");
+        Console.WriteLine("🔄 Applico migrazioni...");
         await db.Database.MigrateAsync();
-        Console.WriteLine("✅ [MIGRATION] Successo!");
+        Console.WriteLine("✅ Migrazioni OK");
 
-        // Seed
+        // Ruoli
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-        var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-
         string[] roles = { "Admin", "User" };
-        foreach (var role in roles)
-            if (!await roleManager.RoleExistsAsync(role)) await roleManager.CreateAsync(new IdentityRole(role));
 
+        foreach (var role in roles)
+            if (!await roleManager.RoleExistsAsync(role))
+                await roleManager.CreateAsync(new IdentityRole(role));
+
+        // Admin
+        var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
         var adminEmail = Environment.GetEnvironmentVariable("ADMIN_EMAIL") ?? "admin@klodtattoo.com";
         var adminPass = Environment.GetEnvironmentVariable("ADMIN_PASSWORD") ?? "Admin@123";
 
         if (await userManager.FindByEmailAsync(adminEmail) is null)
         {
-            var admin = new IdentityUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true };
+            var admin = new IdentityUser
+            {
+                UserName = adminEmail,
+                Email = adminEmail,
+                EmailConfirmed = true
+            };
+
             await userManager.CreateAsync(admin, adminPass);
             await userManager.AddToRoleAsync(admin, "Admin");
         }
 
-        string[] tattooStyles = { "Realistic", "Fine line", "Black Art", "Lettering", "Small Tattoos", "Cartoons", "Animals" };
+        // Tattoo styles
+        string[] tattooStyles =
+        {
+            "Realistic", "Fine line", "Black Art",
+            "Lettering", "Small Tattoos", "Cartoons", "Animals"
+        };
+
         foreach (var t in tattooStyles)
-            if (!db.TattooStyles.Any(s => s.Name == t)) db.TattooStyles.Add(new TattooStyle { Name = t });
+            if (!db.TattooStyles.Any(s => s.Name == t))
+                db.TattooStyles.Add(new TattooStyle { Name = t });
 
         await db.SaveChangesAsync();
     }
     catch (Exception ex)
     {
-        Console.WriteLine("❌ [MIGRATION ERROR] An exception occurred during database migration and seeding.");
-        var currentEx = ex;
-        var i = 0;
-        while (currentEx != null)
-        {
-            Console.WriteLine($"-- INNER EXCEPTION LEVEL {i++} --");
-            Console.WriteLine($"Type: {currentEx.GetType().FullName}");
-            Console.WriteLine($"Message: {currentEx.Message}");
-            Console.WriteLine($"StackTrace: {currentEx.StackTrace}");
-            Console.WriteLine("-----------------------------");
-            currentEx = currentEx.InnerException;
-        }
+        Console.WriteLine("❌ Errore migrazioni/seed");
+        Console.WriteLine(ex);
     }
 }
 
+// ----------------------------------------------------------
+// MIDDLEWARE
+// ----------------------------------------------------------
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+
+app.UseRequestLocalization(
+    app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+
 app.UseAuthentication();
 app.UseAuthorization();
 
+// ----------------------------------------------------------
+// ROUTES
+// ----------------------------------------------------------
 app.MapRazorPages();
 app.MapControllerRoute(name: "areas", pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
