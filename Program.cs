@@ -64,7 +64,7 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 // ----------------------------------------------------------
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString)
-           .EnableSensitiveDataLogging() // Per debug
+           .EnableSensitiveDataLogging()
            .LogTo(Console.WriteLine, LogLevel.Information));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
@@ -72,18 +72,16 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
-    options.Password.RequireUppercase = true; // CAMBIATO: richiede uppercase
-    options.Password.RequireNonAlphanumeric = true; // CAMBIATO: richiede caratteri speciali
-    options.Password.RequiredLength = 8; // CAMBIATO: almeno 8 caratteri
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredLength = 8;
 })
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
-// Data Protection
 builder.Services.AddDataProtection()
     .PersistKeysToDbContext<AppDbContext>();
 
-// Localization
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
@@ -93,7 +91,6 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedUICultures = cultures.Select(c => new CultureInfo(c)).ToList();
 });
 
-// Email
 builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
@@ -101,9 +98,6 @@ builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddControllersWithViews().AddViewLocalization();
 builder.Services.AddRazorPages();
 
-// ----------------------------------------------------------
-// BUILD APP
-// ----------------------------------------------------------
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -116,9 +110,6 @@ app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocal
 app.UseAuthentication();
 app.UseAuthorization();
 
-// ----------------------------------------------------------
-// MIGRATIONS + SEEDING DETTAGLIATO CON LOGGING
-// ----------------------------------------------------------
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -126,50 +117,19 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
-        logger.LogInformation("========================================");
-        logger.LogInformation("🚀 INIZIO PROCESSO DI SEEDING");
-        logger.LogInformation("========================================");
-
         var db = services.GetRequiredService<AppDbContext>();
 
-        logger.LogInformation("🔄 Applicazione migrazioni database...");
-
-        // Controlla se ci sono pending migrations
         var pendingMigrations = await db.Database.GetPendingMigrationsAsync();
         if (pendingMigrations.Any())
-        {
-            logger.LogWarning("⚠️ Ci sono migrazioni in sospeso:");
-            foreach (var m in pendingMigrations)
-                logger.LogWarning($" - {m}");
-
-            logger.LogInformation("✅ Applicazione migrazioni in sospeso...");
             await db.Database.MigrateAsync();
-            logger.LogInformation("✅ Migrazioni completate con successo");
-        }
-        else
-        {
-            logger.LogInformation("✅ Nessuna migrazione pendente, DB aggiornato");
-        }
 
-        await Task.Delay(500); // Assicurati che il DB sia pronto
-
-        // ---------------- RUOLI ----------------
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
         string[] roles = { "Admin", "User" };
 
         foreach (var role in roles)
-        {
             if (!await roleManager.RoleExistsAsync(role))
-            {
-                var result = await roleManager.CreateAsync(new IdentityRole(role));
-                if (result.Succeeded)
-                    logger.LogInformation($"✅ Ruolo '{role}' creato");
-                else
-                    logger.LogError($"❌ Errore creazione ruolo '{role}': {string.Join(", ", result.Errors.Select(e => e.Description))}");
-            }
-        }
+                await roleManager.CreateAsync(new IdentityRole(role));
 
-        // ---------------- ADMIN ----------------
         var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
 
         var adminEmail = Environment.GetEnvironmentVariable("ADMIN_EMAIL") ?? "admin@klodtattoo.com";
@@ -179,79 +139,40 @@ using (var scope = app.Services.CreateScope())
 
         if (existingAdmin == null)
         {
-            var admin = new IdentityUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true };
-            var result = await userManager.CreateAsync(admin, adminPass);
+            var admin = new IdentityUser
+            {
+                UserName = adminEmail,
+                Email = adminEmail,
+                EmailConfirmed = true
+            };
 
+            var result = await userManager.CreateAsync(admin, adminPass);
             if (result.Succeeded)
-            {
-                logger.LogInformation($"✅ Admin creato: {adminEmail}");
                 await userManager.AddToRoleAsync(admin, "Admin");
-                logger.LogInformation("✅ Ruolo 'Admin' assegnato");
-            }
-            else
-            {
-                logger.LogError($"❌ Errore creazione Admin '{adminEmail}': {string.Join(", ", result.Errors.Select(e => e.Description))}");
-            }
         }
         else
         {
-            logger.LogInformation($"✅ Admin già esistente: {adminEmail}");
             if (!await userManager.IsInRoleAsync(existingAdmin, "Admin"))
-            {
                 await userManager.AddToRoleAsync(existingAdmin, "Admin");
-                logger.LogInformation("✅ Ruolo 'Admin' aggiunto");
-            }
         }
 
-        // ---------------- TATTOO STYLES ----------------
         string[] tattooStyles = { "Realistic", "Fine line", "Black Art", "Lettering", "Small Tattoos", "Cartoons", "Animals" };
         var existingStyles = await db.TattooStyles.Select(t => t.Name).ToListAsync();
 
-        int addedCount = 0;
         foreach (var style in tattooStyles)
-        {
             if (!existingStyles.Contains(style))
-            {
                 db.TattooStyles.Add(new TattooStyle { Name = style });
-                addedCount++;
-            }
-        }
-        if (addedCount > 0)
-        {
-            await db.SaveChangesAsync();
-            logger.LogInformation($"✅ Aggiunti {addedCount} nuovi stili tatuaggio");
-        }
-        else
-        {
-            logger.LogInformation("✅ Tutti gli stili tatuaggio già presenti");
-        }
 
-        logger.LogInformation("========================================");
-        logger.LogInformation("✅ SEEDING COMPLETATO CON SUCCESSO");
-        logger.LogInformation("========================================");
+        await db.SaveChangesAsync();
+
     }
     catch (Exception ex)
     {
-        logger.LogError("========================================");
-        logger.LogError("❌ ERRORE DURANTE MIGRAZIONE/SEEDING");
-        logger.LogError($"Tipo: {ex.GetType().Name}");
-        logger.LogError($"Messaggio: {ex.Message}");
-        logger.LogError($"StackTrace:\n{ex.StackTrace}");
-
-        if (ex.InnerException != null)
-        {
-            logger.LogError("--- Inner Exception ---");
-            logger.LogError($"Tipo: {ex.InnerException.GetType().Name}");
-            logger.LogError($"Messaggio: {ex.InnerException.Message}");
-        }
-
-        logger.LogError("⚠️ L'app continuerà ad avviarsi, ma il seeding potrebbe essere incompleto");
+        var loggerError = services.GetRequiredService<ILogger<Program>>();
+        loggerError.LogError($"❌ Errore durante seeding: {ex.Message}");
     }
 }
 
-// ----------------------------------------------------------
-// ROUTES
-// ----------------------------------------------------------
 app.MapRazorPages();
 app.MapControllerRoute(name: "areas", pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
