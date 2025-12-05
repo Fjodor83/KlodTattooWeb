@@ -40,25 +40,28 @@ namespace KlodTattooWeb.Controllers
             return View();
         }
 
-        // POST: Admin/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Title,TattooStyleId")] PortfolioItem portfolioItem, IFormFile imageFile)
         {
-            // Rimuovi ImageUrl e Description dalla validazione del modello perché verranno gestiti manualmente.
             ModelState.Remove(nameof(portfolioItem.ImageUrl));
-            // ModelState.Remove(nameof(portfolioItem.Description)); // Description is not bound here, so no need to remove validation for it.
 
             if (ModelState.IsValid)
             {
                 if (imageFile != null && imageFile.Length > 0)
                 {
-                    // Generate unique file name
                     string wwwRootPath = _hostEnvironment.WebRootPath;
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
-                    string path = Path.Combine(wwwRootPath, "images", "portfolio", fileName);
 
-                    // Save image to wwwroot/images/portfolio
+                    // ⭐ AGGIUNGI QUESTE RIGHE - Crea la cartella se non esiste
+                    string uploadFolder = Path.Combine(wwwRootPath, "images", "portfolio");
+                    if (!Directory.Exists(uploadFolder))
+                    {
+                        Directory.CreateDirectory(uploadFolder);
+                    }
+
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+                    string path = Path.Combine(uploadFolder, fileName); // Usa uploadFolder invece di costruire il path di nuovo
+
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {
                         await imageFile.CopyToAsync(fileStream);
@@ -123,10 +126,16 @@ namespace KlodTattooWeb.Controllers
                             }
                         }
 
-                        // Save new image
+                        // ⭐ AGGIUNGI QUESTE RIGHE - Crea la cartella se non esiste
                         string wwwRootPath = _hostEnvironment.WebRootPath;
+                        string uploadFolder = Path.Combine(wwwRootPath, "images", "portfolio");
+                        if (!Directory.Exists(uploadFolder))
+                        {
+                            Directory.CreateDirectory(uploadFolder);
+                        }
+
                         string fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
-                        string path = Path.Combine(wwwRootPath, "images", "portfolio", fileName);
+                        string path = Path.Combine(uploadFolder, fileName);
 
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
@@ -135,7 +144,6 @@ namespace KlodTattooWeb.Controllers
                         portfolioItem.ImageUrl = "/images/portfolio/" + fileName;
                     }
 
-                    // Only update the properties that were bound and not auto-generated (like CreatedAt or Id)
                     _context.Update(portfolioItem);
                     await _context.SaveChangesAsync();
                 }
