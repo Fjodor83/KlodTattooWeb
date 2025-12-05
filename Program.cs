@@ -20,7 +20,6 @@ var connectionString = ConnectionHelper.GetConnectionString(builder.Configuratio
 
 if (!string.IsNullOrEmpty(dbEnvVar))
 {
-    // Railway
     try
     {
         var validUrl = dbEnvVar.StartsWith("postgres://")
@@ -40,24 +39,24 @@ if (!string.IsNullOrEmpty(dbEnvVar))
     catch
     {
         connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "";
+        Console.WriteLine("⚠️ Errore parsing DATABASE_URL, uso locale");
     }
 }
 else
 {
-    // Locale
     connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "";
     Console.WriteLine("🐘 PostgreSQL Locale");
 }
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(connectionString));
 
 // Fix timestamp PostgreSQL
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // ----------------------------------------------------------
-// IDENTITY + ROLES (CONFIGURAZIONE CORRETTA E UNICA)
+// SERVICES
 // ----------------------------------------------------------
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(connectionString));
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -65,17 +64,12 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
-// ----------------------------------------------------------
-// DATA PROTECTION su DB (obbligatorio su Railway)
-// ----------------------------------------------------------
+// Data Protection
 builder.Services.AddDataProtection()
     .PersistKeysToDbContext<AppDbContext>();
 
-// ----------------------------------------------------------
-// LOCALIZATION
-// ----------------------------------------------------------
+// Localization
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
-
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     var cultures = new[] { "de-DE", "it-IT" };
@@ -84,29 +78,31 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedUICultures = cultures.Select(c => new CultureInfo(c)).ToList();
 });
 
-// ----------------------------------------------------------
-// SERVICES
-// ----------------------------------------------------------
-builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+// Email
+builder.Services.Configure<EmailSettings>(
+    builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
-// MVC + Razor Pages
 builder.Services.AddControllersWithViews().AddViewLocalization();
 builder.Services.AddRazorPages();
 
 // ----------------------------------------------------------
-// AVVIO APP
+// BUILD APP
 // ----------------------------------------------------------
 var app = builder.Build();
 
-// Dettagli errori solo in dev
 if (app.Environment.IsDevelopment())
-{
     app.UseDeveloperExceptionPage();
-}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+app.UseAuthentication();
+app.UseAuthorization();
 
 // ----------------------------------------------------------
-// MIGRAZIONI + SEED AUTOMATICO
+// MIGRATIONS + SEEDING DETTAGLIATO
 // ----------------------------------------------------------
 using (var scope = app.Services.CreateScope())
 {
@@ -117,66 +113,75 @@ using (var scope = app.Services.CreateScope())
         var db = services.GetRequiredService<AppDbContext>();
         Console.WriteLine("🔄 Applico migrazioni...");
         await db.Database.MigrateAsync();
-        Console.WriteLine("✅ Migrazioni OK");
+        Console.WriteLine("✅ Migrazioni completate");
 
-        // Ruoli
+        // ---------------- RUOLI ----------------
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
         string[] roles = { "Admin", "User" };
-
         foreach (var role in roles)
+        {
             if (!await roleManager.RoleExistsAsync(role))
+            {
                 await roleManager.CreateAsync(new IdentityRole(role));
+                Console.WriteLine($"➕ Ruolo creato: {role}");
+            }
+            else
+            {
+                Console.WriteLine($"✔ Ruolo già esistente: {role}");
+            }
+        }
 
-        // Admin
+        // ---------------- ADMIN ----------------
         var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
         var adminEmail = Environment.GetEnvironmentVariable("ADMIN_EMAIL") ?? "admin@klodtattoo.com";
         var adminPass = Environment.GetEnvironmentVariable("ADMIN_PASSWORD") ?? "Admin@123";
 
         if (await userManager.FindByEmailAsync(adminEmail) is null)
         {
-            var admin = new IdentityUser
-            {
-                UserName = adminEmail,
-                Email = adminEmail,
-                EmailConfirmed = true
-            };
+            var admin = new IdentityUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true };
+            var result = await userManager.CreateAsync(admin, adminPass);
 
-            await userManager.CreateAsync(admin, adminPass);
-            await userManager.AddToRoleAsync(admin, "Admin");
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(admin, "Admin");
+                Console.WriteLine($"➕ Admin creato: {adminEmail}");
+            }
+            else
+            {
+                Console.WriteLine($"❌ Errore creazione admin {adminEmail}");
+                foreach (var err in result.Errors)
+                    Console.WriteLine($"  - {err.Description}");
+            }
+        }
+        else
+        {
+            Console.WriteLine($"✔ Admin già esistente: {adminEmail}");
         }
 
-        // Tattoo styles
-        string[] tattooStyles =
+        // ---------------- TATTOO STYLES ----------------
+        string[] tattooStyles = { "Realistic", "Fine line", "Black Art", "Lettering", "Small Tattoos", "Cartoons", "Animals" };
+        foreach (var style in tattooStyles)
         {
-            "Realistic", "Fine line", "Black Art",
-            "Lettering", "Small Tattoos", "Cartoons", "Animals"
-        };
-
-        foreach (var t in tattooStyles)
-            if (!db.TattooStyles.Any(s => s.Name == t))
-                db.TattooStyles.Add(new TattooStyle { Name = t });
+            if (!db.TattooStyles.Any(t => t.Name == style))
+            {
+                db.TattooStyles.Add(new TattooStyle { Name = style });
+                Console.WriteLine($"➕ TattooStyle aggiunto: {style}");
+            }
+            else
+            {
+                Console.WriteLine($"✔ TattooStyle già esistente: {style}");
+            }
+        }
 
         await db.SaveChangesAsync();
+        Console.WriteLine("✅ Seeding completato");
     }
     catch (Exception ex)
     {
-        Console.WriteLine("❌ Errore migrazioni/seed");
+        Console.WriteLine("❌ ERRORE durante migrazione/seeding:");
         Console.WriteLine(ex);
     }
 }
-
-// ----------------------------------------------------------
-// MIDDLEWARE
-// ----------------------------------------------------------
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseRouting();
-
-app.UseRequestLocalization(
-    app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
-
-app.UseAuthentication();
-app.UseAuthorization();
 
 // ----------------------------------------------------------
 // ROUTES
