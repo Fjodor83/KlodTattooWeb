@@ -29,10 +29,11 @@ WORKDIR /app
 # Copio l'app pubblicata
 COPY --from=publish /app/publish .
 
-# Variabile PORT richiesta da Railway
-ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT}
+# Railway passerà la variabile PORT a runtime
+# Non serve settarla qui, il Program.cs la leggerà
+ENV ASPNETCORE_ENVIRONMENT=Production
 
-# Porta esposta (non obbligatoria ma consigliata)
+# Porta di default (Railway la sovrascriverà)
 EXPOSE 8080
 
 ENTRYPOINT ["dotnet", "KlodTattooWeb.dll"]
