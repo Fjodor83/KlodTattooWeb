@@ -9,15 +9,11 @@ public class AppDbContext : IdentityDbContext, IDataProtectionKeyContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    // Per salvare le chiavi di Data Protection nel database
+    // Tabelle per Data Protection
     public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
 
+    // Tabelle custom della tua applicazione
     public DbSet<PortfolioItem> PortfolioItems { get; set; }
     public DbSet<BookingRequest> BookingRequests { get; set; }
     public DbSet<TattooStyle> TattooStyles { get; set; }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-     
-    }
-
 }

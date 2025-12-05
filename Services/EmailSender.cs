@@ -1,5 +1,5 @@
 using MailKit.Net.Smtp;
-using MailKit;
+using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using KlodTattooWeb.Models;
@@ -18,31 +18,37 @@ namespace KlodTattooWeb.Services
 
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var emailMessage = new MimeMessage();
+            var message = new MimeMessage();
 
-            emailMessage.From.Add(new MailboxAddress(_emailSettings.SenderName, _emailSettings.SenderEmail));
-            emailMessage.To.Add(new MailboxAddress("", email));
-            emailMessage.Subject = subject;
-            emailMessage.Body = new TextPart("html") { Text = htmlMessage };
-
-            using (var client = new SmtpClient())
+            message.From.Add(new MailboxAddress(_emailSettings.SenderName, _emailSettings.SenderEmail));
+            message.To.Add(new MailboxAddress(email, email));
+            message.Subject = subject;
+            message.Body = new TextPart("html")
             {
-                try
-                {
-                    await client.ConnectAsync(_emailSettings.SmtpServer, _emailSettings.SmtpPort, MailKit.Security.SecureSocketOptions.StartTls);
-                    await client.AuthenticateAsync(_emailSettings.SmtpUsername, _emailSettings.SmtpPassword);
-                    await client.SendAsync(emailMessage);
-                }
-                catch (Exception ex)
-                {
-                    // Log the exception
-                    Console.WriteLine($"Error sending email: {ex.Message}");
-                    throw; // Re-throw to indicate failure
-                }
-                finally
-                {
-                    await client.DisconnectAsync(true);
-                }
+                Text = htmlMessage
+            };
+
+            using var client = new SmtpClient();
+
+            try
+            {
+                await client.ConnectAsync(
+                    _emailSettings.SmtpServer,
+                    _emailSettings.SmtpPort,
+                    SecureSocketOptions.StartTls
+                );
+
+                await client.AuthenticateAsync(_emailSettings.SmtpUsername, _emailSettings.SmtpPassword);
+                await client.SendAsync(message);
+            }
+            catch
+            {
+                // Rilancia l'errore così Identity può gestirlo
+                throw;
+            }
+            finally
+            {
+                await client.DisconnectAsync(true);
             }
         }
     }
