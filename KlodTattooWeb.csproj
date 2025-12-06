@@ -26,7 +26,4 @@
 		<PackageReference Include="SQLite" Version="3.13.0" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Content Include="wwwroot\**" CopyToPublishDirectory="PreserveNewest" />
-	</ItemGroup>
 </Project>
