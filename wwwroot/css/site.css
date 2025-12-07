@@ -200,6 +200,10 @@ a {
     color: var(--secondary-text) !important;
 }
 
+.text-gold {
+    color: var(--accent-color) !important;
+}
+
 .box-shadow {
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .5);
 }
