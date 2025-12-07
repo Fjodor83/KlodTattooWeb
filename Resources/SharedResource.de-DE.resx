@@ -321,4 +321,7 @@
   <data name="Back_To_Portfolio" xml:space="preserve">
     <value>Zurück zum Portfolio</value>
   </data>
+  <data name="Created_On" xml:space="preserve">
+    <value>Erstellt am</value>
+  </data>
 </root>
