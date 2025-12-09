@@ -176,23 +176,27 @@
                     <h6 class="text-uppercase fw-bold mb-3 text-light">@Localizer["Footer_QuickLinks"]</h6>
                     <ul class="list-unstyled footer-links">
                         <li class="mb-2">
-                            <a asp-controller="Home" asp-action="Index" class="text-muted text-decoration-none">
-                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>@Localizer["Nav_Home"]
+                            <a asp-controller="Home" asp-action="Index" class="text-muted text-decoration-none d-flex align-items-center">
+                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>
+                                <span>@Localizer["Nav_Home"]</span>
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a asp-controller="Portfolio" asp-action="Index" class="text-muted text-decoration-none">
-                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>@Localizer["Nav_Portfolio"]
+                            <a asp-controller="Portfolio" asp-action="Index" class="text-muted text-decoration-none d-flex align-items-center">
+                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>
+                                <span>@Localizer["Nav_Portfolio"]</span>
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a asp-controller="Services" asp-action="Index" class="text-muted text-decoration-none">
-                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>@Localizer["Nav_Services"]
+                            <a asp-controller="Services" asp-action="Index" class="text-muted text-decoration-none d-flex align-items-center">
+                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>
+                                <span>@Localizer["Nav_Services"]</span>
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a asp-controller="Info" asp-action="Index" class="text-muted text-decoration-none">
-                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>@Localizer["Nav_Info"] & FAQ
+                            <a asp-controller="Info" asp-action="Index" class="text-muted text-decoration-none d-flex align-items-center">
+                                <i class="fas fa-chevron-right me-2" style="color: #d4af37; font-size: 0.7rem;"></i>
+                                <span>@Localizer["Nav_Info"] & FAQ</span>
                             </a>
                         </li>
                     </ul>
@@ -202,25 +206,21 @@
                 <div class="col-lg-3 col-md-6">
                     <h6 class="text-uppercase fw-bold mb-3 text-light">@Localizer["Footer_Services"]</h6>
                     <ul class="list-unstyled footer-links">
-                        <li class="mb-2">
-                            <span class="text-muted">
-                                <i class="fas fa-check text-gold me-2"></i>@Localizer["Footer_Service_Custom"]
-                            </span>
+                        <li class="mb-2 d-flex align-items-center">
+                            <i class="fas fa-check text-gold me-2"></i>
+                            <span class="text-muted">@Localizer["Footer_Service_Custom"]</span>
                         </li>
-                        <li class="mb-2">
-                            <span class="text-muted">
-                                <i class="fas fa-check text-gold me-2"></i>@Localizer["Footer_Service_CoverUp"]
-                            </span>
+                        <li class="mb-2 d-flex align-items-center">
+                            <i class="fas fa-check text-gold me-2"></i>
+                            <span class="text-muted">@Localizer["Footer_Service_CoverUp"]</span>
                         </li>
-                        <li class="mb-2">
-                            <span class="text-muted">
-                                <i class="fas fa-check text-gold me-2"></i>@Localizer["Footer_Service_Restoration"]
-                            </span>
+                        <li class="mb-2 d-flex align-items-center">
+                            <i class="fas fa-check text-gold me-2"></i>
+                            <span class="text-muted">@Localizer["Footer_Service_Restoration"]</span>
                         </li>
-                        <li class="mb-2">
-                            <span class="text-muted">
-                                <i class="fas fa-check text-gold me-2"></i>@Localizer["Footer_Service_Consultation"]
-                            </span>
+                        <li class="mb-2 d-flex align-items-center">
+                            <i class="fas fa-check text-gold me-2"></i>
+                            <span class="text-muted">@Localizer["Footer_Service_Consultation"]</span>
                         </li>
                     </ul>
                 </div>
@@ -232,23 +232,23 @@
                         <li class="mb-2 d-flex align-items-start">
                             <i class="fas fa-map-marker-alt text-warning me-2 mt-1"></i>
                             <span class="text-muted small">
-                                Lindenstra�e 26<br>
+                                Lindenstrae 26<br>
                                 63785 Obernburg am Main
                             </span>
                         </li>
-                        <li class="mb-2">
+                        <li class="mb-2 d-flex align-items-center">
                             <i class="fas fa-phone text-warning me-2"></i>
                             <a href="tel:+491722487670" class="text-muted text-decoration-none small">
                                 +49 172 2487670
                             </a>
                         </li>
-                        <li class="mb-2">
+                        <li class="mb-2 d-flex align-items-center">
                             <i class="fas fa-envelope text-warning me-2"></i>
                             <a href="mailto:b.klodtattoo@gmail.com" class="text-muted text-decoration-none small">
                                 b.klodtattoo@gmail.com
                             </a>
                         </li>
-                        <li class="mb-2">
+                        <li class="mb-2 d-flex align-items-center">
                             <i class="fas fa-clock text-warning me-2"></i>
                             <span class="text-muted small">Mo-Fr: 10:00-19:00</span>
                         </li>
