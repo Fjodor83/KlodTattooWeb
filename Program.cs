@@ -98,10 +98,16 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedUICultures = cultures.Select(c => new CultureInfo(c)).ToList();
 });
 
+// --- CONFIGURAZIONE EMAIL AGGIORNATA ---
 builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("EmailSettings"));
+
+// 1. Per Identity (Interfaccia generica)
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
+// 2. Per il BookingController (Classe concreta - FONDAMENTALE PER IL REPLY-TO)
+builder.Services.AddTransient<EmailSender>();
+// ---------------------------------------
 builder.Services.AddControllersWithViews().AddViewLocalization();
 builder.Services.AddRazorPages();
 

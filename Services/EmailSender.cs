@@ -16,13 +16,39 @@ namespace KlodTattooWeb.Services
             _emailSettings = emailSettings.Value;
         }
 
+        // Metodo standard per Identity (Reset Password, Conferma Email)
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
+        {
+            await ExecuteSendEmailAsync(email, subject, htmlMessage, null);
+        }
+
+        // NUOVO METODO: Da usare nel BookingController per le mail dai clienti
+        // Permette di impostare il "Rispondi a" (Reply-To) verso il cliente
+        public async Task SendContactEmailAsync(string clientEmail, string clientName, string subject, string htmlMessage)
+        {
+            // Inviamo la mail a NOI STESSI (SenderEmail), ma se clicchiamo rispondi, rispondiamo al CLIENTE (clientEmail)
+            await ExecuteSendEmailAsync(_emailSettings.SenderEmail, subject, htmlMessage, clientEmail);
+        }
+
+        // Metodo privato che esegue l'invio reale
+        private async Task ExecuteSendEmailAsync(string toEmail, string subject, string htmlMessage, string? replyToEmail)
         {
             var message = new MimeMessage();
 
+            // Il mittente DEVE essere la mail autenticata (Tu)
             message.From.Add(new MailboxAddress(_emailSettings.SenderName, _emailSettings.SenderEmail));
-            message.To.Add(new MailboxAddress(email, email));
+
+            // Il destinatario
+            message.To.Add(new MailboxAddress("", toEmail));
+
+            // Se c'è una mail per la risposta (quella del cliente), la aggiungiamo
+            if (!string.IsNullOrEmpty(replyToEmail))
+            {
+                message.ReplyTo.Add(new MailboxAddress("", replyToEmail));
+            }
+
             message.Subject = subject;
+
             message.Body = new TextPart("html")
             {
                 Text = htmlMessage
@@ -32,19 +58,24 @@ namespace KlodTattooWeb.Services
 
             try
             {
+                // Connessione a Google
                 await client.ConnectAsync(
                     _emailSettings.SmtpServer,
                     _emailSettings.SmtpPort,
                     SecureSocketOptions.StartTls
                 );
 
+                // Login
                 await client.AuthenticateAsync(_emailSettings.SmtpUsername, _emailSettings.SmtpPassword);
+
+                // Invio
                 await client.SendAsync(message);
             }
-            catch
+            catch (Exception ex)
             {
-                // Rilancia l'errore così Identity può gestirlo
-                throw;
+                // In fase di sviluppo è utile vedere l'errore nella console
+                Console.WriteLine($"Errore invio email: {ex.Message}");
+                throw; // Rilanciamo l'errore per gestirlo nel Controller o mostrarlo all'utente
             }
             finally
             {

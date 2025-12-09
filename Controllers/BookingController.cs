@@ -1,20 +1,19 @@
 using KlodTattooWeb.Data;
 using KlodTattooWeb.Models;
 using Microsoft.AspNetCore.Mvc;
-using KlodTattooWeb.Services; // Add this using directive
+using KlodTattooWeb.Services;
 using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services; // Add this using directive
 
 namespace KlodTattooWeb.Controllers
 {
     public class BookingController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly IEmailSender _emailSender;
+        // Usiamo la classe concreta per accedere al metodo SendContactEmailAsync
+        private readonly EmailSender _emailSender;
         private readonly EmailSettings _emailSettings;
 
-        public BookingController(AppDbContext context, IEmailSender emailSender, IOptions<EmailSettings> emailSettings)
+        public BookingController(AppDbContext context, EmailSender emailSender, IOptions<EmailSettings> emailSettings)
         {
             _context = context;
             _emailSender = emailSender;
@@ -37,7 +36,9 @@ namespace KlodTattooWeb.Controllers
                 _context.Add(bookingRequest);
                 await _context.SaveChangesAsync();
 
-                // Send email to client
+                // ---------------------------------------------------
+                // 1. Email al CLIENTE (Conferma)
+                // ---------------------------------------------------
                 var clientSubject = "Conferma Ricezione Richiesta di Prenotazione KlodTattoo";
                 var clientMessage = $"Ciao {bookingRequest.ClientName},<br/><br/>" +
                                     $"Abbiamo ricevuto la tua richiesta di prenotazione per un tatuaggio.<br/>" +
@@ -46,9 +47,14 @@ namespace KlodTattooWeb.Controllers
                                     $"Descrizione dell'idea: {bookingRequest.IdeaDescription}<br/><br/>" +
                                     $"Ti contatteremo presto per definire i dettagli.<br/><br/>" +
                                     $"Grazie,<br/>Il team KlodTattoo";
+
+                // Usa il metodo standard (base)
                 await _emailSender.SendEmailAsync(bookingRequest.Email, clientSubject, clientMessage);
 
-                // Send email to admin/studio
+
+                // ---------------------------------------------------
+                // 2. Email all'ADMIN (Tu)
+                // ---------------------------------------------------
                 var adminSubject = "NUOVA RICHIESTA DI PRENOTAZIONE KlodTattoo";
                 var adminMessage = $"È stata inviata una nuova richiesta di prenotazione:<br/><br/>" +
                                    $"Nome Cliente: {bookingRequest.ClientName}<br/>" +
@@ -57,8 +63,14 @@ namespace KlodTattooWeb.Controllers
                                    $"Parte del Corpo: {bookingRequest.BodyPart}<br/>" +
                                    $"Descrizione Idea: {bookingRequest.IdeaDescription}<br/><br/>" +
                                    $"Accedi all'area admin per gestire la richiesta.";
-                await _emailSender.SendEmailAsync(_emailSettings.SenderEmail, adminSubject, adminMessage);
 
+                // Usa il metodo NUOVO che imposta il Reply-To verso il cliente
+                await _emailSender.SendContactEmailAsync(
+                    bookingRequest.Email,      // Email del cliente (per rispondere a lui)
+                    bookingRequest.ClientName, // Nome del cliente
+                    adminSubject,
+                    adminMessage
+                );
 
                 return RedirectToAction(nameof(Success));
             }
