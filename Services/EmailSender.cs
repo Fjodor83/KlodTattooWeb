@@ -62,7 +62,7 @@ namespace KlodTattooWeb.Services
                 await client.ConnectAsync(
                     _emailSettings.SmtpServer,
                     _emailSettings.SmtpPort,
-                    SecureSocketOptions.StartTls
+                    SecureSocketOptions.Auto
                 );
 
                 // Login
