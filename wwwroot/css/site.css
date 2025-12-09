@@ -279,6 +279,12 @@ a:hover {
     transition: all 0.3s ease;
 }
 
+@media (max-width: 768px) {
+    .navbar .navbar-logo-custom {
+        height: 50px;
+    }
+}
+
 .navbar-logo-custom:hover {
     opacity: 1;
     transform: scale(1.05);
