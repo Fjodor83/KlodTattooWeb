@@ -2,6 +2,10 @@
 @{
     var searchedLocation = Localizer.GetString("Nav_Home").SearchedLocation;
     logger.LogWarning($"Searched location for Nav_Home: {searchedLocation}");
+
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    var action = ViewContext.RouteData.Values["action"]?.ToString();
+    var isHomePage = controller == "Home" && action == "Index";
 }
 <!DOCTYPE html>
 <html lang="@System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
@@ -38,8 +42,9 @@
 
 <body class="d-flex flex-column min-vh-100">
     <!-- Header/Navbar -->
-    <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg navbar-dark shadow-lg" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); backdrop-filter: blur(10px);">
+    <header class="fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark @(isHomePage ? "navbar-transparent shadow-none" : "navbar-glass shadow-sm")" 
+             data-dynamic-navbar="@(isHomePage.ToString().ToLower())">
             <div class="container">
                 <!-- Logo/Brand -->
                 <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
@@ -119,7 +124,7 @@
     </header>
 
     <!-- Main Content -->
-    <div class="flex-grow-1">
+    <div class="flex-grow-1 @(isHomePage ? "hero-page-wrapper" : "page-content-wrapper")">
         <main role="main">
             @RenderBody()
         </main>

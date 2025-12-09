@@ -5,13 +5,21 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@Localizer["Nav_Welcome"] @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link">@Localizer["Nav_Logout"]</button>
-        </form>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            @Localizer["Nav_Welcome"] @User.Identity?.Name!
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
+            <li>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@Localizer["Manage_Account"]</a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="dropdown-item" style="cursor:pointer;">@Localizer["Nav_Logout"]</button>
+                </form>
+            </li>
+        </ul>
     </li>
 }
 else

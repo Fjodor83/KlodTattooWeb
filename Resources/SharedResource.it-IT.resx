@@ -324,4 +324,7 @@
   <data name="Created_On" xml:space="preserve">
     <value>Creato il</value>
   </data>
+  <data name="Manage_Account" xml:space="preserve">
+    <value>Gestisci Account</value>
+  </data>
 </root>

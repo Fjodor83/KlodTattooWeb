@@ -5,7 +5,8 @@
     --bg-color: #121212;
     --surface-color: #1e1e1e;
     --text-color: #e0e0e0;
-    --accent-color: #d4af37; /* Gold */
+    --accent-color: #d4af37;
+    /* Gold */
     --accent-hover: #b5952f;
     --secondary-text: #a0a0a0;
     /* NEW FONTS */
@@ -31,7 +32,12 @@ body {
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-heading);
     color: var(--accent-color);
 }
@@ -43,9 +49,9 @@ a {
     transition: color 0.3s ease;
 }
 
-    a:hover {
-        color: var(--accent-hover);
-    }
+a:hover {
+    color: var(--accent-hover);
+}
 
 /* Navbar base */
 .navbar {
@@ -72,9 +78,9 @@ a {
     font-family: var(--font-body);
 }
 
-    .navbar-nav .nav-link:hover {
-        color: var(--accent-color) !important;
-    }
+.navbar-nav .nav-link:hover {
+    color: var(--accent-color) !important;
+}
 
 /* Pulsante Prenota */
 .navbar .btn-primary {
@@ -88,10 +94,10 @@ a {
     transition: all 0.3s ease;
 }
 
-    .navbar .btn-primary:hover {
-        background-color: var(--accent-hover);
-        border-color: var(--accent-hover);
-    }
+.navbar .btn-primary:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
 
 /* Navbar collapse mobile */
 .navbar-toggler {
@@ -114,9 +120,9 @@ a {
         flex-direction: row;
     }
 
-        .navbar-nav .nav-item {
-            margin-left: 1rem;
-        }
+    .navbar-nav .nav-item {
+        margin-left: 1rem;
+    }
 }
 
 /* Footer */
@@ -143,10 +149,10 @@ a {
     font-family: var(--font-body);
 }
 
-    .btn-primary:hover {
-        background-color: var(--accent-hover);
-        border-color: var(--accent-hover);
-    }
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
 
 .btn-outline-light {
     border-color: var(--accent-color);
@@ -154,10 +160,10 @@ a {
     font-family: var(--font-body);
 }
 
-    .btn-outline-light:hover {
-        background-color: var(--accent-color);
-        color: #000;
-    }
+.btn-outline-light:hover {
+    background-color: var(--accent-color);
+    color: #000;
+}
 
 /* Cards */
 .card {
@@ -183,17 +189,17 @@ a {
     font-family: var(--font-body);
 }
 
-    .form-control:focus {
-        background-color: #333 !important;
-        border-color: var(--accent-color) !important;
-        color: #ffffff !important;
-        box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25) !important;
-    }
+.form-control:focus {
+    background-color: #333 !important;
+    border-color: var(--accent-color) !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25) !important;
+}
 
-    .form-control::placeholder {
-        color: #888 !important;
-        opacity: 1;
-    }
+.form-control::placeholder {
+    color: #888 !important;
+    opacity: 1;
+}
 
 /* Utilities */
 .text-muted {
@@ -227,4 +233,44 @@ a {
 .dropdown-item:hover {
     background-color: #333;
     color: var(--accent-color);
+}
+
+/* Glass Navbar (Scrolled) */
+.navbar.navbar-glass {
+    background: rgba(20, 20, 20, 0.6) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    transition: all 0.3s ease;
+}
+
+/* Transparent Navbar (Top of Home Page) */
+.navbar.navbar-transparent {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: none !important;
+
+    box-shadow: none !important;
+}
+
+/* Hero Section */
+.hero-section {
+    background-image: url('/images/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 130vh;
+    min-height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Page Spacers */
+.page-content-wrapper {
+    padding-top: 100px;
+}
+
+.hero-page-wrapper {
+    padding-top: 0 !important;
 }

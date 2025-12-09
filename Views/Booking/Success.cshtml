@@ -6,7 +6,7 @@
 
 <div class="container mt-5 text-center" style="min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
     <i class="fas fa-check-circle fa-5x mb-4" style="color: #d4af37;"></i>
-    <h1 class="display-4 text-uppercase mb-3">@Localizer["Success_Title"]</h1>
-    <p class="lead text-muted mb-5">@Html.Raw(Localizer["Success_Subtitle"])</p>
-    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-light btn-lg px-5">@Localizer["Button_BackToHome"]</a>
+    <h1 class="display-4 text-uppercase mb-3">@Localizer["Success_Title"].Value</h1>
+    <p class="lead text-muted mb-5">@Localizer["Success_Subtitle"].Value</p>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-lg px-5">@Localizer["Button_BackToHome"].Value</a>
 </div>
