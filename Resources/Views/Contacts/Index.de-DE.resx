@@ -86,13 +86,13 @@
     <value>Mo - Fr</value>
   </data>
   <data name="OpeningHours_Weekdays_Time" xml:space="preserve">
-    <value>10:00 - 19:00</value>
+    <value>11:00 - 16:00</value>
   </data>
   <data name="OpeningHours_Saturday" xml:space="preserve">
     <value>Samstag</value>
   </data>
   <data name="OpeningHours_Saturday_Time" xml:space="preserve">
-    <value>10:00 - 16:00</value>
+    <value>Geschlossen</value>
   </data>
   <data name="OpeningHours_Sunday" xml:space="preserve">
     <value>Sonntag</value>

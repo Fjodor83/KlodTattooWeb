@@ -86,13 +86,13 @@
     <value>Lun - Ven</value>
   </data>
   <data name="OpeningHours_Weekdays_Time" xml:space="preserve">
-    <value>10:00 - 19:00</value>
+    <value>11:00 - 16:00</value>
   </data>
   <data name="OpeningHours_Saturday" xml:space="preserve">
     <value>Sabato</value>
   </data>
   <data name="OpeningHours_Saturday_Time" xml:space="preserve">
-    <value>10:00 - 16:00</value>
+    <value>Chiuso</value>
   </data>
   <data name="OpeningHours_Sunday" xml:space="preserve">
     <value>Domenica</value>
