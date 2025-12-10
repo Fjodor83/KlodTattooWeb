@@ -98,7 +98,9 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedUICultures = cultures.Select(c => new CultureInfo(c)).ToList();
 });
 
-// --- CONFIGURAZIONE EMAIL AGGIORNATA ---
+// ----------------------------------------------------------
+// EMAIL CONFIGURATION - RESEND (AGGIORNATO)
+// ----------------------------------------------------------
 builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("EmailSettings"));
 
@@ -107,9 +109,18 @@ builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 // 2. Per il BookingController (Classe concreta - FONDAMENTALE PER IL REPLY-TO)
 builder.Services.AddTransient<EmailSender>();
-// ---------------------------------------
+
+Console.WriteLine("📧 EmailSender configurato con Resend API");
+// ----------------------------------------------------------
+
 builder.Services.AddControllersWithViews().AddViewLocalization();
 builder.Services.AddRazorPages();
+
+// ----------------------------------------------------------
+// HEALTH CHECKS (utile per Railway monitoring)
+// ----------------------------------------------------------
+builder.Services.AddHealthChecks()
+    .AddNpgSql(connectionString, name: "database", timeout: TimeSpan.FromSeconds(3));
 
 var app = builder.Build();
 
@@ -141,7 +152,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // ----------------------------------------------------------
-// DATABASE SEEDING - USA IL TUO SEEDER DEDICATO
+// DATABASE SEEDING & MIGRATIONS
 // ----------------------------------------------------------
 using (var scope = app.Services.CreateScope())
 {
@@ -150,21 +161,35 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
+        // Applica migrations automaticamente (importante per Railway)
+        var db = services.GetRequiredService<AppDbContext>();
+        Console.WriteLine("🔄 Applicazione migrations database...");
+        await db.Database.MigrateAsync();
+        Console.WriteLine("✅ Migrations completate");
+
         // Usa il tuo DatabaseSeeder che ha già il reset password!
+        Console.WriteLine("🌱 Avvio seeding database...");
         await DatabaseSeeder.SeedAsync(services, logger);
+        Console.WriteLine("✅ Seeding completato");
     }
     catch (Exception ex)
     {
-        logger.LogError($"❌ ERRORE CRITICO NEL SEEDING: {ex}");
-        // In produzione, potrebbe essere meglio lanciare l'eccezione
-        // per far fallire il deploy se il seeding è critico
+        logger.LogError($"❌ ERRORE CRITICO NEL SETUP DATABASE: {ex.Message}");
+        logger.LogError($"Stack trace: {ex.StackTrace}");
+        // In produzione, fai fallire il deploy se il database non è accessibile
         throw;
     }
 }
 
+// ----------------------------------------------------------
+// ROUTES & HEALTH CHECK
+// ----------------------------------------------------------
+app.MapHealthChecks("/health");
 app.MapRazorPages();
 app.MapControllerRoute(name: "areas", pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
 Console.WriteLine($"✅ Applicazione pronta e in ascolto sulla porta {port}");
+Console.WriteLine($"🏥 Health check disponibile su: /health");
+
 app.Run();

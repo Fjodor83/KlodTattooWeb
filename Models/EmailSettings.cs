@@ -10,5 +10,6 @@ namespace KlodTattooWeb.Models
 
         public string SenderEmail { get; set; } = string.Empty;
         public string SenderName { get; set; } = string.Empty;
+        public required string ResendApiKey { get; set; }
     }
 }
