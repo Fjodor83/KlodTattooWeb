@@ -1,7 +1,7 @@
 # =========================
 # STAGE 1 — RESTORE
 # =========================
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 # Copio il csproj prima per sfruttare la cache Docker
@@ -23,7 +23,7 @@ RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
 # =========================
 # STAGE 3 — RUNTIME
 # =========================
-FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
 
 # Copio l'app pubblicata
