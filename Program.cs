@@ -13,14 +13,19 @@ using System.Globalization;
 var builder = WebApplication.CreateBuilder(args);
 
 // ----------------------------------------------------------
-// CONFIGURAZIONE PORTA PER RAILWAY
+// CONFIGURAZIONE PORTA (RAILWAY vs IIS/DOCKER)
 // ----------------------------------------------------------
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
-Console.WriteLine($"🚀 Server configurato per ascoltare sulla porta: {port}");
+// Su Railway la porta viene passata via env PORT.
+// Su IIS (IONOS) non dobbiamo forzare UseUrls, gestisce tutto il modulo ASP.NET Core.
+var port = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrEmpty(port))
+{
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+    Console.WriteLine($"🚀 Server configurato per ascoltare sulla porta: {port}");
+}
 
 // ----------------------------------------------------------
-// LOGGING CONFIGURATION (IMPORTANTE PER DEBUG!)
+// LOGGING CONFIGURATION
 // ----------------------------------------------------------
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
@@ -28,12 +33,14 @@ builder.Logging.AddDebug();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
 // ----------------------------------------------------------
-// DATABASE CONFIG (LOCALE o RAILWAY)
+// DATABASE CONFIG (Multi-Provider: Postgres, Mssql, Sqlite)
 // ----------------------------------------------------------
+var dbProvider = builder.Configuration["ConnectionStrings:DatabaseProvider"] ?? "Postgres";
 var dbEnvVar = Environment.GetEnvironmentVariable("DATABASE_URL");
-var connectionString = ConnectionHelper.GetConnectionString(builder.Configuration);
+string connectionString = "";
 
-if (!string.IsNullOrEmpty(dbEnvVar))
+// 1. Priority: Environment Variable (Railway/Docker overriding EVERYTHING)
+if (!string.IsNullOrEmpty(dbEnvVar) && dbProvider.Equals("Postgres", StringComparison.OrdinalIgnoreCase))
 {
     try
     {
@@ -49,30 +56,58 @@ if (!string.IsNullOrEmpty(dbEnvVar))
             $"Username={userInfo[0]};Password={(userInfo.Length > 1 ? userInfo[1] : "")};" +
             $"SSL Mode=Require;Trust Server Certificate=true";
 
-        Console.WriteLine($"🐘 Railway DB: {uri.Host}:{uri.Port}");
+        Console.WriteLine($"🐘 Railway DB (Env Var): {uri.Host}:{uri.Port}");
     }
     catch (Exception ex)
     {
-        connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "";
         Console.WriteLine($"⚠️ Errore parsing DATABASE_URL: {ex.Message}");
     }
 }
-else
+
+// 2. Config File (appsettings.json)
+if (string.IsNullOrEmpty(connectionString))
 {
-    connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "";
-    Console.WriteLine("🐘 PostgreSQL Locale");
+    if (dbProvider.Equals("Mssql", StringComparison.OrdinalIgnoreCase))
+    {
+        connectionString = builder.Configuration.GetConnectionString("MssqlConnection") ?? "";
+        Console.WriteLine("🗄️ MSSQL Database (IONOS)");
+    }
+    else if (dbProvider.Equals("Sqlite", StringComparison.OrdinalIgnoreCase))
+    {
+        connectionString = builder.Configuration.GetConnectionString("SqliteConnection") ?? "Data Source=klodtattoo.db";
+        Console.WriteLine("📂 SQLite Database");
+    }
+    else // Default to Postgres
+    {
+        connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "";
+        Console.WriteLine("🐘 PostgreSQL Database (Locale/Config)");
+    }
 }
 
-// Fix timestamp PostgreSQL
+// Fix timestamp PostgreSQL (solo se servisse, innocuo altrove)
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // ----------------------------------------------------------
 // SERVICES
 // ----------------------------------------------------------
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(connectionString)
-           .EnableSensitiveDataLogging()
-           .LogTo(Console.WriteLine, LogLevel.Information));
+{
+    if (dbProvider.Equals("Mssql", StringComparison.OrdinalIgnoreCase))
+    {
+        options.UseSqlServer(connectionString);
+    }
+    else if (dbProvider.Equals("Sqlite", StringComparison.OrdinalIgnoreCase))
+    {
+        options.UseSqlite(connectionString);
+    }
+    else
+    {
+        options.UseNpgsql(connectionString);
+    }
+
+    options.EnableSensitiveDataLogging()
+           .LogTo(Console.WriteLine, LogLevel.Information);
+});
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
