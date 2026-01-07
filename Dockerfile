@@ -1,4 +1,6 @@
 # Dockerfile per KlodTattooWeb (.NET 10.0)
+# Posizione: ROOT del progetto (stessa cartella di KlodTattooWeb.csproj)
+
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 WORKDIR /app
 EXPOSE 8080
