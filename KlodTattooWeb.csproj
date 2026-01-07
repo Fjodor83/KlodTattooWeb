@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 	<ItemGroup>
-	  <None Include="wwwroot\render.yaml" />
+	  <Content Include="render.yaml" />
 	</ItemGroup>
 
 	<ItemGroup>
