@@ -1,0 +1,30 @@
+# Dockerfile per KlodTattooWeb (.NET 10.0)
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
+WORKDIR /app
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://0.0.0.0:8080
+
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+COPY ["KlodTattooWeb.csproj", "./"]
+RUN dotnet restore "KlodTattooWeb.csproj"
+
+COPY . .
+WORKDIR "/src"
+RUN dotnet build "KlodTattooWeb.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "KlodTattooWeb.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+RUN mkdir -p wwwroot/images/portfolio && \
+    chmod -R 777 wwwroot/images
+
+ENV ASPNETCORE_ENVIRONMENT=Production \
+    ConnectionStrings__DatabaseProvider=Postgres
+
+ENTRYPOINT ["dotnet", "KlodTattooWeb.dll"]
