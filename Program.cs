@@ -12,16 +12,8 @@ using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-var port = Environment.GetEnvironmentVariable("PORT");
-if (!string.IsNullOrEmpty(port))
-{
-    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
-    Console.WriteLine($"🚀 Server configurato per ascoltare sulla porta: {port}");
-}
-
 // ----------------------------------------------------------
-// LOGGING CONFIGURATION
+// LOGGING
 // ----------------------------------------------------------
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
@@ -29,55 +21,70 @@ builder.Logging.AddDebug();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
 // ----------------------------------------------------------
-// DATABASE CONFIG (IONOS MSSQL)
+// DATABASE CONFIG
 // ----------------------------------------------------------
-var dbProvider = builder.Configuration["ConnectionStrings:DatabaseProvider"] ?? "Mssql";
-string connectionString = "";
+// In produzione (Azure) usa SEMPRE DefaultConnection
+// In locale puoi usare MssqlConnection o SqliteConnection
+string connectionString;
 
-// Config File (appsettings.json)
-if (dbProvider.Equals("Mssql", StringComparison.OrdinalIgnoreCase))
+if (builder.Environment.IsProduction())
 {
-    connectionString = builder.Configuration.GetConnectionString("MssqlConnection") ?? "";
-    Console.WriteLine("🗄️ MSSQL Database (IONOS)");
+    connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+        ?? throw new Exception("❌ DefaultConnection non trovata nella configurazione Azure.");
+    Console.WriteLine("🌐 Production mode → Using DefaultConnection");
 }
-else if (dbProvider.Equals("Sqlite", StringComparison.OrdinalIgnoreCase))
+else
 {
-    connectionString = builder.Configuration.GetConnectionString("SqliteConnection") ?? "Data Source=klodtattoo.db";
-    Console.WriteLine("📂 SQLite Database");
-}
-else // Fallback/Other
-{
-    connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "";
-    Console.WriteLine("🐘 Database (Custom/Legacy)");
-}
+    // Usa DatabaseProvider solo in locale
+    var dbProvider = builder.Configuration["ConnectionStrings:DatabaseProvider"] ?? "Mssql";
 
-
-
-// Fix timestamp PostgreSQL (solo se servisse, innocuo altrove)
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-
-// ----------------------------------------------------------
-// SERVICES
-// ----------------------------------------------------------
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    if (dbProvider.Equals("Mssql", StringComparison.OrdinalIgnoreCase))
+    if (dbProvider.Equals("Sqlite", StringComparison.OrdinalIgnoreCase))
     {
-        options.UseSqlServer(connectionString);
+        connectionString = builder.Configuration.GetConnectionString("SqliteConnection")
+            ?? "Data Source=klodtattoo.db";
+        Console.WriteLine("📂 SQLite (local)");
     }
-    else if (dbProvider.Equals("Sqlite", StringComparison.OrdinalIgnoreCase))
+    else if (dbProvider.Equals("Mssql", StringComparison.OrdinalIgnoreCase))
     {
-        options.UseSqlite(connectionString);
+        connectionString = builder.Configuration.GetConnectionString("MssqlConnection")
+            ?? throw new Exception("❌ MssqlConnection non trovata in locale.");
+        Console.WriteLine("🗄️ MSSQL (local)");
     }
     else
     {
-        options.UseNpgsql(connectionString);
+        connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+            ?? throw new Exception("❌ DefaultConnection non trovata.");
+        Console.WriteLine("🐘 Using DefaultConnection (fallback)");
+    }
+}
+
+// ----------------------------------------------------------
+// DB CONTEXT
+// ----------------------------------------------------------
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    if (builder.Environment.IsProduction())
+    {
+        // Azure usa SQL Server
+        options.UseSqlServer(connectionString);
+    }
+    else
+    {
+        var dbProvider = builder.Configuration["ConnectionStrings:DatabaseProvider"] ?? "Mssql";
+
+        if (dbProvider.Equals("Sqlite", StringComparison.OrdinalIgnoreCase))
+            options.UseSqlite(connectionString);
+        else
+            options.UseSqlServer(connectionString);
     }
 
     options.EnableSensitiveDataLogging()
            .LogTo(Console.WriteLine, LogLevel.Information);
 });
 
+// ----------------------------------------------------------
+// IDENTITY
+// ----------------------------------------------------------
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -93,6 +100,9 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 builder.Services.AddDataProtection()
     .PersistKeysToDbContext<AppDbContext>();
 
+// ----------------------------------------------------------
+// LOCALIZATION
+// ----------------------------------------------------------
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
@@ -102,28 +112,25 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedUICultures = cultures.Select(c => new CultureInfo(c)).ToList();
 });
 
-// --- CONFIGURAZIONE EMAIL AGGIORNATA ---
+// ----------------------------------------------------------
+// EMAIL
+// ----------------------------------------------------------
 builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("EmailSettings"));
 
-builder.Services.AddResponseCompression(options =>
-{
-    options.EnableForHttps = true;
-});
-
-// 2. Per Identity (Interfaccia generica)
 builder.Services.AddTransient<IEmailSender, EmailSender>();
-
-// 2. Per il BookingController (Classe concreta - FONDAMENTALE PER IL REPLY-TO)
 builder.Services.AddTransient<EmailSender>();
-// ---------------------------------------
+
+// ----------------------------------------------------------
+// MVC + RAZOR
+// ----------------------------------------------------------
 builder.Services.AddControllersWithViews().AddViewLocalization();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
 // ----------------------------------------------------------
-// MIDDLEWARE CONFIGURATION
+// MIDDLEWARE
 // ----------------------------------------------------------
 if (app.Environment.IsDevelopment())
 {
@@ -132,17 +139,9 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error");
-    
 }
 
-// Compressione Risposte (Performance)
 app.UseResponseCompression();
-
-if (!app.Environment.IsProduction())
-{
-    app.UseHttpsRedirection();
-}
-
 app.UseStaticFiles();
 app.UseRouting();
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
@@ -150,7 +149,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // ----------------------------------------------------------
-// DATABASE SEEDING - USA IL TUO SEEDER DEDICATO
+// DATABASE SEEDING
 // ----------------------------------------------------------
 using (var scope = app.Services.CreateScope())
 {
@@ -159,21 +158,20 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
-        // Usa il tuo DatabaseSeeder che ha già il reset password!
         await DatabaseSeeder.SeedAsync(services, logger);
     }
     catch (Exception ex)
     {
         logger.LogError($"❌ ERRORE CRITICO NEL SEEDING: {ex}");
-        // In produzione, potrebbe essere meglio lanciare l'eccezione
-        // per far fallire il deploy se il seeding è critico
         throw;
     }
 }
 
+// ----------------------------------------------------------
+// ROUTING
+// ----------------------------------------------------------
 app.MapRazorPages();
 app.MapControllerRoute(name: "areas", pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
-Console.WriteLine($"✅ Applicazione pronta e in ascolto sulla porta {port}");
 app.Run();
