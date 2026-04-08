@@ -1,0 +1,16 @@
+.git
+.github
+.vs
+.vscode
+
+**/bin
+**/obj
+
+*.user
+*.suo
+*.log
+*.tmp
+
+*.db
+*.db-shm
+*.db-wal

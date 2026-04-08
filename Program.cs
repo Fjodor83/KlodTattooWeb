@@ -3,6 +3,7 @@ using KlodTattooWeb.Data;
 using KlodTattooWeb.Models;
 using KlodTattooWeb.Services;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Localization;
@@ -13,6 +14,20 @@ using System.Globalization;
 var builder = WebApplication.CreateBuilder(args);
 
 // ----------------------------------------------------------
+// HOSTING (Railway / containers)
+// ----------------------------------------------------------
+var portEnv = Environment.GetEnvironmentVariable("PORT");
+
+if (int.TryParse(portEnv, out var port))
+{
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+}
+else if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ASPNETCORE_URLS")))
+{
+    builder.WebHost.UseUrls("http://0.0.0.0:8080");
+}
+
+// ----------------------------------------------------------
 // LOGGING
 // ----------------------------------------------------------
 builder.Logging.ClearProviders();
@@ -21,65 +36,91 @@ builder.Logging.AddDebug();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
 // ----------------------------------------------------------
+// FORWARDED HEADERS (Railway / reverse proxy)
+// ----------------------------------------------------------
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    options.KnownIPNetworks.Clear();
+    options.KnownProxies.Clear();
+});
+
+// ----------------------------------------------------------
 // DATABASE CONFIG
 // ----------------------------------------------------------
-// In produzione (Azure) usa SEMPRE DefaultConnection
-// In locale puoi usare MssqlConnection o SqliteConnection
-string connectionString;
+var databaseUrl =
+    Environment.GetEnvironmentVariable("DATABASE_URL") ??
+    Environment.GetEnvironmentVariable("DATABASE_PRIVATE_URL");
 
-if (builder.Environment.IsProduction())
+var dbProvider = builder.Configuration["ConnectionStrings:DatabaseProvider"];
+
+if (!string.IsNullOrWhiteSpace(databaseUrl) && !(
+    dbProvider?.Equals("Postgres", StringComparison.OrdinalIgnoreCase) == true ||
+    dbProvider?.Equals("PostgreSql", StringComparison.OrdinalIgnoreCase) == true ||
+    dbProvider?.Equals("Npgsql", StringComparison.OrdinalIgnoreCase) == true))
 {
-    connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-        ?? throw new Exception("❌ DefaultConnection non trovata nella configurazione Azure.");
-    Console.WriteLine("🌐 Production mode → Using DefaultConnection");
+    dbProvider = "Postgres";
+}
+else if (string.IsNullOrWhiteSpace(dbProvider))
+{
+    dbProvider = "Mssql";
+}
+
+dbProvider = dbProvider.Trim();
+
+string connectionString;
+if (dbProvider.Equals("Sqlite", StringComparison.OrdinalIgnoreCase))
+{
+    connectionString = builder.Configuration.GetConnectionString("SqliteConnection")
+        ?? "Data Source=klodtattoo.db";
+}
+else if (
+    dbProvider.Equals("Postgres", StringComparison.OrdinalIgnoreCase) ||
+    dbProvider.Equals("PostgreSql", StringComparison.OrdinalIgnoreCase) ||
+    dbProvider.Equals("Npgsql", StringComparison.OrdinalIgnoreCase))
+{
+    connectionString = ConnectionHelper.GetConnectionString(builder.Configuration);
+}
+else if (
+    dbProvider.Equals("Mssql", StringComparison.OrdinalIgnoreCase) ||
+    dbProvider.Equals("SqlServer", StringComparison.OrdinalIgnoreCase))
+{
+    connectionString =
+        (builder.Environment.IsProduction()
+            ? builder.Configuration.GetConnectionString("DefaultConnection")
+            : builder.Configuration.GetConnectionString("MssqlConnection"))
+        ?? builder.Configuration.GetConnectionString("MssqlConnection")
+        ?? builder.Configuration.GetConnectionString("DefaultConnection")
+        ?? throw new Exception("❌ Connection string per MSSQL non trovata (MssqlConnection/DefaultConnection).");
 }
 else
 {
-    // Usa DatabaseProvider solo in locale
-    var dbProvider = builder.Configuration["ConnectionStrings:DatabaseProvider"] ?? "Mssql";
-
-    if (dbProvider.Equals("Sqlite", StringComparison.OrdinalIgnoreCase))
-    {
-        connectionString = builder.Configuration.GetConnectionString("SqliteConnection")
-            ?? "Data Source=klodtattoo.db";
-        Console.WriteLine("📂 SQLite (local)");
-    }
-    else if (dbProvider.Equals("Mssql", StringComparison.OrdinalIgnoreCase))
-    {
-        connectionString = builder.Configuration.GetConnectionString("MssqlConnection")
-            ?? throw new Exception("❌ MssqlConnection non trovata in locale.");
-        Console.WriteLine("🗄️ MSSQL (local)");
-    }
-    else
-    {
-        connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-            ?? throw new Exception("❌ DefaultConnection non trovata.");
-        Console.WriteLine("🐘 Using DefaultConnection (fallback)");
-    }
+    throw new Exception($"❌ DatabaseProvider '{dbProvider}' non supportato. Usa: Postgres | Mssql | Sqlite");
 }
+
+Console.WriteLine($"🗄️ DB Provider → {dbProvider}");
 
 // ----------------------------------------------------------
 // DB CONTEXT
 // ----------------------------------------------------------
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    if (builder.Environment.IsProduction())
-    {
-        // Azure usa SQL Server
-        options.UseSqlServer(connectionString);
-    }
+    if (dbProvider.Equals("Sqlite", StringComparison.OrdinalIgnoreCase))
+        options.UseSqlite(connectionString);
+    else if (
+        dbProvider.Equals("Postgres", StringComparison.OrdinalIgnoreCase) ||
+        dbProvider.Equals("PostgreSql", StringComparison.OrdinalIgnoreCase) ||
+        dbProvider.Equals("Npgsql", StringComparison.OrdinalIgnoreCase))
+        options.UseNpgsql(connectionString);
     else
+        options.UseSqlServer(connectionString);
+
+    if (builder.Environment.IsDevelopment())
     {
-        var dbProvider = builder.Configuration["ConnectionStrings:DatabaseProvider"] ?? "Mssql";
-
-        if (dbProvider.Equals("Sqlite", StringComparison.OrdinalIgnoreCase))
-            options.UseSqlite(connectionString);
-        else
-            options.UseSqlServer(connectionString);
+        options.EnableSensitiveDataLogging()
+            .EnableDetailedErrors()
+            .LogTo(Console.WriteLine, LogLevel.Information);
     }
-
-    options.EnableSensitiveDataLogging()
-           .LogTo(Console.WriteLine, LogLevel.Information);
 });
 
 // ----------------------------------------------------------
@@ -126,12 +167,15 @@ builder.Services.AddTransient<EmailSender>();
 // ----------------------------------------------------------
 builder.Services.AddControllersWithViews().AddViewLocalization();
 builder.Services.AddRazorPages();
+builder.Services.AddResponseCompression(options => options.EnableForHttps = true);
 
 var app = builder.Build();
 
 // ----------------------------------------------------------
 // MIDDLEWARE
 // ----------------------------------------------------------
+app.UseForwardedHeaders();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
